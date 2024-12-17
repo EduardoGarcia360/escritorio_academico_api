@@ -1,5 +1,5 @@
 const setupAssociations = (models) => {
-    const { Usuario, Colegio, CicloEscolar } = models;
+    const { Usuario, Colegio, NivelEducacion, Jornada, JornadaCicloEscolar, CicloEscolar } = models;
 
     // Relaciones para Colegio
     Usuario.hasMany(Colegio, { foreignKey: "id_usuario_creo" });
@@ -15,6 +15,26 @@ const setupAssociations = (models) => {
     Usuario.hasMany(CicloEscolar, { foreignKey: "id_usuario_modifico" });
     CicloEscolar.belongsTo(Usuario, { as: "creador", foreignKey: "id_usuario_creo" });
     CicloEscolar.belongsTo(Usuario, { as: "modificador", foreignKey: "id_usuario_modifico" });
+
+    // Relaciones para NivelEducacion
+    Colegio.hasMany(NivelEducacion, { foreignKey: "id_colegio" });
+    NivelEducacion.belongsTo(Colegio, { foreignKey: "id_colegio" });
+    Usuario.hasMany(NivelEducacion, { foreignKey: "id_usuario_creo" });
+    Usuario.hasMany(NivelEducacion, { foreignKey: "id_usuario_modifico" });
+
+    // Relaciones para Jornada
+    NivelEducacion.hasMany(Jornada, { foreignKey: "id_nivel" });
+    Jornada.belongsTo(NivelEducacion, { foreignKey: "id_nivel" });
+    Usuario.hasMany(Jornada, { foreignKey: "id_usuario_creo" });
+    Usuario.hasMany(Jornada, { foreignKey: "id_usuario_modifico" });
+
+    // Relaciones para JornadaCicloEscolar
+    Jornada.hasMany(JornadaCicloEscolar, { foreignKey: "id_jornada" });
+    JornadaCicloEscolar.belongsTo(Jornada, { foreignKey: "id_jornada" });
+    CicloEscolar.hasMany(JornadaCicloEscolar, { foreignKey: "id_ciclo" });
+    JornadaCicloEscolar.belongsTo(CicloEscolar, { foreignKey: "id_ciclo" });
+    Usuario.hasMany(JornadaCicloEscolar, { foreignKey: "id_usuario_creo" });
+    Usuario.hasMany(JornadaCicloEscolar, { foreignKey: "id_usuario_modifico" });
 
 };
 
