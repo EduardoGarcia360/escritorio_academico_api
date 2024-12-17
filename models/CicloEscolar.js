@@ -47,7 +47,7 @@ class CicloEscolar extends Model {
       {
         sequelize,
         modelName: "CicloEscolar",
-        tableName: "ciclo_escolar",
+        tableName: "CicloEscolar",
         timestamps: true
       }
     );
