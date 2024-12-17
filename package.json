@@ -1,0 +1,20 @@
+{
+  "name": "escritorio_academico_api",
+  "version": "1.0.0",
+  "description": "Es una API desarrollada para gestionar y facilitar operaciones académicas dentro de un sistema de Escritorio Académico. Proporciona un conjunto de endpoints para realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) sobre recursos como usuarios, colegios, clases y otros módulos relacionados con la administración académica.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.5",
+    "sequelize": "^6.37.5"
+  }
+}
