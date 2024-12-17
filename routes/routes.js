@@ -11,6 +11,27 @@ import {
     updateJornadaCicloEscolar, 
     deleteJornadaCicloEscolar 
 } from "../controllers/JornadaCicloEscolarController.js";
+import { 
+    getAllGrados, 
+    getGrado, 
+    createGrado, 
+    updateGrado, 
+    deleteGrado 
+} from "../controllers/GradoController.js";
+import { 
+    getAllPersonalDocente, 
+    getPersonalDocente, 
+    createPersonalDocente, 
+    updatePersonalDocente, 
+    deletePersonalDocente 
+} from "../controllers/PersonalDocenteController.js";
+import { 
+    getAllEstudiantes, 
+    getEstudiante, 
+    createEstudiante, 
+    updateEstudiante, 
+    deleteEstudiante 
+} from "../controllers/EstudianteController.js";
 const router = express.Router()
 
 // usuarios
@@ -54,5 +75,26 @@ router.get('/jornadacicloescolar/:id', getJornadaCicloEscolar);
 router.post('/jornadacicloescolar/', createJornadaCicloEscolar);
 router.put('/jornadacicloescolar/:id', updateJornadaCicloEscolar);
 router.delete('/jornadacicloescolar/:id', deleteJornadaCicloEscolar);
+
+// grados
+router.get('/grados/', getAllGrados);
+router.get('/grados/:id', getGrado);
+router.post('/grados/', createGrado);
+router.put('/grados/:id', updateGrado);
+router.delete('/grados/:id', deleteGrado);
+
+// personal docente
+router.get('/personaldocente/', getAllPersonalDocente);
+router.get('/personaldocente/:id', getPersonalDocente);
+router.post('/personaldocente/', createPersonalDocente);
+router.put('/personaldocente/:id', updatePersonalDocente);
+router.delete('/personaldocente/:id', deletePersonalDocente);
+
+// estudiantes
+router.get('/estudiantes/', getAllEstudiantes);
+router.get('/estudiantes/:id', getEstudiante);
+router.post('/estudiantes/', createEstudiante);
+router.put('/estudiantes/:id', updateEstudiante);
+router.delete('/estudiantes/:id', deleteEstudiante);
 
 export default router
