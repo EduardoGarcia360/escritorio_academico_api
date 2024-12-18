@@ -32,6 +32,27 @@ import {
     updateEstudiante, 
     deleteEstudiante 
 } from "../controllers/EstudianteController.js";
+import { 
+    getAllAsignacionesDocenteGrado, 
+    getAsignacionDocenteGrado, 
+    createAsignacionDocenteGrado, 
+    updateAsignacionDocenteGrado, 
+    deleteAsignacionDocenteGrado 
+} from "../controllers/AsignacionDocenteGradoController.js";
+import { 
+    getAllAsignacionesEstudianteGrado, 
+    getAsignacionEstudianteGrado, 
+    createAsignacionEstudianteGrado, 
+    updateAsignacionEstudianteGrado, 
+    deleteAsignacionEstudianteGrado 
+} from "../controllers/AsignacionEstudianteGradoController.js";
+import { 
+    getAllTutores, 
+    getTutor, 
+    createTutor, 
+    updateTutor, 
+    deleteTutor 
+} from "../controllers/TutorController.js";
 const router = express.Router()
 
 // usuarios
@@ -96,5 +117,26 @@ router.get('/estudiantes/:id', getEstudiante);
 router.post('/estudiantes/', createEstudiante);
 router.put('/estudiantes/:id', updateEstudiante);
 router.delete('/estudiantes/:id', deleteEstudiante);
+
+// asignaciones docente-grado
+router.get('/asignacionesdocentegrado/', getAllAsignacionesDocenteGrado);
+router.get('/asignacionesdocentegrado/:id', getAsignacionDocenteGrado);
+router.post('/asignacionesdocentegrado/', createAsignacionDocenteGrado);
+router.put('/asignacionesdocentegrado/:id', updateAsignacionDocenteGrado);
+router.delete('/asignacionesdocentegrado/:id', deleteAsignacionDocenteGrado);
+
+// asignaciones estudiante-grado
+router.get('/asignacionesestudiantegrado/', getAllAsignacionesEstudianteGrado);
+router.get('/asignacionesestudiantegrado/:id', getAsignacionEstudianteGrado);
+router.post('/asignacionesestudiantegrado/', createAsignacionEstudianteGrado);
+router.put('/asignacionesestudiantegrado/:id', updateAsignacionEstudianteGrado);
+router.delete('/asignacionesestudiantegrado/:id', deleteAsignacionEstudianteGrado);
+
+// tutores
+router.get('/tutores/', getAllTutores);
+router.get('/tutores/:id', getTutor);
+router.post('/tutores/', createTutor);
+router.put('/tutores/:id', updateTutor);
+router.delete('/tutores/:id', deleteTutor);
 
 export default router

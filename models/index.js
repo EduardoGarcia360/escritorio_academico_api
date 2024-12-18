@@ -8,6 +8,9 @@ import JornadaCicloEscolar from "./JornadaCicloEscolar.js";
 import Grado from "./Grado.js";
 import PersonalDocente from "./PersonalDocente.js";
 import Estudiante from "./Estudiante.js";
+import AsignacionDocenteGrado from "./AsignacionDocenteGrado.js";
+import AsignacionEstudianteGrado from "./AsignacionEstudianteGrado.js";
+import Tutor from "./Tutor.js";
 import setupAssociations from "./associations.js";
 
 // Inicializar modelos
@@ -21,6 +24,9 @@ const models = {
     Grado,
     PersonalDocente,
     Estudiante,
+    AsignacionDocenteGrado,
+    AsignacionEstudianteGrado,
+    Tutor,
 };
 
 Object.values(models).forEach((model) => {
