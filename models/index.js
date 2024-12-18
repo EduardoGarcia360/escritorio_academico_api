@@ -17,6 +17,9 @@ import CuotaEstudiante from "./CuotaEstudiante.js";
 import PagoCuota from "./PagoCuota.js";
 import GastoExtraordinario from "./GastoExtraordinario.js";
 import DetalleGastoTutor from "./DetalleGastoTutor.js";
+import ActividadBus from "./ActividadBus.js";
+import Bus from "./Bus.js";
+import EncargadoBus from "./EncargadoBus.js";
 import setupAssociations from "./associations.js";
 
 // Inicializar modelos
@@ -39,6 +42,9 @@ const models = {
     PagoCuota,
     GastoExtraordinario,
     DetalleGastoTutor,
+    ActividadBus,
+    Bus,
+    EncargadoBus,
 };
 
 Object.values(models).forEach((model) => {

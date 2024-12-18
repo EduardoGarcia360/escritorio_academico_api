@@ -18,6 +18,9 @@ const setupAssociations = (models) => {
         PagoCuota,
         GastoExtraordinario,
         DetalleGastoTutor,
+        ActividadBus,
+        Bus,
+        EncargadoBus,
     } = models;
 
     // Relaciones para Colegio
@@ -140,6 +143,24 @@ const setupAssociations = (models) => {
     DetalleGastoTutor.belongsTo(Estudiante, { foreignKey: "id_estudiante" });
     Usuario.hasMany(DetalleGastoTutor, { foreignKey: "id_usuario_creo" });
     Usuario.hasMany(DetalleGastoTutor, { foreignKey: "id_usuario_modifico" });
+
+    // Relaciones para ActividadBus
+    Colegio.hasMany(ActividadBus, { foreignKey: "id_colegio" });
+    ActividadBus.belongsTo(Colegio, { foreignKey: "id_colegio" });
+    Usuario.hasMany(ActividadBus, { foreignKey: "id_usuario_creo" });
+    Usuario.hasMany(ActividadBus, { foreignKey: "id_usuario_modifico" });
+
+    // Relaciones para Bus
+    Usuario.hasMany(Bus, { foreignKey: "id_usuario_creo" });
+    Usuario.hasMany(Bus, { foreignKey: "id_usuario_modifico" });
+
+    // Relaciones para EncargadoBus
+    Bus.hasMany(EncargadoBus, { foreignKey: "id_bus" });
+    EncargadoBus.belongsTo(Bus, { foreignKey: "id_bus" });
+    PersonalDocente.hasMany(EncargadoBus, { foreignKey: "id_docente" });
+    EncargadoBus.belongsTo(PersonalDocente, { foreignKey: "id_docente" });
+    Usuario.hasMany(EncargadoBus, { foreignKey: "id_usuario_creo" });
+    Usuario.hasMany(EncargadoBus, { foreignKey: "id_usuario_modifico" });
 
 };
 

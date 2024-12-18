@@ -95,6 +95,27 @@ import {
     updateDetalleGastoTutor, 
     deleteDetalleGastoTutor 
 } from "../controllers/DetalleGastoTutorController.js";
+import { 
+    getAllActividadesBus, 
+    getActividadBus, 
+    createActividadBus, 
+    updateActividadBus, 
+    deleteActividadBus 
+} from "../controllers/ActividadBusController.js";
+import { 
+    getAllBuses, 
+    getBus, 
+    createBus, 
+    updateBus, 
+    deleteBus 
+} from "../controllers/BusController.js";
+import { 
+    getAllEncargadosBus, 
+    getEncargadoBus, 
+    createEncargadoBus, 
+    updateEncargadoBus, 
+    deleteEncargadoBus 
+} from "../controllers/EncargadoBusController.js";
 const router = express.Router()
 
 // usuarios
@@ -222,5 +243,26 @@ router.get('/detallesgastotutor/:id', getDetalleGastoTutor);
 router.post('/detallesgastotutor/', createDetalleGastoTutor);
 router.put('/detallesgastotutor/:id', updateDetalleGastoTutor);
 router.delete('/detallesgastotutor/:id', deleteDetalleGastoTutor);
+
+// actividades de bus
+router.get('/actividadesbus/', getAllActividadesBus);
+router.get('/actividadesbus/:id', getActividadBus);
+router.post('/actividadesbus/', createActividadBus);
+router.put('/actividadesbus/:id', updateActividadBus);
+router.delete('/actividadesbus/:id', deleteActividadBus);
+
+// buses
+router.get('/buses/', getAllBuses);
+router.get('/buses/:id', getBus);
+router.post('/buses/', createBus);
+router.put('/buses/:id', updateBus);
+router.delete('/buses/:id', deleteBus);
+
+// encargados de bus
+router.get('/encargadosbus/', getAllEncargadosBus);
+router.get('/encargadosbus/:id', getEncargadoBus);
+router.post('/encargadosbus/', createEncargadoBus);
+router.put('/encargadosbus/:id', updateEncargadoBus);
+router.delete('/encargadosbus/:id', deleteEncargadoBus);
 
 export default router
