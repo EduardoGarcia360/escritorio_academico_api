@@ -74,6 +74,27 @@ import {
     updateCuotaEstudiante, 
     deleteCuotaEstudiante 
 } from "../controllers/CuotaEstudianteController.js";
+import { 
+    getAllPagosCuota, 
+    getPagoCuota, 
+    createPagoCuota, 
+    updatePagoCuota, 
+    deletePagoCuota 
+} from "../controllers/PagoCuotaController.js";
+import { 
+    getAllGastosExtraordinarios, 
+    getGastoExtraordinario, 
+    createGastoExtraordinario, 
+    updateGastoExtraordinario, 
+    deleteGastoExtraordinario 
+} from "../controllers/GastoExtraordinarioController.js";
+import { 
+    getAllDetallesGastoTutor, 
+    getDetalleGastoTutor, 
+    createDetalleGastoTutor, 
+    updateDetalleGastoTutor, 
+    deleteDetalleGastoTutor 
+} from "../controllers/DetalleGastoTutorController.js";
 const router = express.Router()
 
 // usuarios
@@ -180,5 +201,26 @@ router.get('/cuotasestudiante/:id', getCuotaEstudiante);
 router.post('/cuotasestudiante/', createCuotaEstudiante);
 router.put('/cuotasestudiante/:id', updateCuotaEstudiante);
 router.delete('/cuotasestudiante/:id', deleteCuotaEstudiante);
+
+// pagos de cuota
+router.get('/pagoscuota/', getAllPagosCuota);
+router.get('/pagoscuota/:id', getPagoCuota);
+router.post('/pagoscuota/', createPagoCuota);
+router.put('/pagoscuota/:id', updatePagoCuota);
+router.delete('/pagoscuota/:id', deletePagoCuota);
+
+// gastos extraordinarios
+router.get('/gastosextraordinarios/', getAllGastosExtraordinarios);
+router.get('/gastosextraordinarios/:id', getGastoExtraordinario);
+router.post('/gastosextraordinarios/', createGastoExtraordinario);
+router.put('/gastosextraordinarios/:id', updateGastoExtraordinario);
+router.delete('/gastosextraordinarios/:id', deleteGastoExtraordinario);
+
+// detalles de gastos de tutor
+router.get('/detallesgastotutor/', getAllDetallesGastoTutor);
+router.get('/detallesgastotutor/:id', getDetalleGastoTutor);
+router.post('/detallesgastotutor/', createDetalleGastoTutor);
+router.put('/detallesgastotutor/:id', updateDetalleGastoTutor);
+router.delete('/detallesgastotutor/:id', deleteDetalleGastoTutor);
 
 export default router

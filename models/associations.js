@@ -15,6 +15,9 @@ const setupAssociations = (models) => {
         TutorEstudiante,
         CuotaColegio,
         CuotaEstudiante,
+        PagoCuota,
+        GastoExtraordinario,
+        DetalleGastoTutor,
     } = models;
 
     // Relaciones para Colegio
@@ -115,6 +118,28 @@ const setupAssociations = (models) => {
     CuotaEstudiante.belongsTo(Estudiante, { foreignKey: "id_estudiante" });
     Usuario.hasMany(CuotaEstudiante, { foreignKey: "id_usuario_creo" });
     Usuario.hasMany(CuotaEstudiante, { foreignKey: "id_usuario_modifico" });
+
+    // Relaciones para PagoCuota
+    CuotaEstudiante.hasMany(PagoCuota, { foreignKey: "id_cuota_estudiante" });
+    PagoCuota.belongsTo(CuotaEstudiante, { foreignKey: "id_cuota_estudiante" });
+    Usuario.hasMany(PagoCuota, { foreignKey: "id_usuario_creo" });
+    Usuario.hasMany(PagoCuota, { foreignKey: "id_usuario_modifico" });
+
+    // Relaciones para GastoExtraordinario
+    Colegio.hasMany(GastoExtraordinario, { foreignKey: "id_colegio" });
+    GastoExtraordinario.belongsTo(Colegio, { foreignKey: "id_colegio" });
+    Usuario.hasMany(GastoExtraordinario, { foreignKey: "id_usuario_creo" });
+    Usuario.hasMany(GastoExtraordinario, { foreignKey: "id_usuario_modifico" });
+
+    // Relaciones para DetalleGastoTutor
+    GastoExtraordinario.hasMany(DetalleGastoTutor, { foreignKey: "id_gasto" });
+    DetalleGastoTutor.belongsTo(GastoExtraordinario, { foreignKey: "id_gasto" });
+    Tutor.hasMany(DetalleGastoTutor, { foreignKey: "id_tutor" });
+    DetalleGastoTutor.belongsTo(Tutor, { foreignKey: "id_tutor" });
+    Estudiante.hasMany(DetalleGastoTutor, { foreignKey: "id_estudiante" });
+    DetalleGastoTutor.belongsTo(Estudiante, { foreignKey: "id_estudiante" });
+    Usuario.hasMany(DetalleGastoTutor, { foreignKey: "id_usuario_creo" });
+    Usuario.hasMany(DetalleGastoTutor, { foreignKey: "id_usuario_modifico" });
 
 };
 
