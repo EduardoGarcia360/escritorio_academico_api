@@ -20,6 +20,8 @@ import DetalleGastoTutor from "./DetalleGastoTutor.js";
 import ActividadBus from "./ActividadBus.js";
 import Bus from "./Bus.js";
 import EncargadoBus from "./EncargadoBus.js";
+import EstudianteActividad from "./EstudianteActividad.js";
+import CoordenadaBus from "./CoordenadaBus.js";
 import setupAssociations from "./associations.js";
 
 // Inicializar modelos
@@ -45,6 +47,8 @@ const models = {
     ActividadBus,
     Bus,
     EncargadoBus,
+    EstudianteActividad,
+    CoordenadaBus,
 };
 
 Object.values(models).forEach((model) => {

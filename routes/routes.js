@@ -116,6 +116,20 @@ import {
     updateEncargadoBus, 
     deleteEncargadoBus 
 } from "../controllers/EncargadoBusController.js";
+import { 
+    getAllEstudiantesActividades, 
+    getEstudianteActividad, 
+    createEstudianteActividad, 
+    updateEstudianteActividad, 
+    deleteEstudianteActividad 
+} from "../controllers/EstudianteActividadController.js";
+import { 
+    getAllCoordenadasBus, 
+    getCoordenadaBus, 
+    createCoordenadaBus, 
+    updateCoordenadaBus, 
+    deleteCoordenadaBus 
+} from "../controllers/CoordenadaBusController.js";
 const router = express.Router()
 
 // usuarios
@@ -264,5 +278,19 @@ router.get('/encargadosbus/:id', getEncargadoBus);
 router.post('/encargadosbus/', createEncargadoBus);
 router.put('/encargadosbus/:id', updateEncargadoBus);
 router.delete('/encargadosbus/:id', deleteEncargadoBus);
+
+// actividades de estudiantes
+router.get('/estudiantesactividades/', getAllEstudiantesActividades);
+router.get('/estudiantesactividades/:id', getEstudianteActividad);
+router.post('/estudiantesactividades/', createEstudianteActividad);
+router.put('/estudiantesactividades/:id', updateEstudianteActividad);
+router.delete('/estudiantesactividades/:id', deleteEstudianteActividad);
+
+// coordenadas de buses
+router.get('/coordenadasbus/', getAllCoordenadasBus);
+router.get('/coordenadasbus/:id', getCoordenadaBus);
+router.post('/coordenadasbus/', createCoordenadaBus);
+router.put('/coordenadasbus/:id', updateCoordenadaBus);
+router.delete('/coordenadasbus/:id', deleteCoordenadaBus);
 
 export default router
