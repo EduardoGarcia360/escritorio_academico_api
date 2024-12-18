@@ -53,6 +53,27 @@ import {
     updateTutor, 
     deleteTutor 
 } from "../controllers/TutorController.js";
+import { 
+    getAllTutorEstudiantes, 
+    getTutorEstudiante, 
+    createTutorEstudiante, 
+    updateTutorEstudiante, 
+    deleteTutorEstudiante 
+} from "../controllers/TutorEstudianteController.js";
+import { 
+    getAllCuotasColegio, 
+    getCuotaColegio, 
+    createCuotaColegio, 
+    updateCuotaColegio, 
+    deleteCuotaColegio 
+} from "../controllers/CuotaColegioController.js";
+import { 
+    getAllCuotasEstudiante, 
+    getCuotaEstudiante, 
+    createCuotaEstudiante, 
+    updateCuotaEstudiante, 
+    deleteCuotaEstudiante 
+} from "../controllers/CuotaEstudianteController.js";
 const router = express.Router()
 
 // usuarios
@@ -138,5 +159,26 @@ router.get('/tutores/:id', getTutor);
 router.post('/tutores/', createTutor);
 router.put('/tutores/:id', updateTutor);
 router.delete('/tutores/:id', deleteTutor);
+
+// relaciones tutor-estudiante
+router.get('/tutorestudiantes/', getAllTutorEstudiantes);
+router.get('/tutorestudiantes/:id', getTutorEstudiante);
+router.post('/tutorestudiantes/', createTutorEstudiante);
+router.put('/tutorestudiantes/:id', updateTutorEstudiante);
+router.delete('/tutorestudiantes/:id', deleteTutorEstudiante);
+
+// cuotas colegio
+router.get('/cuotascolegio/', getAllCuotasColegio);
+router.get('/cuotascolegio/:id', getCuotaColegio);
+router.post('/cuotascolegio/', createCuotaColegio);
+router.put('/cuotascolegio/:id', updateCuotaColegio);
+router.delete('/cuotascolegio/:id', deleteCuotaColegio);
+
+// cuotas estudiante
+router.get('/cuotasestudiante/', getAllCuotasEstudiante);
+router.get('/cuotasestudiante/:id', getCuotaEstudiante);
+router.post('/cuotasestudiante/', createCuotaEstudiante);
+router.put('/cuotasestudiante/:id', updateCuotaEstudiante);
+router.delete('/cuotasestudiante/:id', deleteCuotaEstudiante);
 
 export default router

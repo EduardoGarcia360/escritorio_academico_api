@@ -11,6 +11,9 @@ import Estudiante from "./Estudiante.js";
 import AsignacionDocenteGrado from "./AsignacionDocenteGrado.js";
 import AsignacionEstudianteGrado from "./AsignacionEstudianteGrado.js";
 import Tutor from "./Tutor.js";
+import TutorEstudiante from "./TutorEstudiante.js";
+import CuotaColegio from "./CuotaColegio.js";
+import CuotaEstudiante from "./CuotaEstudiante.js";
 import setupAssociations from "./associations.js";
 
 // Inicializar modelos
@@ -27,6 +30,9 @@ const models = {
     AsignacionDocenteGrado,
     AsignacionEstudianteGrado,
     Tutor,
+    TutorEstudiante,
+    CuotaColegio,
+    CuotaEstudiante,
 };
 
 Object.values(models).forEach((model) => {
