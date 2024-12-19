@@ -47,6 +47,12 @@ export const createCicloEscolar = async (req, res) => {
 
 export const updateCicloEscolar = async (req, res) => {
     try {
+        const cicloEscolar = await CicloEscolar.findOne({ where: { id_ciclo: req.params.id } });
+
+        if (!cicloEscolar) {
+            return res.status(400).json({ message: 'Ciclo escolar no encontrado' });
+        }
+        
         await CicloEscolar.update(req.body, {
             where: {
                 id_ciclo: req.params.id
