@@ -130,6 +130,7 @@ import {
     updateCoordenadaBus, 
     deleteCoordenadaBus 
 } from "../controllers/CoordenadaBusController.js";
+import { executeStoredProcedure } from "../controllers/StoredProcedureController.js";
 const router = express.Router()
 
 // usuarios
@@ -292,5 +293,8 @@ router.get('/coordenadasbus/:id', getCoordenadaBus);
 router.post('/coordenadasbus/', createCoordenadaBus);
 router.put('/coordenadasbus/:id', updateCoordenadaBus);
 router.delete('/coordenadasbus/:id', deleteCoordenadaBus);
+
+// ejecutar stored procedure
+router.post('/execute-procedure', executeStoredProcedure);
 
 export default router
