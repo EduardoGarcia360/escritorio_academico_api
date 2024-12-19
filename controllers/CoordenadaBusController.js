@@ -5,7 +5,7 @@ export const getAllCoordenadasBus = async (req, res) => {
         const coordenadas = await CoordenadaBus.findAll();
         res.status(200).json(coordenadas);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,16 +18,16 @@ export const getCoordenadaBus = async (req, res) => {
         });
         res.status(200).json(coordenada[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createCoordenadaBus = async (req, res) => {
     try {
         await CoordenadaBus.create(req.body);
-        res.status(200).json({ message: 'Coordenada de bus creada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Coordenada de bus creada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateCoordenadaBus = async (req, res) => {
                 id_coordenada: req.params.id
             }
         });
-        res.status(200).json({ message: 'Coordenada de bus actualizada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Coordenada de bus actualizada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -51,7 +51,7 @@ export const deleteCoordenadaBus = async (req, res) => {
         });
 
         if (!coordenada) {
-            return res.status(400).json({ message: 'Coordenada no encontrada' });
+            return res.status(400).json({ status: 'ERROR', message: 'Coordenada no encontrada' });
         }
 
         await CoordenadaBus.destroy({
@@ -59,8 +59,8 @@ export const deleteCoordenadaBus = async (req, res) => {
                 id_coordenada: req.params.id
             }
         });
-        res.status(200).json({ message: 'Coordenada de bus eliminada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Coordenada de bus eliminada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };

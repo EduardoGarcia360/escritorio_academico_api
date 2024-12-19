@@ -5,7 +5,7 @@ export const getAllBuses = async (req, res) => {
         const buses = await Bus.findAll();
         res.status(200).json(buses);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,16 +18,16 @@ export const getBus = async (req, res) => {
         });
         res.status(200).json(bus[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createBus = async (req, res) => {
     try {
         await Bus.create(req.body);
-        res.status(200).json({ message: 'Bus creado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Bus creado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateBus = async (req, res) => {
                 id_bus: req.params.id
             }
         });
-        res.status(200).json({ message: 'Bus actualizado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Bus actualizado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -51,7 +51,7 @@ export const deleteBus = async (req, res) => {
         });
 
         if (!bus) {
-            return res.status(400).json({ message: 'Bus no encontrado' });
+            return res.status(400).json({ status: 'ERROR', message: 'Bus no encontrado' });
         }
 
         await Bus.destroy({
@@ -59,8 +59,8 @@ export const deleteBus = async (req, res) => {
                 id_bus: req.params.id
             }
         });
-        res.status(200).json({ message: 'Bus eliminado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Bus eliminado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };

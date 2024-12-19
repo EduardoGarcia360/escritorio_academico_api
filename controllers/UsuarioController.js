@@ -5,7 +5,7 @@ export const getAllUsuarios = async (req, res) => {
         const usuarios = await Usuario.findAll()
         res.status(200).json(usuarios)
     } catch (error) {
-        res.status(400).json({ message: error.message })
+        res.status(400).json({ status: 'ERROR', message: error.message })
     }
 }
 
@@ -18,16 +18,16 @@ export const getUsuario = async (req, res) => {
         });
         res.status(200).json(usuario[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createUsuario = async (req, res) => {
     try {
         await Usuario.create(req.body);
-        res.status(200).json({ message: 'Usuario creado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Usuario creado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateUsuario = async (req, res) => {
                 id_usuario: req.params.id
             }
         });
-        res.status(200).json({ message: 'Usuario actualizado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Usuario actualizado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -50,7 +50,7 @@ export const deleteUsuario = async (req, res) => {
         const usuario = await Usuario.findOne({ where: { id_usuario: req.params.id } });
 
         if (!usuario) {
-            return res.status(400).json({ message: 'Registro no encontrado' });
+            return res.status(400).json({ status: 'ERROR', message: 'Registro no encontrado' });
         }
 
         await Usuario.destroy({
@@ -58,9 +58,8 @@ export const deleteUsuario = async (req, res) => {
                 id_usuario: req.params.id
             }
         })
-        res.status(200).json({ message: 'Registro eliminado correctamente!' })
+        res.status(200).json({ status: 'OK', message: 'Registro eliminado correctamente!' })
     } catch (error) {
-        console.log('ERROR:', error)
-        res.status(400).json({ message: error.message })
+        res.status(400).json({ status: 'ERROR', message: error.message })
     }
 }

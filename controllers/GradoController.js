@@ -5,7 +5,7 @@ export const getAllGrados = async (req, res) => {
         const grados = await Grado.findAll();
         res.status(200).json(grados);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,16 +18,16 @@ export const getGrado = async (req, res) => {
         });
         res.status(200).json(grado[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createGrado = async (req, res) => {
     try {
         await Grado.create(req.body);
-        res.status(200).json({ message: 'Grado creado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Grado creado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateGrado = async (req, res) => {
                 id_grado: req.params.id
             }
         });
-        res.status(200).json({ message: 'Grado actualizado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Grado actualizado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -51,7 +51,7 @@ export const deleteGrado = async (req, res) => {
         });
 
         if (!grado) {
-            return res.status(400).json({ message: 'Grado no encontrado' });
+            return res.status(400).json({ status: 'ERROR', message: 'Grado no encontrado' });
         }
 
         await Grado.destroy({
@@ -59,8 +59,8 @@ export const deleteGrado = async (req, res) => {
                 id_grado: req.params.id
             }
         });
-        res.status(200).json({ message: 'Grado eliminado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Grado eliminado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };

@@ -5,7 +5,7 @@ export const getAllEstudiantes = async (req, res) => {
         const estudiantes = await Estudiante.findAll();
         res.status(200).json(estudiantes);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,16 +18,16 @@ export const getEstudiante = async (req, res) => {
         });
         res.status(200).json(estudiante[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createEstudiante = async (req, res) => {
     try {
         await Estudiante.create(req.body);
-        res.status(200).json({ message: 'Estudiante creado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Estudiante creado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateEstudiante = async (req, res) => {
                 id_estudiante: req.params.id
             }
         });
-        res.status(200).json({ message: 'Estudiante actualizado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Estudiante actualizado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -51,7 +51,7 @@ export const deleteEstudiante = async (req, res) => {
         });
 
         if (!estudiante) {
-            return res.status(400).json({ message: 'Estudiante no encontrado' });
+            return res.status(400).json({ status: 'ERROR', message: 'Estudiante no encontrado' });
         }
 
         await Estudiante.destroy({
@@ -59,8 +59,8 @@ export const deleteEstudiante = async (req, res) => {
                 id_estudiante: req.params.id
             }
         });
-        res.status(200).json({ message: 'Estudiante eliminado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Estudiante eliminado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };

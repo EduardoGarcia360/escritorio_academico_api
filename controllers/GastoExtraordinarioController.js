@@ -5,7 +5,7 @@ export const getAllGastosExtraordinarios = async (req, res) => {
         const gastos = await GastoExtraordinario.findAll();
         res.status(200).json(gastos);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,16 +18,16 @@ export const getGastoExtraordinario = async (req, res) => {
         });
         res.status(200).json(gasto[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createGastoExtraordinario = async (req, res) => {
     try {
         await GastoExtraordinario.create(req.body);
-        res.status(200).json({ message: 'Gasto extraordinario creado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Gasto extraordinario creado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateGastoExtraordinario = async (req, res) => {
                 id_gasto: req.params.id
             }
         });
-        res.status(200).json({ message: 'Gasto extraordinario actualizado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Gasto extraordinario actualizado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -51,7 +51,7 @@ export const deleteGastoExtraordinario = async (req, res) => {
         });
 
         if (!gasto) {
-            return res.status(400).json({ message: 'Gasto no encontrado' });
+            return res.status(400).json({ status: 'ERROR', message: 'Gasto no encontrado' });
         }
 
         await GastoExtraordinario.destroy({
@@ -59,8 +59,8 @@ export const deleteGastoExtraordinario = async (req, res) => {
                 id_gasto: req.params.id
             }
         });
-        res.status(200).json({ message: 'Gasto extraordinario eliminado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Gasto extraordinario eliminado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };

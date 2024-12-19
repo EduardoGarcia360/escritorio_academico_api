@@ -5,7 +5,7 @@ export const getAllEstudiantesActividades = async (req, res) => {
         const estudiantesActividades = await EstudianteActividad.findAll();
         res.status(200).json(estudiantesActividades);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,16 +18,16 @@ export const getEstudianteActividad = async (req, res) => {
         });
         res.status(200).json(estudianteActividad[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createEstudianteActividad = async (req, res) => {
     try {
         await EstudianteActividad.create(req.body);
-        res.status(200).json({ message: 'Actividad de estudiante creada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Actividad de estudiante creada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateEstudianteActividad = async (req, res) => {
                 id_estudiante_actividad: req.params.id
             }
         });
-        res.status(200).json({ message: 'Actividad de estudiante actualizada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Actividad de estudiante actualizada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -51,7 +51,7 @@ export const deleteEstudianteActividad = async (req, res) => {
         });
 
         if (!estudianteActividad) {
-            return res.status(400).json({ message: 'Actividad no encontrada' });
+            return res.status(400).json({ status: 'ERROR', message: 'Actividad no encontrada' });
         }
 
         await EstudianteActividad.destroy({
@@ -59,8 +59,8 @@ export const deleteEstudianteActividad = async (req, res) => {
                 id_estudiante_actividad: req.params.id
             }
         });
-        res.status(200).json({ message: 'Actividad de estudiante eliminada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Actividad de estudiante eliminada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };

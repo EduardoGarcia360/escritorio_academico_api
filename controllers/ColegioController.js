@@ -5,7 +5,7 @@ export const getAllColegios = async (req, res) => {
         const colegios = await Colegio.findAll();
         res.status(200).json(colegios);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,16 +18,16 @@ export const getColegio = async (req, res) => {
         });
         res.status(200).json(colegio[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createColegio = async (req, res) => {
     try {
         await Colegio.create(req.body);
-        res.status(200).json({ message: 'Colegio creado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Colegio creado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateColegio = async (req, res) => {
                 id_colegio: req.params.id
             }
         });
-        res.status(200).json({ message: 'Colegio actualizado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Colegio actualizado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -49,7 +49,7 @@ export const deleteColegio = async (req, res) => {
         const colegio = await Colegio.findOne({ where: { id_colegio: req.params.id } });
 
         if (!colegio) {
-            return res.status(400).json({ message: 'Colegio no encontrado' });
+            return res.status(400).json({ status: 'ERROR', message: 'Colegio no encontrado' });
         }
 
         await Colegio.destroy({
@@ -57,8 +57,8 @@ export const deleteColegio = async (req, res) => {
                 id_colegio: req.params.id
             }
         });
-        res.status(200).json({ message: 'Colegio eliminado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Colegio eliminado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };

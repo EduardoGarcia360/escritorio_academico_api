@@ -5,7 +5,7 @@ export const getAllActividadesBus = async (req, res) => {
         const actividades = await ActividadBus.findAll();
         res.status(200).json(actividades);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,16 +18,16 @@ export const getActividadBus = async (req, res) => {
         });
         res.status(200).json(actividad[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createActividadBus = async (req, res) => {
     try {
         await ActividadBus.create(req.body);
-        res.status(200).json({ message: 'Actividad de bus creada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Actividad de bus creada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateActividadBus = async (req, res) => {
                 id_actividad: req.params.id
             }
         });
-        res.status(200).json({ message: 'Actividad de bus actualizada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Actividad de bus actualizada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -51,7 +51,7 @@ export const deleteActividadBus = async (req, res) => {
         });
 
         if (!actividad) {
-            return res.status(400).json({ message: 'Actividad no encontrada' });
+            return res.status(400).json({ status: 'ERROR', message: 'Actividad no encontrada' });
         }
 
         await ActividadBus.destroy({
@@ -59,8 +59,8 @@ export const deleteActividadBus = async (req, res) => {
                 id_actividad: req.params.id
             }
         });
-        res.status(200).json({ message: 'Actividad de bus eliminada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Actividad de bus eliminada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };

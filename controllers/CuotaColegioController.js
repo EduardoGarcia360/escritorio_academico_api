@@ -5,7 +5,7 @@ export const getAllCuotasColegio = async (req, res) => {
         const cuotas = await CuotaColegio.findAll();
         res.status(200).json(cuotas);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,16 +18,16 @@ export const getCuotaColegio = async (req, res) => {
         });
         res.status(200).json(cuota[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createCuotaColegio = async (req, res) => {
     try {
         await CuotaColegio.create(req.body);
-        res.status(200).json({ message: 'Cuota de colegio creada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Cuota de colegio creada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateCuotaColegio = async (req, res) => {
                 id_cuota: req.params.id
             }
         });
-        res.status(200).json({ message: 'Cuota de colegio actualizada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Cuota de colegio actualizada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -51,7 +51,7 @@ export const deleteCuotaColegio = async (req, res) => {
         });
 
         if (!cuota) {
-            return res.status(400).json({ message: 'Cuota no encontrada' });
+            return res.status(400).json({ status: 'ERROR', message: 'Cuota no encontrada' });
         }
 
         await CuotaColegio.destroy({
@@ -59,8 +59,8 @@ export const deleteCuotaColegio = async (req, res) => {
                 id_cuota: req.params.id
             }
         });
-        res.status(200).json({ message: 'Cuota de colegio eliminada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Cuota de colegio eliminada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };

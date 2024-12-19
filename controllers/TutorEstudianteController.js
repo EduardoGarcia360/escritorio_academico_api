@@ -5,7 +5,7 @@ export const getAllTutorEstudiantes = async (req, res) => {
         const relaciones = await TutorEstudiante.findAll();
         res.status(200).json(relaciones);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,16 +18,16 @@ export const getTutorEstudiante = async (req, res) => {
         });
         res.status(200).json(relacion[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createTutorEstudiante = async (req, res) => {
     try {
         await TutorEstudiante.create(req.body);
-        res.status(200).json({ message: 'Relación tutor-estudiante creada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Relación tutor-estudiante creada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateTutorEstudiante = async (req, res) => {
                 id_relacion: req.params.id
             }
         });
-        res.status(200).json({ message: 'Relación tutor-estudiante actualizada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Relación tutor-estudiante actualizada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -51,7 +51,7 @@ export const deleteTutorEstudiante = async (req, res) => {
         });
 
         if (!relacion) {
-            return res.status(400).json({ message: 'Relación no encontrada' });
+            return res.status(400).json({ status: 'ERROR', message: 'Relación no encontrada' });
         }
 
         await TutorEstudiante.destroy({
@@ -59,8 +59,8 @@ export const deleteTutorEstudiante = async (req, res) => {
                 id_relacion: req.params.id
             }
         });
-        res.status(200).json({ message: 'Relación tutor-estudiante eliminada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Relación tutor-estudiante eliminada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };

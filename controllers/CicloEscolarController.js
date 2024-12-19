@@ -5,7 +5,7 @@ export const getAllCiclosEscolares = async (req, res) => {
         const ciclosEscolares = await CicloEscolar.findAll();
         res.status(200).json(ciclosEscolares);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,7 +18,7 @@ export const getCicloEscolar = async (req, res) => {
         });
         res.status(200).json(cicloEscolar[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -33,15 +33,16 @@ export const createCicloEscolar = async (req, res) => {
 
         if (cicloActivo) {
             return res.status(400).json({
+                status: 'ERROR',
                 message: 'Ya existe un ciclo escolar activo. No se puede crear otro.'
             });
         }
 
         // Crear el nuevo ciclo escolar
         await CicloEscolar.create(req.body);
-        res.status(200).json({ message: 'Ciclo escolar creado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Ciclo escolar creado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -50,7 +51,7 @@ export const updateCicloEscolar = async (req, res) => {
         const cicloEscolar = await CicloEscolar.findOne({ where: { id_ciclo: req.params.id } });
 
         if (!cicloEscolar) {
-            return res.status(400).json({ message: 'Ciclo escolar no encontrado' });
+            return res.status(400).json({ status: 'ERROR', message: 'Ciclo escolar no encontrado' });
         }
         
         await CicloEscolar.update(req.body, {
@@ -58,9 +59,9 @@ export const updateCicloEscolar = async (req, res) => {
                 id_ciclo: req.params.id
             }
         });
-        res.status(200).json({ message: 'Ciclo escolar actualizado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Ciclo escolar actualizado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -69,7 +70,7 @@ export const deleteCicloEscolar = async (req, res) => {
         const cicloEscolar = await CicloEscolar.findOne({ where: { id_ciclo: req.params.id } });
 
         if (!cicloEscolar) {
-            return res.status(400).json({ message: 'Ciclo escolar no encontrado' });
+            return res.status(400).json({ status: 'ERROR', message: 'Ciclo escolar no encontrado' });
         }
 
         await CicloEscolar.destroy({
@@ -77,8 +78,8 @@ export const deleteCicloEscolar = async (req, res) => {
                 id_ciclo: req.params.id
             }
         });
-        res.status(200).json({ message: 'Ciclo escolar eliminado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Ciclo escolar eliminado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };

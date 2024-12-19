@@ -5,7 +5,7 @@ export const getAllDetallesGastoTutor = async (req, res) => {
         const detalles = await DetalleGastoTutor.findAll();
         res.status(200).json(detalles);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,16 +18,16 @@ export const getDetalleGastoTutor = async (req, res) => {
         });
         res.status(200).json(detalle[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createDetalleGastoTutor = async (req, res) => {
     try {
         await DetalleGastoTutor.create(req.body);
-        res.status(200).json({ message: 'Detalle de gasto de tutor creado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Detalle de gasto de tutor creado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateDetalleGastoTutor = async (req, res) => {
                 id_detalle: req.params.id
             }
         });
-        res.status(200).json({ message: 'Detalle de gasto de tutor actualizado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Detalle de gasto de tutor actualizado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -51,7 +51,7 @@ export const deleteDetalleGastoTutor = async (req, res) => {
         });
 
         if (!detalle) {
-            return res.status(400).json({ message: 'Detalle no encontrado' });
+            return res.status(400).json({ status: 'ERROR', message: 'Detalle no encontrado' });
         }
 
         await DetalleGastoTutor.destroy({
@@ -59,8 +59,8 @@ export const deleteDetalleGastoTutor = async (req, res) => {
                 id_detalle: req.params.id
             }
         });
-        res.status(200).json({ message: 'Detalle de gasto de tutor eliminado correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Detalle de gasto de tutor eliminado correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };

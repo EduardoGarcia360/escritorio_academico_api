@@ -5,7 +5,7 @@ export const getAllAsignacionesDocenteGrado = async (req, res) => {
         const asignaciones = await AsignacionDocenteGrado.findAll();
         res.status(200).json(asignaciones);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,16 +18,16 @@ export const getAsignacionDocenteGrado = async (req, res) => {
         });
         res.status(200).json(asignacion[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createAsignacionDocenteGrado = async (req, res) => {
     try {
         await AsignacionDocenteGrado.create(req.body);
-        res.status(200).json({ message: 'Asignación de docente a grado creada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Asignación de docente a grado creada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateAsignacionDocenteGrado = async (req, res) => {
                 id_asignacion: req.params.id
             }
         });
-        res.status(200).json({ message: 'Asignación de docente a grado actualizada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Asignación de docente a grado actualizada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -51,7 +51,7 @@ export const deleteAsignacionDocenteGrado = async (req, res) => {
         });
 
         if (!asignacion) {
-            return res.status(400).json({ message: 'Asignación no encontrada' });
+            return res.status(400).json({ status: 'ERROR', message: 'Asignación no encontrada' });
         }
 
         await AsignacionDocenteGrado.destroy({
@@ -59,8 +59,8 @@ export const deleteAsignacionDocenteGrado = async (req, res) => {
                 id_asignacion: req.params.id
             }
         });
-        res.status(200).json({ message: 'Asignación eliminada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Asignación eliminada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };

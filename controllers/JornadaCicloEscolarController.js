@@ -5,7 +5,7 @@ export const getAllJornadasCicloEscolar = async (req, res) => {
         const jornadasCicloEscolar = await JornadaCicloEscolar.findAll();
         res.status(200).json(jornadasCicloEscolar);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -18,16 +18,16 @@ export const getJornadaCicloEscolar = async (req, res) => {
         });
         res.status(200).json(jornadaCicloEscolar[0]);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
 export const createJornadaCicloEscolar = async (req, res) => {
     try {
         await JornadaCicloEscolar.create(req.body);
-        res.status(200).json({ message: 'Jornada ciclo escolar creada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Jornada ciclo escolar creada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -38,9 +38,9 @@ export const updateJornadaCicloEscolar = async (req, res) => {
                 id_jornada_ciclo: req.params.id
             }
         });
-        res.status(200).json({ message: 'Jornada ciclo escolar actualizada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Jornada ciclo escolar actualizada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
 
@@ -51,7 +51,7 @@ export const deleteJornadaCicloEscolar = async (req, res) => {
         });
 
         if (!jornadaCicloEscolar) {
-            return res.status(400).json({ message: 'Jornada ciclo escolar no encontrada' });
+            return res.status(400).json({ status: 'ERROR', message: 'Jornada ciclo escolar no encontrada' });
         }
 
         await JornadaCicloEscolar.destroy({
@@ -59,8 +59,8 @@ export const deleteJornadaCicloEscolar = async (req, res) => {
                 id_jornada_ciclo: req.params.id
             }
         });
-        res.status(200).json({ message: 'Jornada ciclo escolar eliminada correctamente!' });
+        res.status(200).json({ status: 'OK', message: 'Jornada ciclo escolar eliminada correctamente!' });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
