@@ -137,6 +137,8 @@ import {
     createUsuarioColegio, 
     deleteUsuarioColegio 
 } from "../controllers/UsuarioColegioController.js";
+import { login } from "../controllers/AuthController.js";
+import { authenticateToken } from "../middlewares/authMiddleware.js";
 const router = express.Router()
 
 // usuarios
@@ -308,5 +310,8 @@ router.delete('/usuarioscolegios/:id', deleteUsuarioColegio);
 
 // ejecutar stored procedure
 router.post('/execute-procedure', executeStoredProcedure);
+
+// autenticación
+router.post('/login', login)
 
 export default router
