@@ -23,6 +23,7 @@ const setupAssociations = (models) => {
         EncargadoBus,
         EstudianteActividad,
         CoordenadaBus,
+        UsuarioColegio,
     } = models;
 
     // Relaciones para Colegio
@@ -179,6 +180,12 @@ const setupAssociations = (models) => {
     CoordenadaBus.belongsTo(Bus, { foreignKey: "id_bus" });
     Usuario.hasMany(CoordenadaBus, { foreignKey: "id_usuario_creo" });
     Usuario.hasMany(CoordenadaBus, { foreignKey: "id_usuario_modifico" });
+
+    // Relaciones para UsuarioColegio
+    Usuario.hasMany(UsuarioColegio, { foreignKey: "id_usuario" });
+    UsuarioColegio.belongsTo(Usuario, { foreignKey: "id_usuario" });
+    Colegio.hasMany(UsuarioColegio, { foreignKey: "id_colegio" });
+    UsuarioColegio.belongsTo(Colegio, { foreignKey: "id_colegio" });
 
 };
 

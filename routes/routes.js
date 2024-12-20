@@ -131,6 +131,12 @@ import {
     deleteCoordenadaBus 
 } from "../controllers/CoordenadaBusController.js";
 import { executeStoredProcedure } from "../controllers/StoredProcedureController.js";
+import { 
+    getUsuariosByColegio, 
+    getUsuarioColegio, 
+    createUsuarioColegio, 
+    deleteUsuarioColegio 
+} from "../controllers/UsuarioColegioController.js";
 const router = express.Router()
 
 // usuarios
@@ -293,6 +299,12 @@ router.get('/coordenadasbus/:id', getCoordenadaBus);
 router.post('/coordenadasbus/', createCoordenadaBus);
 router.put('/coordenadasbus/:id', updateCoordenadaBus);
 router.delete('/coordenadasbus/:id', deleteCoordenadaBus);
+
+// relaciones usuario-colegio
+router.get('/usuarioscolegios/colegio/:id', getUsuariosByColegio);
+router.get('/usuarioscolegios/:id', getUsuarioColegio);
+router.post('/usuarioscolegios/', createUsuarioColegio);
+router.delete('/usuarioscolegios/:id', deleteUsuarioColegio);
 
 // ejecutar stored procedure
 router.post('/execute-procedure', executeStoredProcedure);
