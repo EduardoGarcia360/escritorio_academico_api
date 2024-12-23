@@ -139,6 +139,7 @@ import {
 } from "../controllers/UsuarioColegioController.js";
 import { login } from "../controllers/AuthController.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js";
+import { decryptPayload } from "../middlewares/securityMiddleware.js";
 const router = express.Router()
 
 // usuarios
@@ -312,6 +313,6 @@ router.delete('/usuarioscolegios/:id', deleteUsuarioColegio);
 router.post('/execute-procedure', executeStoredProcedure);
 
 // autenticación
-router.post('/login', login)
+router.post('/login', decryptPayload, login)
 
 export default router
