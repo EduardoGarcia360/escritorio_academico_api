@@ -1,10 +1,8 @@
 import jwt from "jsonwebtoken";
 
 export const authenticateToken = (req, res, next) => {
-    // Obtener el token del encabezado de la solicitud
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1]; // Formato "Bearer token"
-
+    // Obtener el token desde las cookies
+    const token = req.cookies?.token;
     if (!token) {
         return res.status(401).json({ status: 'ERROR', message: 'Acceso no autorizado: Token no proporcionado' });
     }

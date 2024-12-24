@@ -45,7 +45,15 @@ export const login = async (req, res) => {
         };
         const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: process.env.TIME_EXPIRE_TOKEN });
 
-        return res.json({ status: 'OK', token });
+        // cookie HTTPOnly
+        res.cookie('token', token, {
+            httpOnly: true, // No accesible desde JavaScript
+            secure: process.env.SECURE_COOKIE === 'TRUE', // Solo en HTTPS en producción
+            sameSite: 'lax', // Protege contra ataques CSRF (ajustar según necesidad)
+            maxAge: 60 * 60 * 1000, // Duración de 1 hora (ajustar según necesidad)
+        });
+
+        return res.json({ status: 'OK', message: 'Inicio de Sesión Correcto' });
     } catch (error) {
         return res.status(500).json({ status: 'ERROR', message: "Error interno del servidor", error: error.message });
     }

@@ -1,14 +1,19 @@
 import express from "express";
 import cors from 'cors'
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import { db } from "./models/index.js";
 import escritorioRoutes from "./routes/routes.js";
 
 dotenv.config({ path: './development.env' });
 const app = express()
 
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true, // Permite el envío de cookies y credenciales
+}))
 app.use(express.json())
+app.use(cookieParser()); // Habilita el middleware para manejar cookies
 app.use('/escritorio', escritorioRoutes)
 
 try {
