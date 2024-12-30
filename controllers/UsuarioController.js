@@ -1,4 +1,6 @@
 import Usuario from "../models/Usuario.js";
+import UsuarioColegio from "../models/UsuarioColegio.js";
+import { decodeJWT } from "../utils/codificar.js";
 
 export const getAllUsuarios = async (req, res) => {
     try {
@@ -11,12 +13,38 @@ export const getAllUsuarios = async (req, res) => {
 
 export const getUsuario = async (req, res) => {
     try {
-        const usuario = await Usuario.findAll({
+        // Obtener y decodificar el token
+        const token = req.cookies?.token;
+        const userData = decodeJWT(token);
+
+        if (!userData) {
+            return res.status(400).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
+        }
+
+        // Obtener los datos del usuario
+        const usuario = await Usuario.findOne({
             where: {
                 id_usuario: req.params.id
             }
         });
-        res.status(200).json(usuario[0]);
+
+        if (!usuario) {
+            return res.status(400).json({ status: 'ERROR', message: "Usuario no encontrado" });
+        }
+
+        // Verificar si el usuario está asociado al colegio del token
+        const usuarioColegio = await UsuarioColegio.findOne({
+            where: {
+                id_usuario: req.params.id,
+                id_colegio: userData.id_colegio // El colegio del token decodificado
+            }
+        });
+
+        if (!usuarioColegio) {
+            return res.status(400).json({ status: 'ERROR', message: "El usuario no pertenece al colegio asociado" });
+        }
+
+        res.status(200).json(usuario);
     } catch (error) {
         res.status(400).json({ status: 'ERROR', message: error.message });
     }

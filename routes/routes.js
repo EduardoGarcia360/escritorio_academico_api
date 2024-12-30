@@ -143,11 +143,9 @@ import { decryptPayload } from "../middlewares/securityMiddleware.js";
 const router = express.Router()
 
 // usuarios
-router.get('/usuarios/', authenticateToken, getAllUsuarios)
 router.get('/usuarios/:id', authenticateToken, getUsuario)
 router.post('/usuarios/', decryptPayload, authenticateToken, createUsuario)
 router.put('/usuarios/:id', decryptPayload, authenticateToken, updateUsuario)
-router.delete('/usuarios/:id', authenticateToken, deleteUsuario)
 
 // colegios
 router.get('/colegios/', getAllColegios);
