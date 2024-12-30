@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import { db } from "./models/index.js";
 import escritorioRoutes from "./routes/routes.js";
+import encryptResponse from "./middlewares/responseEncryptMiddleware.js";
 
 dotenv.config({ path: './development.env' });
 const app = express()
@@ -14,6 +15,7 @@ app.use(cors({
 }))
 app.use(express.json())
 app.use(cookieParser()); // Habilita el middleware para manejar cookies
+app.use(encryptResponse);
 app.use('/escritorio', escritorioRoutes)
 
 try {
