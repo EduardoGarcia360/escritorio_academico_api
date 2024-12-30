@@ -137,7 +137,7 @@ import {
     createUsuarioColegio, 
     deleteUsuarioColegio 
 } from "../controllers/UsuarioColegioController.js";
-import { login } from "../controllers/AuthController.js";
+import { login, validateSession } from "../controllers/AuthController.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js";
 import { decryptPayload } from "../middlewares/securityMiddleware.js";
 const router = express.Router()
@@ -312,5 +312,6 @@ router.post('/execute-procedure', executeStoredProcedure);
 
 // autenticación
 router.post('/login', decryptPayload, login)
+router.get('/auth/validatesession', decryptPayload, authenticateToken, validateSession)
 
 export default router

@@ -58,3 +58,11 @@ export const login = async (req, res) => {
         return res.status(500).json({ status: 'ERROR', message: "Error interno del servidor", error: error.message });
     }
 };
+
+export const validateSession = async (req, res) => {
+    try {
+        res.status(200).json({ status: 'OK', message: 'Token válido' });
+    } catch (error) {
+        res.status(400).json({ status: 'ERROR', message: error.message })
+    }
+}
