@@ -4,7 +4,7 @@ export const authenticateToken = (req, res, next) => {
     // Obtener el token desde las cookies
     const token = req.cookies?.token;
     if (!token) {
-        return res.status(401).json({ status: 'ERROR', message: 'Acceso no autorizado: Token no proporcionado' });
+        return res.status(403).json({ status: 'ERROR', message: 'Acceso no autorizado: Token no proporcionado' });
     }
 
     try {
