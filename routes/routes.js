@@ -148,11 +148,11 @@ router.post('/usuarios/', decryptPayload, authenticateToken, createUsuario)
 router.put('/usuarios/:id', decryptPayload, authenticateToken, updateUsuario)
 
 // colegios
-router.get('/colegios/', getAllColegios);
-router.get('/colegios/:id', getColegio);
-router.post('/colegios/', createColegio);
-router.put('/colegios/:id', updateColegio);
-router.delete('/colegios/:id', deleteColegio);
+// router.get('/colegios/', getAllColegios);
+router.get('/colegios/', authenticateToken, getColegio);
+router.post('/colegios/', decryptPayload, authenticateToken, createColegio);
+router.put('/colegios/', decryptPayload, authenticateToken, updateColegio);
+router.delete('/colegios/:id', decryptPayload, authenticateToken, deleteColegio);
 
 // ciclos escolares
 router.get('/ciclosescolares/', getAllCiclosEscolares);
