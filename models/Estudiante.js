@@ -70,6 +70,9 @@ class Estudiante extends Model {
           type: DataTypes.INTEGER,
           allowNull: true,
         },
+        fotografia: {
+          type: DataTypes.STRING(1000),
+        },
       },
       {
         sequelize,

@@ -3,7 +3,14 @@ import { getAllUsuarios, getUsuario, createUsuario, updateUsuario, deleteUsuario
 import { getAllColegios, getColegio, createColegio, updateColegio, deleteColegio } from "../controllers/ColegioController.js";
 import { getAllCiclosEscolares, getCicloEscolar, createCicloEscolar, updateCicloEscolar, deleteCicloEscolar } from "../controllers/CicloEscolarController.js";
 import { getAllNivelesEducacion, getNivelEducacion, createNivelEducacion, updateNivelEducacion, deleteNivelEducacion } from "../controllers/NivelEducacionController.js";
-import { getAllJornadas, getJornada, createJornada, updateJornada, deleteJornada } from "../controllers/JornadaController.js";
+import { 
+    getJornadaByNivelEducacion,
+    getAllJornadas, 
+    getJornada, 
+    createJornada, 
+    updateJornada, 
+    deleteJornada 
+} from "../controllers/JornadaController.js";
 import { 
     getAllJornadasCicloEscolar, 
     getJornadaCicloEscolar, 
@@ -12,6 +19,7 @@ import {
     deleteJornadaCicloEscolar 
 } from "../controllers/JornadaCicloEscolarController.js";
 import { 
+    getGradoByJornada,
     getAllGrados, 
     getGrado, 
     createGrado, 
@@ -137,6 +145,7 @@ import {
     createUsuarioColegio, 
     deleteUsuarioColegio 
 } from "../controllers/UsuarioColegioController.js";
+import { getAllSecciones } from "../controllers/SeccionController.js";
 import { login, validateSession } from "../controllers/AuthController.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js";
 import { decryptPayload } from "../middlewares/securityMiddleware.js";
@@ -169,8 +178,9 @@ router.put('/niveleducacion/:id', updateNivelEducacion);
 router.delete('/niveleducacion/:id', deleteNivelEducacion);
 
 // jornadas
-router.get('/jornadas/', getAllJornadas);
-router.get('/jornadas/:id', getJornada);
+// router.get('/jornadas/', getAllJornadas);
+router.get('/jornadas/:id', decryptPayload, authenticateToken, getJornada);
+router.get('/jornadas/niveleducacion/:id', decryptPayload, authenticateToken, getJornadaByNivelEducacion);
 router.post('/jornadas/', createJornada);
 router.put('/jornadas/:id', updateJornada);
 router.delete('/jornadas/:id', deleteJornada);
@@ -185,6 +195,7 @@ router.delete('/jornadacicloescolar/:id', deleteJornadaCicloEscolar);
 // grados
 router.get('/grados/', getAllGrados);
 router.get('/grados/:id', getGrado);
+router.get('/grados/jornada/:id', getGradoByJornada);
 router.post('/grados/', createGrado);
 router.put('/grados/:id', updateGrado);
 router.delete('/grados/:id', deleteGrado);
@@ -197,7 +208,7 @@ router.put('/personaldocente/:id', updatePersonalDocente);
 router.delete('/personaldocente/:id', deletePersonalDocente);
 
 // estudiantes
-router.get('/estudiantes/', getAllEstudiantes);
+// router.get('/estudiantes/', getAllEstudiantes);
 router.get('/estudiantes/:id', getEstudiante);
 router.post('/estudiantes/', createEstudiante);
 router.put('/estudiantes/:id', updateEstudiante);
@@ -306,6 +317,9 @@ router.get('/usuarioscolegios/colegio/:id', getUsuariosByColegio);
 router.get('/usuarioscolegios/:id', getUsuarioColegio);
 router.post('/usuarioscolegios/', createUsuarioColegio);
 router.delete('/usuarioscolegios/:id', deleteUsuarioColegio);
+
+// secciones
+router.get('/secciones', decryptPayload, authenticateToken, getAllSecciones);
 
 // ejecutar stored procedure
 router.post('/execute-procedure', executeStoredProcedure);

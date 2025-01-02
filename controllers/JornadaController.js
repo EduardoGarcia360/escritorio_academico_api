@@ -22,6 +22,19 @@ export const getJornada = async (req, res) => {
     }
 };
 
+export const getJornadaByNivelEducacion = async (req, res) => {
+    try {
+        const jornada = await Jornada.findAll({
+            where: {
+                id_nivel: req.params.id
+            }
+        });
+        res.status(200).json(jornada);
+    } catch (error) {
+        res.status(400).json({ status: 'ERROR', message: error.message });
+    }
+};
+
 export const createJornada = async (req, res) => {
     try {
         await Jornada.create(req.body);

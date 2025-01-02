@@ -1,8 +1,20 @@
 import Estudiante from "../models/Estudiante.js";
+import { decodeJWT } from "../utils/codificar.js";
 
 export const getAllEstudiantes = async (req, res) => {
     try {
-        const estudiantes = await Estudiante.findAll();
+        const token = req.cookies?.token;
+        const userData = decodeJWT(token);
+
+        if (!userData) {
+            return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
+        }
+
+        const estudiantes = await Estudiante.findAll({
+            where: {
+                id_colegio: userData.id_colegio
+            }
+        });
         res.status(200).json(estudiantes);
     } catch (error) {
         res.status(400).json({ status: 'ERROR', message: error.message });

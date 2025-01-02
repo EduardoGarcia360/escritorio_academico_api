@@ -1,8 +1,20 @@
 import NivelEducacion from "../models/NivelEducacion.js";
+import { decodeJWT } from "../utils/codificar.js";
 
 export const getAllNivelesEducacion = async (req, res) => {
     try {
-        const nivelesEducacion = await NivelEducacion.findAll();
+        const token = req.cookies?.token;
+        const userData = decodeJWT(token);
+
+        if (!userData) {
+            return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
+        }
+
+        const nivelesEducacion = await NivelEducacion.findAll({
+            where: {
+                id_colegio: userData.id_colegio
+            }
+        });
         res.status(200).json(nivelesEducacion);
     } catch (error) {
         res.status(400).json({ status: 'ERROR', message: error.message });
