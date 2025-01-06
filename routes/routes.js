@@ -171,11 +171,11 @@ router.put('/ciclosescolares/:id', updateCicloEscolar);
 router.delete('/ciclosescolares/:id', deleteCicloEscolar);
 
 // niveles de educación
-router.get('/niveleducacion/', getAllNivelesEducacion);
-router.get('/niveleducacion/:id', getNivelEducacion);
-router.post('/niveleducacion/', createNivelEducacion);
-router.put('/niveleducacion/:id', updateNivelEducacion);
-router.delete('/niveleducacion/:id', deleteNivelEducacion);
+router.get('/niveleducacion/', decryptPayload, authenticateToken, getAllNivelesEducacion);
+router.get('/niveleducacion/:id', decryptPayload, authenticateToken, getNivelEducacion);
+router.post('/niveleducacion/', decryptPayload, authenticateToken, createNivelEducacion);
+router.put('/niveleducacion/:id', decryptPayload, authenticateToken, updateNivelEducacion);
+router.delete('/niveleducacion/:id', decryptPayload, authenticateToken, deleteNivelEducacion);
 
 // jornadas
 // router.get('/jornadas/', getAllJornadas);
