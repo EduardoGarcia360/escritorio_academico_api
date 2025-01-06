@@ -209,10 +209,11 @@ router.delete('/personaldocente/:id', deletePersonalDocente);
 
 // estudiantes
 // router.get('/estudiantes/', getAllEstudiantes);
-router.get('/estudiantes/:id', getEstudiante);
-router.post('/estudiantes/', createEstudiante);
-router.put('/estudiantes/:id', updateEstudiante);
-router.delete('/estudiantes/:id', deleteEstudiante);
+router.get('/estudiantes/:id', decryptPayload, authenticateToken, getEstudiante);
+router.post('/estudiantes/', decryptPayload, authenticateToken, createEstudiante);
+router.put('/estudiantes/:id', decryptPayload, authenticateToken, updateEstudiante);
+router.put('/estudiantes/inactivar/:id', decryptPayload, authenticateToken, updateEstudiante);
+// router.delete('/estudiantes/:id', deleteEstudiante);
 
 // asignaciones docente-grado
 router.get('/asignacionesdocentegrado/', getAllAsignacionesDocenteGrado);

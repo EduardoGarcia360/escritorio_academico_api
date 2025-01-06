@@ -1,4 +1,4 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model, Sequelize } from "sequelize";
 
 class Estudiante extends Model {
   static init(sequelize) {
@@ -51,6 +51,7 @@ class Estudiante extends Model {
         fecha_inscripcion: {
           type: DataTypes.DATEONLY,
           allowNull: false,
+          defaultValue: Sequelize.NOW,
         },
         sexo: {
           type: DataTypes.ENUM("M", "F", "O"),
