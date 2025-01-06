@@ -164,11 +164,11 @@ router.put('/colegios/', decryptPayload, authenticateToken, updateColegio);
 router.delete('/colegios/:id', decryptPayload, authenticateToken, deleteColegio);
 
 // ciclos escolares
-router.get('/ciclosescolares/', getAllCiclosEscolares);
-router.get('/ciclosescolares/:id', getCicloEscolar);
-router.post('/ciclosescolares/', createCicloEscolar);
-router.put('/ciclosescolares/:id', updateCicloEscolar);
-router.delete('/ciclosescolares/:id', deleteCicloEscolar);
+router.get('/ciclosescolares/', decryptPayload, authenticateToken, getAllCiclosEscolares);
+router.get('/ciclosescolares/:id', decryptPayload, authenticateToken, getCicloEscolar);
+router.post('/ciclosescolares/', decryptPayload, authenticateToken, createCicloEscolar);
+router.put('/ciclosescolares/:id', decryptPayload, authenticateToken, updateCicloEscolar);
+router.delete('/ciclosescolares/:id', decryptPayload, authenticateToken, deleteCicloEscolar);
 
 // niveles de educación
 router.get('/niveleducacion/', decryptPayload, authenticateToken, getAllNivelesEducacion);
