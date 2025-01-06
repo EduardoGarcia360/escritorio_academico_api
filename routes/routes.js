@@ -230,18 +230,13 @@ router.put('/asignacionesestudiantegrado/:id', updateAsignacionEstudianteGrado);
 router.delete('/asignacionesestudiantegrado/:id', deleteAsignacionEstudianteGrado);
 
 // tutores
-router.get('/tutores/', getAllTutores);
-router.get('/tutores/:id', getTutor);
+router.get('/tutores/estudiante/:id', decryptPayload, authenticateToken, getAllTutores);
+router.get('/tutores/:id', decryptPayload, authenticateToken, getTutor);
 router.post('/tutores/', createTutor);
 router.put('/tutores/:id', updateTutor);
 router.delete('/tutores/:id', deleteTutor);
 
 // relaciones tutor-estudiante
-router.get('/tutorestudiantes/', getAllTutorEstudiantes);
-router.get('/tutorestudiantes/:id', getTutorEstudiante);
-router.post('/tutorestudiantes/', createTutorEstudiante);
-router.put('/tutorestudiantes/:id', updateTutorEstudiante);
-router.delete('/tutorestudiantes/:id', deleteTutorEstudiante);
 
 // cuotas colegio
 router.get('/cuotascolegio/', getAllCuotasColegio);
