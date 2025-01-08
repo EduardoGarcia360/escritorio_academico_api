@@ -48,6 +48,7 @@ import {
     deleteAsignacionDocenteGrado 
 } from "../controllers/AsignacionDocenteGradoController.js";
 import { 
+    getAllAsignacionesEstudianteGradoByGrado,
     getAllAsignacionesEstudianteGrado, 
     getAsignacionEstudianteGrado, 
     createAsignacionEstudianteGrado, 
@@ -215,11 +216,9 @@ router.put('/asignacionesdocentegrado/:id', updateAsignacionDocenteGrado);
 router.delete('/asignacionesdocentegrado/:id', deleteAsignacionDocenteGrado);
 
 // asignaciones estudiante-grado
-router.get('/asignacionesestudiantegrado/', getAllAsignacionesEstudianteGrado);
-router.get('/asignacionesestudiantegrado/:id', getAsignacionEstudianteGrado);
-router.post('/asignacionesestudiantegrado/', createAsignacionEstudianteGrado);
-router.put('/asignacionesestudiantegrado/:id', updateAsignacionEstudianteGrado);
-router.delete('/asignacionesestudiantegrado/:id', deleteAsignacionEstudianteGrado);
+router.get('/asignacionesestudiantegrado/grado/:id', decryptPayload, authenticateToken, getAllAsignacionesEstudianteGradoByGrado);
+router.post('/asignacionesestudiantegrado/', decryptPayload, authenticateToken, createAsignacionEstudianteGrado);
+router.delete('/asignacionesestudiantegrado/:id', decryptPayload, authenticateToken, deleteAsignacionEstudianteGrado);
 
 // tutores
 router.get('/tutores/estudiante/:id', decryptPayload, authenticateToken, getAllTutores);
