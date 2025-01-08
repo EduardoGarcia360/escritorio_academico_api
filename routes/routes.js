@@ -19,7 +19,7 @@ import {
     deleteJornadaCicloEscolar 
 } from "../controllers/JornadaCicloEscolarController.js";
 import { 
-    getGradoByJornada,
+    getAllGradosByJornadaCiclo,
     getAllGrados, 
     getGrado, 
     createGrado, 
@@ -188,12 +188,11 @@ router.post('/jornadacicloescolar/', decryptPayload, authenticateToken, createJo
 router.delete('/jornadacicloescolar/:id', decryptPayload, authenticateToken, deleteJornadaCicloEscolar);
 
 // grados
-router.get('/grados/', getAllGrados);
-router.get('/grados/:id', getGrado);
-router.get('/grados/jornada/:id', getGradoByJornada);
-router.post('/grados/', createGrado);
-router.put('/grados/:id', updateGrado);
-router.delete('/grados/:id', deleteGrado);
+router.get('/grados/jornadaciclo/:id', decryptPayload, authenticateToken, getAllGradosByJornadaCiclo);
+router.get('/grados/:id', decryptPayload, authenticateToken, getGrado);
+router.post('/grados/', decryptPayload, authenticateToken, createGrado);
+router.put('/grados/:id', decryptPayload, authenticateToken, updateGrado);
+router.delete('/grados/:id', decryptPayload, authenticateToken, deleteGrado);
 
 // personal docente
 router.get('/personaldocente/', getAllPersonalDocente);

@@ -1,10 +1,24 @@
 import Grado from "../models/Grado.js";
 import JornadaCicloEscolar from "../models/JornadaCicloEscolar.js";
 import CicloEscolar from "../models/CicloEscolar.js";
+import { decodeJWT } from "../utils/codificar.js";
 
 export const getAllGrados = async (req, res) => {
     try {
         const grados = await Grado.findAll();
+        res.status(200).json(grados);
+    } catch (error) {
+        res.status(400).json({ status: 'ERROR', message: error.message });
+    }
+};
+
+export const getAllGradosByJornadaCiclo = async (req, res) => {
+    try {
+        const grados = await Grado.findAll({
+            where: {
+                id_jornada_ciclo: req.params.id
+            }
+        });
         res.status(200).json(grados);
     } catch (error) {
         res.status(400).json({ status: 'ERROR', message: error.message });
@@ -26,6 +40,15 @@ export const getGrado = async (req, res) => {
 
 export const createGrado = async (req, res) => {
     try {
+        const token = req.cookies?.token;
+        const userData = decodeJWT(token);
+
+        if (!userData) {
+            return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
+        }
+
+        req.body.id_usuario_creo = userData.id
+
         await Grado.create(req.body);
         res.status(200).json({ status: 'OK', message: 'Grado creado correctamente!' });
     } catch (error) {
@@ -35,6 +58,15 @@ export const createGrado = async (req, res) => {
 
 export const updateGrado = async (req, res) => {
     try {
+        const token = req.cookies?.token;
+        const userData = decodeJWT(token);
+
+        if (!userData) {
+            return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
+        }
+
+        req.body.id_usuario_modifico = userData.id
+
         await Grado.update(req.body, {
             where: {
                 id_grado: req.params.id
@@ -62,44 +94,6 @@ export const deleteGrado = async (req, res) => {
             }
         });
         res.status(200).json({ status: 'OK', message: 'Grado eliminado correctamente!' });
-    } catch (error) {
-        res.status(400).json({ status: 'ERROR', message: error.message });
-    }
-};
-
-export const getGradoByJornada = async (req, res) => {
-    try {
-        const { id } = req.params; // ID de la jornada seleccionada
-
-        // Obtener el ciclo escolar activo
-        const cicloActivo = await CicloEscolar.findOne({
-            where: { estado: 'A' }
-        });
-
-        if (!cicloActivo) {
-            return res.status(404).json({ status: 'ERROR', message: 'No hay un ciclo escolar activo.' });
-        }
-
-        // Obtener la asociación jornada-ciclo escolar
-        const jornadaCiclo = await JornadaCicloEscolar.findOne({
-            where: {
-                id_jornada: id,
-                id_ciclo: cicloActivo.id_ciclo
-            }
-        });
-
-        if (!jornadaCiclo) {
-            return res.status(404).json({ status: 'ERROR', message: 'No se encontró una asociación válida para la jornada y ciclo escolar activo.' });
-        }
-
-        // Obtener los grados asociados a la jornada-ciclo
-        const grados = await Grado.findAll({
-            where: {
-                id_jornada_ciclo: jornadaCiclo.id_jornada_ciclo
-            }
-        });
-
-        res.status(200).json(grados);
     } catch (error) {
         res.status(400).json({ status: 'ERROR', message: error.message });
     }
