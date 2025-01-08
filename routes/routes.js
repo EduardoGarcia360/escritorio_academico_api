@@ -181,9 +181,9 @@ router.delete('/niveleducacion/:id', decryptPayload, authenticateToken, deleteNi
 // router.get('/jornadas/', getAllJornadas);
 router.get('/jornadas/:id', decryptPayload, authenticateToken, getJornada);
 router.get('/jornadas/niveleducacion/:id', decryptPayload, authenticateToken, getJornadaByNivelEducacion);
-router.post('/jornadas/', createJornada);
-router.put('/jornadas/:id', updateJornada);
-router.delete('/jornadas/:id', deleteJornada);
+router.post('/jornadas/', decryptPayload, authenticateToken, createJornada);
+router.put('/jornadas/:id', decryptPayload, authenticateToken, updateJornada);
+router.delete('/jornadas/:id', decryptPayload, authenticateToken, deleteJornada);
 
 // jornadas ciclo escolar
 router.get('/jornadacicloescolar/', getAllJornadasCicloEscolar);
