@@ -1,6 +1,7 @@
 import Grado from "../models/Grado.js";
 import AsignacionEstudianteGrado from "../models/AsignacionEstudianteGrado.js";
 import { decodeJWT } from "../utils/codificar.js";
+import { Sequelize } from "sequelize";
 
 export const getAllGrados = async (req, res) => {
     try {
@@ -16,6 +17,18 @@ export const getAllGradosByJornadaCiclo = async (req, res) => {
         const grados = await Grado.findAll({
             where: {
                 id_jornada_ciclo: req.params.id
+            },
+            attributes: {
+                include: [
+                    [
+                        Sequelize.literal(`(
+                            SELECT COUNT(*)
+                            FROM AsignacionEstudianteGrado AS aeg
+                            WHERE aeg.id_grado = Grado.id_grado
+                        )`),
+                        'cantidad_estudiantes'
+                    ]
+                ]
             }
         });
         res.status(200).json(grados);
