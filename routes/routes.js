@@ -157,7 +157,6 @@ router.post('/usuarios/', decryptPayload, authenticateToken, createUsuario)
 router.put('/usuarios/:id', decryptPayload, authenticateToken, updateUsuario)
 
 // colegios
-// router.get('/colegios/', getAllColegios);
 router.get('/colegios/', authenticateToken, getColegio);
 router.post('/colegios/', decryptPayload, authenticateToken, createColegio);
 router.put('/colegios/', decryptPayload, authenticateToken, updateColegio);
@@ -178,7 +177,6 @@ router.put('/niveleducacion/:id', decryptPayload, authenticateToken, updateNivel
 router.delete('/niveleducacion/:id', decryptPayload, authenticateToken, deleteNivelEducacion);
 
 // jornadas
-// router.get('/jornadas/', getAllJornadas);
 router.get('/jornadas/:id', decryptPayload, authenticateToken, getJornada);
 router.get('/jornadas/niveleducacion/:id', decryptPayload, authenticateToken, getJornadaByNivelEducacion);
 router.post('/jornadas/', decryptPayload, authenticateToken, createJornada);
@@ -186,11 +184,8 @@ router.put('/jornadas/:id', decryptPayload, authenticateToken, updateJornada);
 router.delete('/jornadas/:id', decryptPayload, authenticateToken, deleteJornada);
 
 // jornadas ciclo escolar
-router.get('/jornadacicloescolar/', getAllJornadasCicloEscolar);
-router.get('/jornadacicloescolar/:id', getJornadaCicloEscolar);
-router.post('/jornadacicloescolar/', createJornadaCicloEscolar);
-router.put('/jornadacicloescolar/:id', updateJornadaCicloEscolar);
-router.delete('/jornadacicloescolar/:id', deleteJornadaCicloEscolar);
+router.post('/jornadacicloescolar/', decryptPayload, authenticateToken, createJornadaCicloEscolar);
+router.delete('/jornadacicloescolar/:id', decryptPayload, authenticateToken, deleteJornadaCicloEscolar);
 
 // grados
 router.get('/grados/', getAllGrados);
@@ -208,12 +203,10 @@ router.put('/personaldocente/:id', updatePersonalDocente);
 router.delete('/personaldocente/:id', deletePersonalDocente);
 
 // estudiantes
-// router.get('/estudiantes/', getAllEstudiantes);
 router.get('/estudiantes/:id', decryptPayload, authenticateToken, getEstudiante);
 router.post('/estudiantes/', decryptPayload, authenticateToken, createEstudiante);
 router.put('/estudiantes/:id', decryptPayload, authenticateToken, updateEstudiante);
 router.put('/estudiantes/inactivar/:id', decryptPayload, authenticateToken, updateEstudiante);
-// router.delete('/estudiantes/:id', deleteEstudiante);
 
 // asignaciones docente-grado
 router.get('/asignacionesdocentegrado/', getAllAsignacionesDocenteGrado);
