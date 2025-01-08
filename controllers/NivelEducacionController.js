@@ -1,6 +1,7 @@
 import NivelEducacion from "../models/NivelEducacion.js";
 import Jornada from "../models/Jornada.js";
 import { decodeJWT } from "../utils/codificar.js";
+import { Sequelize } from "sequelize";
 
 export const getAllNivelesEducacion = async (req, res) => {
     try {
@@ -11,11 +12,26 @@ export const getAllNivelesEducacion = async (req, res) => {
             return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
         }
 
+        // Obtener los niveles de educación junto con el contador de jornadas
         const nivelesEducacion = await NivelEducacion.findAll({
             where: {
                 id_colegio: userData.id_colegio
+            },
+            attributes: {
+                include: [
+                    // Subconsulta para contar las jornadas asociadas
+                    [
+                        Sequelize.literal(`(
+                            SELECT COUNT(*)
+                            FROM Jornada AS j
+                            WHERE j.id_nivel = NivelEducacion.id_nivel
+                        )`),
+                        'cantidad_jornada'
+                    ]
+                ]
             }
         });
+
         res.status(200).json(nivelesEducacion);
     } catch (error) {
         res.status(400).json({ status: 'ERROR', message: error.message });
