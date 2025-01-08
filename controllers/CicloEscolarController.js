@@ -1,5 +1,6 @@
 import CicloEscolar from "../models/CicloEscolar.js";
 import { decodeJWT } from "../utils/codificar.js";
+import { Sequelize } from "sequelize";
 
 export const getAllCiclosEscolares = async (req, res) => {
     try {
@@ -10,11 +11,26 @@ export const getAllCiclosEscolares = async (req, res) => {
             return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
         }
 
+        // Obtener los ciclos escolares junto con el contador de jornadas asociadas
         const ciclosEscolares = await CicloEscolar.findAll({
             where: {
                 id_colegio: userData.id_colegio
+            },
+            attributes: {
+                include: [
+                    // Subconsulta para contar las jornadas asociadas
+                    [
+                        Sequelize.literal(`(
+                            SELECT COUNT(*)
+                            FROM JornadaCicloEscolar AS jce
+                            WHERE jce.id_ciclo = CicloEscolar.id_ciclo
+                        )`),
+                        'cantidad_jornadas'
+                    ]
+                ]
             }
         });
+
         res.status(200).json(ciclosEscolares);
     } catch (error) {
         res.status(400).json({ status: 'ERROR', message: error.message });
