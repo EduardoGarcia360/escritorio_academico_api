@@ -1,6 +1,5 @@
 import Grado from "../models/Grado.js";
-import JornadaCicloEscolar from "../models/JornadaCicloEscolar.js";
-import CicloEscolar from "../models/CicloEscolar.js";
+import AsignacionEstudianteGrado from "../models/AsignacionEstudianteGrado.js";
 import { decodeJWT } from "../utils/codificar.js";
 
 export const getAllGrados = async (req, res) => {
@@ -86,6 +85,14 @@ export const deleteGrado = async (req, res) => {
 
         if (!grado) {
             return res.status(400).json({ status: 'ERROR', message: 'Grado no encontrado' });
+        }
+
+        const asignacion = await AsignacionEstudianteGrado.findOne({
+            where: { id_grado: req.params.id }
+        })
+
+        if (asignacion) {
+            return res.status(400).json({ status: 'ERROR', message: 'Grado asociado a una asignación' });
         }
 
         await Grado.destroy({
