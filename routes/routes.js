@@ -209,11 +209,8 @@ router.put('/estudiantes/:id', decryptPayload, authenticateToken, updateEstudian
 router.put('/estudiantes/inactivar/:id', decryptPayload, authenticateToken, updateEstudiante);
 
 // asignaciones docente-grado
-router.get('/asignacionesdocentegrado/', getAllAsignacionesDocenteGrado);
-router.get('/asignacionesdocentegrado/:id', getAsignacionDocenteGrado);
-router.post('/asignacionesdocentegrado/', createAsignacionDocenteGrado);
-router.put('/asignacionesdocentegrado/:id', updateAsignacionDocenteGrado);
-router.delete('/asignacionesdocentegrado/:id', deleteAsignacionDocenteGrado);
+router.post('/asignacionesdocentegrado/', decryptPayload, authenticateToken, createAsignacionDocenteGrado);
+router.delete('/asignacionesdocentegrado/:id', decryptPayload, authenticateToken, deleteAsignacionDocenteGrado);
 
 // asignaciones estudiante-grado
 router.get('/asignacionesestudiantegrado/grado/:id', decryptPayload, authenticateToken, getAllAsignacionesEstudianteGradoByGrado);
