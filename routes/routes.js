@@ -196,11 +196,11 @@ router.put('/grados/:id', decryptPayload, authenticateToken, updateGrado);
 router.delete('/grados/:id', decryptPayload, authenticateToken, deleteGrado);
 
 // personal docente
-router.get('/personaldocente/', getAllPersonalDocente);
-router.get('/personaldocente/:id', getPersonalDocente);
-router.post('/personaldocente/', createPersonalDocente);
-router.put('/personaldocente/:id', updatePersonalDocente);
-router.delete('/personaldocente/:id', deletePersonalDocente);
+router.get('/personaldocente/', decryptPayload, authenticateToken, getAllPersonalDocente);
+router.get('/personaldocente/:id', decryptPayload, authenticateToken, getPersonalDocente);
+router.post('/personaldocente/', decryptPayload, authenticateToken, createPersonalDocente);
+router.put('/personaldocente/:id', decryptPayload, authenticateToken, updatePersonalDocente);
+router.delete('/personaldocente/:id', decryptPayload, authenticateToken, deletePersonalDocente);
 
 // estudiantes
 router.get('/estudiantes/:id', decryptPayload, authenticateToken, getEstudiante);
@@ -223,9 +223,9 @@ router.delete('/asignacionesestudiantegrado/:id', decryptPayload, authenticateTo
 // tutores
 router.get('/tutores/estudiante/:id', decryptPayload, authenticateToken, getAllTutores);
 router.get('/tutores/:id', decryptPayload, authenticateToken, getTutor);
-router.post('/tutores/', createTutor);
-router.put('/tutores/:id', updateTutor);
-router.delete('/tutores/:id', deleteTutor);
+router.post('/tutores/', decryptPayload, authenticateToken, createTutor);
+router.put('/tutores/:id', decryptPayload, authenticateToken, updateTutor);
+router.delete('/tutores/:id', decryptPayload, authenticateToken, deleteTutor);
 
 // relaciones tutor-estudiante
 
