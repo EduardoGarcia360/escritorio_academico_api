@@ -27,6 +27,14 @@ export const getAllGradosByJornadaCiclo = async (req, res) => {
                             WHERE aeg.id_grado = Grado.id_grado
                         )`),
                         'cantidad_estudiantes'
+                    ],
+                    [
+                        Sequelize.literal(`(
+                            SELECT COUNT(*)
+                            FROM AsignacionDocenteGrado AS adg
+                            WHERE adg.id_grado = Grado.id_grado
+                        )`),
+                        'cantidad_maestros'
                     ]
                 ]
             }
