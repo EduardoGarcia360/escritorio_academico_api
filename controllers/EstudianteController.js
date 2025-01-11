@@ -1,4 +1,5 @@
 import Estudiante from "../models/Estudiante.js";
+import CuotaColegio from "../models/CuotaColegio.js";
 import { decodeJWT } from "../utils/codificar.js";
 
 export const getAllEstudiantes = async (req, res) => {
@@ -43,11 +44,25 @@ export const createEstudiante = async (req, res) => {
             return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
         }
 
+        // Validar si existe un registro en CuotaColegio
+        const cuotaColegio = await CuotaColegio.findOne({
+            where: { id_colegio: userData.id_colegio }
+        });
+
+        if (!cuotaColegio) {
+            return res.status(400).json({ status: 'ERROR', message: 'No se creó la cantidad de la cuota' });
+        }
+
         req.body.id_usuario_creo = userData.id
         req.body.id_colegio = userData.id_colegio
         
-        await Estudiante.create(req.body);
-        res.status(200).json({ status: 'OK', message: 'Estudiante creado correctamente!' });
+        const newEstudiante = await Estudiante.create(req.body);
+
+        res.status(200).json({ 
+            status: 'OK', 
+            message: 'Estudiante creado correctamente!',
+            id_estudiante: newEstudiante.id_estudiante
+        });
     } catch (error) {
         res.status(400).json({ status: 'ERROR', message: error.message });
     }
