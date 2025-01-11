@@ -146,6 +146,20 @@ import {
     createUsuarioColegio, 
     deleteUsuarioColegio 
 } from "../controllers/UsuarioColegioController.js";
+import {
+    getAllBancos,
+    getBanco,
+    createBanco,
+    updateBanco,
+    deleteBanco
+} from "../controllers/BancoController.js";
+import {
+    getAllCuentasBancariasColegio,
+    getCuentaBancariaColegio,
+    createCuentaBancariaColegio,
+    updateCuentaBancariaColegio,
+    deleteCuentaBancariaColegio
+} from "../controllers/CuentaBancariaColegioController.js";
 import { getAllSecciones } from "../controllers/SeccionController.js";
 import { login, validateSession } from "../controllers/AuthController.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js";
@@ -298,6 +312,20 @@ router.get('/usuarioscolegios/colegio/:id', getUsuariosByColegio);
 router.get('/usuarioscolegios/:id', getUsuarioColegio);
 router.post('/usuarioscolegios/', createUsuarioColegio);
 router.delete('/usuarioscolegios/:id', deleteUsuarioColegio);
+
+// bancos
+router.get('/bancos/', getAllBancos);
+router.get('/bancos/:id', getBanco);
+router.post('/bancos/', createBanco);
+router.put('/bancos/:id', updateBanco);
+router.delete('/bancos/:id', deleteBanco);
+
+// Cuentas bancarias de colegio
+router.get('/cuentasbancarias/', getAllCuentasBancariasColegio);
+router.get('/cuentasbancarias/:id', getCuentaBancariaColegio);
+router.post('/cuentasbancarias/', createCuentaBancariaColegio);
+router.put('/cuentasbancarias/:id', updateCuentaBancariaColegio);
+router.delete('/cuentasbancarias/:id', deleteCuentaBancariaColegio);
 
 // secciones
 router.get('/secciones', decryptPayload, authenticateToken, getAllSecciones);
