@@ -227,11 +227,11 @@ router.delete('/tutores/:id', decryptPayload, authenticateToken, deleteTutor);
 // relaciones tutor-estudiante
 
 // cuotas colegio
-router.get('/cuotascolegio/', getAllCuotasColegio);
-router.get('/cuotascolegio/:id', getCuotaColegio);
-router.post('/cuotascolegio/', createCuotaColegio);
-router.put('/cuotascolegio/:id', updateCuotaColegio);
-router.delete('/cuotascolegio/:id', deleteCuotaColegio);
+router.get('/cuotascolegio/', decryptPayload, authenticateToken, getAllCuotasColegio);
+router.get('/cuotascolegio/:id', decryptPayload, authenticateToken, getCuotaColegio);
+router.post('/cuotascolegio/', decryptPayload, authenticateToken, createCuotaColegio);
+router.put('/cuotascolegio/:id', decryptPayload, authenticateToken, updateCuotaColegio);
+router.delete('/cuotascolegio/:id', decryptPayload, authenticateToken, deleteCuotaColegio);
 
 // cuotas estudiante
 router.get('/cuotasestudiante/', getAllCuotasEstudiante);

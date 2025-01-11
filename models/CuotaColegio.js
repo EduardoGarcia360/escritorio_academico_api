@@ -22,12 +22,6 @@ class CuotaColegio extends Model {
         periodicidad: {
           type: DataTypes.STRING(50),
         },
-        fecha_creacion: {
-          type: DataTypes.DATEONLY,
-        },
-        fecha_modificacion: {
-          type: DataTypes.DATEONLY,
-        },
         id_usuario_creo: {
           type: DataTypes.INTEGER,
           allowNull: false,
