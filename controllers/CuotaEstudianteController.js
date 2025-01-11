@@ -1,8 +1,35 @@
 import CuotaEstudiante from "../models/CuotaEstudiante.js";
+import CicloEscolar from "../models/CicloEscolar.js";
+import { Op } from "sequelize";
 
 export const getAllCuotasEstudiante = async (req, res) => {
     try {
-        const cuotas = await CuotaEstudiante.findAll();
+        // Obtener el ciclo escolar activo
+        const cicloActivo = await CicloEscolar.findOne({
+            where: { estado: 'A' },
+            attributes: ['fecha_inicio'] // Obtener fecha de inicio del ciclo escolar
+        });
+
+        if (!cicloActivo) {
+            return res.status(404).json({
+                status: 'ERROR',
+                message: 'No hay un ciclo escolar activo'
+            });
+        }
+
+        // Extraer el año de la fecha de inicio del ciclo escolar
+        const anioInicial = new Date(cicloActivo.fecha_inicio).getFullYear();
+
+        // Filtrar las cuotas por estudiante y periodo dentro del año del ciclo activo
+        const cuotas = await CuotaEstudiante.findAll({
+            where: {
+                id_estudiante: req.params.id,
+                periodo: {
+                    [Op.like]: `${anioInicial}-%` // Validar que el periodo comience con el año del ciclo escolar activo
+                }
+            }
+        });
+
         res.status(200).json(cuotas);
     } catch (error) {
         res.status(400).json({ status: 'ERROR', message: error.message });

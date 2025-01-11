@@ -234,11 +234,8 @@ router.put('/cuotascolegio/:id', decryptPayload, authenticateToken, updateCuotaC
 router.delete('/cuotascolegio/:id', decryptPayload, authenticateToken, deleteCuotaColegio);
 
 // cuotas estudiante
-router.get('/cuotasestudiante/', getAllCuotasEstudiante);
-router.get('/cuotasestudiante/:id', getCuotaEstudiante);
-router.post('/cuotasestudiante/', createCuotaEstudiante);
+router.get('/cuotasestudiante/:id', getAllCuotasEstudiante);
 router.put('/cuotasestudiante/:id', updateCuotaEstudiante);
-router.delete('/cuotasestudiante/:id', deleteCuotaEstudiante);
 
 // pagos de cuota
 router.get('/pagoscuota/', getAllPagosCuota);
