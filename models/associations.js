@@ -24,6 +24,8 @@ const setupAssociations = (models) => {
         EstudianteActividad,
         CoordenadaBus,
         UsuarioColegio,
+        Banco,
+        CuentaBancariaColegio,
     } = models;
 
     // Relaciones para Colegio
@@ -128,8 +130,12 @@ const setupAssociations = (models) => {
     // Relaciones para PagoCuota
     CuotaEstudiante.hasMany(PagoCuota, { foreignKey: "id_cuota_estudiante" });
     PagoCuota.belongsTo(CuotaEstudiante, { foreignKey: "id_cuota_estudiante" });
+    CuentaBancariaColegio.hasMany(PagoCuota, { foreignKey: "id_cuenta_colegio" });
+    PagoCuota.belongsTo(CuentaBancariaColegio, { foreignKey: "id_cuenta_colegio" });
     Usuario.hasMany(PagoCuota, { foreignKey: "id_usuario_creo" });
     Usuario.hasMany(PagoCuota, { foreignKey: "id_usuario_modifico" });
+    PagoCuota.belongsTo(Usuario, { foreignKey: "id_usuario_creo" });
+    PagoCuota.belongsTo(Usuario, { foreignKey: "id_usuario_modifico" });
 
     // Relaciones para GastoExtraordinario
     Colegio.hasMany(GastoExtraordinario, { foreignKey: "id_colegio" });
@@ -187,6 +193,23 @@ const setupAssociations = (models) => {
     Colegio.hasMany(UsuarioColegio, { foreignKey: "id_colegio" });
     UsuarioColegio.belongsTo(Colegio, { foreignKey: "id_colegio" });
 
+    // Relaciones para Banco
+    Usuario.hasMany(Banco, { foreignKey: "id_usuario_creo" });
+    Usuario.hasMany(Banco, { foreignKey: "id_usuario_modifico" });
+    Banco.belongsTo(Usuario, { as: "creador", foreignKey: "id_usuario_creo" });
+    Banco.belongsTo(Usuario, { as: "modificador", foreignKey: "id_usuario_modifico" });
+
+    // Relaciones para CuentaBancariaColegio
+    Colegio.hasMany(CuentaBancariaColegio, { foreignKey: "id_colegio" });
+    CuentaBancariaColegio.belongsTo(Colegio, { foreignKey: "id_colegio" });
+
+    Banco.hasMany(CuentaBancariaColegio, { foreignKey: "id_banco" });
+    CuentaBancariaColegio.belongsTo(Banco, { foreignKey: "id_banco" });
+
+    Usuario.hasMany(CuentaBancariaColegio, { foreignKey: "id_usuario_creo" });
+    Usuario.hasMany(CuentaBancariaColegio, { foreignKey: "id_usuario_modifico" });
+    CuentaBancariaColegio.belongsTo(Usuario, { as: "creador", foreignKey: "id_usuario_creo" });
+    CuentaBancariaColegio.belongsTo(Usuario, { as: "modificador", foreignKey: "id_usuario_modifico" });
 };
 
 export default setupAssociations;

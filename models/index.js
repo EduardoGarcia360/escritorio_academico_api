@@ -23,6 +23,8 @@ import EncargadoBus from "./EncargadoBus.js";
 import EstudianteActividad from "./EstudianteActividad.js";
 import CoordenadaBus from "./CoordenadaBus.js";
 import UsuarioColegio from "./UsuarioColegio.js";
+import Banco from "./Banco.js";
+import CuentaBancariaColegio from "./CuentaBancariaColegio.js";
 import setupAssociations from "./associations.js";
 
 // Inicializar modelos
@@ -51,6 +53,8 @@ const models = {
     EstudianteActividad,
     CoordenadaBus,
     UsuarioColegio,
+    Banco,
+    CuentaBancariaColegio,
 };
 
 Object.values(models).forEach((model) => {

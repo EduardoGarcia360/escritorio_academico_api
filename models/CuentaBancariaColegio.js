@@ -1,39 +1,35 @@
 import { DataTypes, Model } from "sequelize";
 
-class PagoCuota extends Model {
+class CuentaBancariaColegio extends Model {
   static init(sequelize) {
     return super.init(
       {
-        id_pago: {
+        id_cuenta_colegio: {
           type: DataTypes.INTEGER,
           primaryKey: true,
           autoIncrement: true,
         },
-        id_cuota_estudiante: {
+        id_colegio: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        id_cuenta_colegio: {
+        id_banco: {
           type: DataTypes.INTEGER,
-          allowNull: true,
+          allowNull: false,
         },
-        monto_pagado: {
-          type: DataTypes.DECIMAL(10, 2),
-        },
-        fecha_pago: {
-          type: DataTypes.DATEONLY,
-        },
-        metodo_pago: {
+        numero_cuenta: {
           type: DataTypes.STRING(50),
+          allowNull: false,
         },
-        numero_boleta: {
-          type: DataTypes.STRING(50),
+        tipo_cuenta: {
+          type: DataTypes.ENUM("A", "M", "C"),
+          comment: "A=Ahorro, M=Monetarias, C=Corrientes",
         },
-        fecha_boleta: {
-          type: DataTypes.DATEONLY,
+        nombre_titular: {
+          type: DataTypes.STRING(100),
         },
-        imagen_boleta: {
-          type: DataTypes.STRING(255),
+        moneda: {
+          type: DataTypes.STRING(10),
         },
         id_usuario_creo: {
           type: DataTypes.INTEGER,
@@ -46,12 +42,12 @@ class PagoCuota extends Model {
       },
       {
         sequelize,
-        modelName: "PagoCuota",
-        tableName: "PagoCuota",
+        modelName: "CuentaBancariaColegio",
+        tableName: "CuentaBancariaColegio",
         timestamps: true,
       }
     );
   }
 }
 
-export default PagoCuota;
+export default CuentaBancariaColegio;
