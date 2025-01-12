@@ -198,6 +198,8 @@ const setupAssociations = (models) => {
     Usuario.hasMany(Banco, { foreignKey: "id_usuario_modifico" });
     Banco.belongsTo(Usuario, { as: "creador", foreignKey: "id_usuario_creo" });
     Banco.belongsTo(Usuario, { as: "modificador", foreignKey: "id_usuario_modifico" });
+    Colegio.hasMany(Banco, { foreignKey: "id_colegio" });
+    Banco.belongsTo(Colegio, { foreignKey: "id_colegio" });
 
     // Relaciones para CuentaBancariaColegio
     Colegio.hasMany(CuentaBancariaColegio, { foreignKey: "id_colegio" });

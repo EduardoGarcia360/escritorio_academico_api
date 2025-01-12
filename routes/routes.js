@@ -314,11 +314,11 @@ router.post('/usuarioscolegios/', createUsuarioColegio);
 router.delete('/usuarioscolegios/:id', deleteUsuarioColegio);
 
 // bancos
-router.get('/bancos/', getAllBancos);
-router.get('/bancos/:id', getBanco);
-router.post('/bancos/', createBanco);
-router.put('/bancos/:id', updateBanco);
-router.delete('/bancos/:id', deleteBanco);
+router.get('/bancos/', decryptPayload, authenticateToken, getAllBancos);
+router.get('/bancos/:id', decryptPayload, authenticateToken, getBanco);
+router.post('/bancos/', decryptPayload, authenticateToken, createBanco);
+router.put('/bancos/:id', decryptPayload, authenticateToken, updateBanco);
+router.delete('/bancos/:id', decryptPayload, authenticateToken, deleteBanco);
 
 // Cuentas bancarias de colegio
 router.get('/cuentasbancarias/', getAllCuentasBancariasColegio);

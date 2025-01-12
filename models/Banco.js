@@ -9,6 +9,10 @@ class Banco extends Model {
           primaryKey: true,
           autoIncrement: true,
         },
+        id_colegio: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
         nombre_banco: {
           type: DataTypes.STRING(100),
           allowNull: false,
