@@ -321,11 +321,11 @@ router.put('/bancos/:id', decryptPayload, authenticateToken, updateBanco);
 router.delete('/bancos/:id', decryptPayload, authenticateToken, deleteBanco);
 
 // Cuentas bancarias de colegio
-router.get('/cuentasbancarias/', getAllCuentasBancariasColegio);
-router.get('/cuentasbancarias/:id', getCuentaBancariaColegio);
-router.post('/cuentasbancarias/', createCuentaBancariaColegio);
-router.put('/cuentasbancarias/:id', updateCuentaBancariaColegio);
-router.delete('/cuentasbancarias/:id', deleteCuentaBancariaColegio);
+router.get('/cuentasbancarias/', decryptPayload, authenticateToken, getAllCuentasBancariasColegio);
+router.get('/cuentasbancarias/:id', decryptPayload, authenticateToken, getCuentaBancariaColegio);
+router.post('/cuentasbancarias/', decryptPayload, authenticateToken, createCuentaBancariaColegio);
+router.put('/cuentasbancarias/:id', decryptPayload, authenticateToken, updateCuentaBancariaColegio);
+router.delete('/cuentasbancarias/:id', decryptPayload, authenticateToken, deleteCuentaBancariaColegio);
 
 // secciones
 router.get('/secciones', decryptPayload, authenticateToken, getAllSecciones);
