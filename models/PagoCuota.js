@@ -23,9 +23,6 @@ class PagoCuota extends Model {
         fecha_pago: {
           type: DataTypes.DATEONLY,
         },
-        metodo_pago: {
-          type: DataTypes.STRING(50),
-        },
         numero_boleta: {
           type: DataTypes.STRING(50),
         },

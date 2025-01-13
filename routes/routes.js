@@ -84,6 +84,7 @@ import {
     deleteCuotaEstudiante 
 } from "../controllers/CuotaEstudianteController.js";
 import { 
+    getPagoCuotaByCuotaEstudiante,
     getAllPagosCuota, 
     getPagoCuota, 
     createPagoCuota, 
@@ -248,15 +249,14 @@ router.put('/cuotascolegio/:id', decryptPayload, authenticateToken, updateCuotaC
 router.delete('/cuotascolegio/:id', decryptPayload, authenticateToken, deleteCuotaColegio);
 
 // cuotas estudiante
-router.get('/cuotasestudiante/:id', getAllCuotasEstudiante);
-router.put('/cuotasestudiante/:id', updateCuotaEstudiante);
+router.get('/cuotasestudiante/:id', decryptPayload, authenticateToken, getAllCuotasEstudiante);
+router.get('/cuotasestudiante/resumen/:id', decryptPayload, authenticateToken, getCuotaEstudiante);
+router.put('/cuotasestudiante/:id', decryptPayload, authenticateToken, updateCuotaEstudiante);
 
 // pagos de cuota
-router.get('/pagoscuota/', getAllPagosCuota);
-router.get('/pagoscuota/:id', getPagoCuota);
-router.post('/pagoscuota/', createPagoCuota);
-router.put('/pagoscuota/:id', updatePagoCuota);
-router.delete('/pagoscuota/:id', deletePagoCuota);
+router.get('/pagoscuota/', decryptPayload, authenticateToken, getAllPagosCuota);
+router.get('/pagoscuota/cuotaestudiante/:id', decryptPayload, authenticateToken, getPagoCuotaByCuotaEstudiante);
+router.post('/pagoscuota/', decryptPayload, authenticateToken, createPagoCuota);
 
 // gastos extraordinarios
 router.get('/gastosextraordinarios/', getAllGastosExtraordinarios);
