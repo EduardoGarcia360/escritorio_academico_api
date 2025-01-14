@@ -27,7 +27,7 @@ BEGIN
     INTO v_id_cuota, v_monto
     FROM CuotaColegio
     WHERE id_colegio = p_id_colegio
-    ORDER BY fecha_creacion DESC
+    ORDER BY createdAt DESC
     LIMIT 1;
 
     -- Verificar si se encontró una cuota
