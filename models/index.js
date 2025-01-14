@@ -25,6 +25,7 @@ import CoordenadaBus from "./CoordenadaBus.js";
 import UsuarioColegio from "./UsuarioColegio.js";
 import Banco from "./Banco.js";
 import CuentaBancariaColegio from "./CuentaBancariaColegio.js";
+import AsignacionGastoExtra from "./AsignacionGastoExtra.js";
 import setupAssociations from "./associations.js";
 
 // Inicializar modelos
@@ -55,6 +56,7 @@ const models = {
     UsuarioColegio,
     Banco,
     CuentaBancariaColegio,
+    AsignacionGastoExtra,
 };
 
 Object.values(models).forEach((model) => {

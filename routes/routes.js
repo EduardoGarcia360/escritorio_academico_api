@@ -161,6 +161,13 @@ import {
     updateCuentaBancariaColegio,
     deleteCuentaBancariaColegio
 } from "../controllers/CuentaBancariaColegioController.js";
+import {
+    getAllAsignacionesGastoExtra,
+    getAsignacionGastoExtra,
+    createAsignacionGastoExtra,
+    updateAsignacionGastoExtra,
+    deleteAsignacionGastoExtra
+} from "../controllers/AsignacionGastoExtraController.js";
 import { getAllSecciones } from "../controllers/SeccionController.js";
 import { login, validateSession } from "../controllers/AuthController.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js";
@@ -326,6 +333,13 @@ router.get('/cuentasbancarias/:id', decryptPayload, authenticateToken, getCuenta
 router.post('/cuentasbancarias/', decryptPayload, authenticateToken, createCuentaBancariaColegio);
 router.put('/cuentasbancarias/:id', decryptPayload, authenticateToken, updateCuentaBancariaColegio);
 router.delete('/cuentasbancarias/:id', decryptPayload, authenticateToken, deleteCuentaBancariaColegio);
+
+// Rutas para asignaciones de gastos extras
+router.get('/asignacionesgastoextra/', getAllAsignacionesGastoExtra);
+router.get('/asignacionesgastoextra/:id', getAsignacionGastoExtra);
+router.post('/asignacionesgastoextra/', createAsignacionGastoExtra);
+router.put('/asignacionesgastoextra/:id', updateAsignacionGastoExtra);
+router.delete('/asignacionesgastoextra/:id', deleteAsignacionGastoExtra);
 
 // secciones
 router.get('/secciones', decryptPayload, authenticateToken, getAllSecciones);
