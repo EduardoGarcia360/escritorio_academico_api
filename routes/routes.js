@@ -259,11 +259,11 @@ router.get('/pagoscuota/cuotaestudiante/:id', decryptPayload, authenticateToken,
 router.post('/pagoscuota/', decryptPayload, authenticateToken, createPagoCuota);
 
 // gastos extraordinarios
-router.get('/gastosextraordinarios/', getAllGastosExtraordinarios);
-router.get('/gastosextraordinarios/:id', getGastoExtraordinario);
-router.post('/gastosextraordinarios/', createGastoExtraordinario);
-router.put('/gastosextraordinarios/:id', updateGastoExtraordinario);
-router.delete('/gastosextraordinarios/:id', deleteGastoExtraordinario);
+router.get('/gastosextraordinarios/', decryptPayload, authenticateToken, getAllGastosExtraordinarios);
+router.get('/gastosextraordinarios/:id', decryptPayload, authenticateToken, getGastoExtraordinario);
+router.post('/gastosextraordinarios/', decryptPayload, authenticateToken, createGastoExtraordinario);
+router.put('/gastosextraordinarios/:id', decryptPayload, authenticateToken, updateGastoExtraordinario);
+router.delete('/gastosextraordinarios/:id', decryptPayload, authenticateToken, deleteGastoExtraordinario);
 
 // detalles de gastos de tutor
 router.get('/detallesgastotutor/', getAllDetallesGastoTutor);
