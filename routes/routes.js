@@ -335,10 +335,7 @@ router.put('/cuentasbancarias/:id', decryptPayload, authenticateToken, updateCue
 router.delete('/cuentasbancarias/:id', decryptPayload, authenticateToken, deleteCuentaBancariaColegio);
 
 // Rutas para asignaciones de gastos extras
-router.get('/asignacionesgastoextra/', getAllAsignacionesGastoExtra);
-router.get('/asignacionesgastoextra/:id', getAsignacionGastoExtra);
 router.post('/asignacionesgastoextra/', createAsignacionGastoExtra);
-router.put('/asignacionesgastoextra/:id', updateAsignacionGastoExtra);
 router.delete('/asignacionesgastoextra/:id', deleteAsignacionGastoExtra);
 
 // secciones
