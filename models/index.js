@@ -19,7 +19,6 @@ import GastoExtraordinario from "./GastoExtraordinario.js";
 import ActividadBus from "./ActividadBus.js";
 import Bus from "./Bus.js";
 import EncargadoBus from "./EncargadoBus.js";
-import EstudianteActividad from "./EstudianteActividad.js";
 import CoordenadaBus from "./CoordenadaBus.js";
 import UsuarioColegio from "./UsuarioColegio.js";
 import Banco from "./Banco.js";
@@ -49,7 +48,6 @@ const models = {
     ActividadBus,
     Bus,
     EncargadoBus,
-    EstudianteActividad,
     CoordenadaBus,
     UsuarioColegio,
     Banco,

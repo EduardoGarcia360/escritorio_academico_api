@@ -120,13 +120,6 @@ import {
     deleteEncargadoBus 
 } from "../controllers/EncargadoBusController.js";
 import { 
-    getAllEstudiantesActividades, 
-    getEstudianteActividad, 
-    createEstudianteActividad, 
-    updateEstudianteActividad, 
-    deleteEstudianteActividad 
-} from "../controllers/EstudianteActividadController.js";
-import { 
     getAllCoordenadasBus, 
     getCoordenadaBus, 
     createCoordenadaBus, 
@@ -288,12 +281,7 @@ router.post('/encargadosbus/', createEncargadoBus);
 router.put('/encargadosbus/:id', updateEncargadoBus);
 router.delete('/encargadosbus/:id', deleteEncargadoBus);
 
-// actividades de estudiantes
-router.get('/estudiantesactividades/', getAllEstudiantesActividades);
-router.get('/estudiantesactividades/:id', getEstudianteActividad);
-router.post('/estudiantesactividades/', createEstudianteActividad);
-router.put('/estudiantesactividades/:id', updateEstudianteActividad);
-router.delete('/estudiantesactividades/:id', deleteEstudianteActividad);
+// actividades de estudiantes - deprecated
 
 // coordenadas de buses
 router.get('/coordenadasbus/', getAllCoordenadasBus);
