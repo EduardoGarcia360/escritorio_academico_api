@@ -16,7 +16,6 @@ import CuotaColegio from "./CuotaColegio.js";
 import CuotaEstudiante from "./CuotaEstudiante.js";
 import PagoCuota from "./PagoCuota.js";
 import GastoExtraordinario from "./GastoExtraordinario.js";
-import ActividadBus from "./ActividadBus.js";
 import UsuarioColegio from "./UsuarioColegio.js";
 import Banco from "./Banco.js";
 import CuentaBancariaColegio from "./CuentaBancariaColegio.js";
@@ -42,7 +41,6 @@ const models = {
     CuotaEstudiante,
     PagoCuota,
     GastoExtraordinario,
-    ActividadBus,
     UsuarioColegio,
     Banco,
     CuentaBancariaColegio,

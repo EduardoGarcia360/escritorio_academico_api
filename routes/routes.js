@@ -98,13 +98,6 @@ import {
     updateGastoExtraordinario, 
     deleteGastoExtraordinario 
 } from "../controllers/GastoExtraordinarioController.js";
-import { 
-    getAllActividadesBus, 
-    getActividadBus, 
-    createActividadBus, 
-    updateActividadBus, 
-    deleteActividadBus 
-} from "../controllers/ActividadBusController.js";
 import { executeStoredProcedure } from "../controllers/StoredProcedureController.js";
 import { 
     getUsuariosByColegio, 
@@ -236,13 +229,6 @@ router.get('/gastosextraordinarios/:id', decryptPayload, authenticateToken, getG
 router.post('/gastosextraordinarios/', decryptPayload, authenticateToken, createGastoExtraordinario);
 router.put('/gastosextraordinarios/:id', decryptPayload, authenticateToken, updateGastoExtraordinario);
 router.delete('/gastosextraordinarios/:id', decryptPayload, authenticateToken, deleteGastoExtraordinario);
-
-// actividades de bus
-router.get('/actividadesbus/', getAllActividadesBus);
-router.get('/actividadesbus/:id', getActividadBus);
-router.post('/actividadesbus/', createActividadBus);
-router.put('/actividadesbus/:id', updateActividadBus);
-router.delete('/actividadesbus/:id', deleteActividadBus);
 
 // relaciones usuario-colegio
 router.get('/usuarioscolegios/colegio/:id', getUsuariosByColegio);
