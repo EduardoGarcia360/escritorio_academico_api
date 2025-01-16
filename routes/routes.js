@@ -140,6 +140,13 @@ import {
     updateAsignacionTransporteExtra,
     deleteAsignacionTransporteExtra
 } from "../controllers/AsignacionTransporteExtraController.js";
+import {
+    getAllCoordenadasBus,
+    getCoordenadaBus,
+    createCoordenadaBus,
+    updateCoordenadaBus,
+    deleteCoordenadaBus
+} from "../controllers/CoordenadaBusController.js";
 import { getAllSecciones } from "../controllers/SeccionController.js";
 import { login, validateSession } from "../controllers/AuthController.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js";
@@ -281,6 +288,13 @@ router.get('/asignacionestransporteextra/:id', getAsignacionTransporteExtra);
 router.post('/asignacionestransporteextra/', createAsignacionTransporteExtra);
 router.put('/asignacionestransporteextra/:id', updateAsignacionTransporteExtra);
 router.delete('/asignacionestransporteextra/:id', deleteAsignacionTransporteExtra);
+
+// Rutas para coordenadas de buses
+router.get('/coordenadasbus/', getAllCoordenadasBus);
+router.get('/coordenadasbus/:id', getCoordenadaBus);
+router.post('/coordenadasbus/', createCoordenadaBus);
+router.put('/coordenadasbus/:id', updateCoordenadaBus);
+router.delete('/coordenadasbus/:id', deleteCoordenadaBus);
 
 // secciones
 router.get('/secciones', decryptPayload, authenticateToken, getAllSecciones);
