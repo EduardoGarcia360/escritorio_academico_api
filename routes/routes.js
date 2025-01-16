@@ -126,6 +126,13 @@ import {
     updateAsignacionGastoExtra,
     deleteAsignacionGastoExtra
 } from "../controllers/AsignacionGastoExtraController.js";
+import {
+    getAllBuses,
+    getBus,
+    createBus,
+    updateBus,
+    deleteBus
+} from "../controllers/BusController.js";
 import { getAllSecciones } from "../controllers/SeccionController.js";
 import { login, validateSession } from "../controllers/AuthController.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js";
@@ -253,6 +260,13 @@ router.delete('/cuentasbancarias/:id', decryptPayload, authenticateToken, delete
 // Rutas para asignaciones de gastos extras
 router.post('/asignacionesgastoextra/', createAsignacionGastoExtra);
 router.delete('/asignacionesgastoextra/:id', deleteAsignacionGastoExtra);
+
+// Rutas para buses
+router.get('/buses/', getAllBuses);
+router.get('/buses/:id', getBus);
+router.post('/buses/', createBus);
+router.put('/buses/:id', updateBus);
+router.delete('/buses/:id', deleteBus);
 
 // secciones
 router.get('/secciones', decryptPayload, authenticateToken, getAllSecciones);

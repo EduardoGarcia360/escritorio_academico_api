@@ -20,6 +20,7 @@ import UsuarioColegio from "./UsuarioColegio.js";
 import Banco from "./Banco.js";
 import CuentaBancariaColegio from "./CuentaBancariaColegio.js";
 import AsignacionGastoExtra from "./AsignacionGastoExtra.js";
+import Bus from "./Bus.js";
 import setupAssociations from "./associations.js";
 
 // Inicializar modelos
@@ -45,6 +46,7 @@ const models = {
     Banco,
     CuentaBancariaColegio,
     AsignacionGastoExtra,
+    Bus,
 };
 
 Object.values(models).forEach((model) => {

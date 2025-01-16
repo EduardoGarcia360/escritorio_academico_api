@@ -21,6 +21,7 @@ const setupAssociations = (models) => {
         Banco,
         CuentaBancariaColegio,
         AsignacionGastoExtra,
+        Bus,
     } = models;
 
     // Relaciones para Colegio
@@ -175,6 +176,15 @@ const setupAssociations = (models) => {
     Usuario.hasMany(AsignacionGastoExtra, { foreignKey: "id_usuario_modifico" });
     AsignacionGastoExtra.belongsTo(Usuario, { as: "creador", foreignKey: "id_usuario_creo" });
     AsignacionGastoExtra.belongsTo(Usuario, { as: "modificador", foreignKey: "id_usuario_modifico" });
+
+    // Relaciones para Bus
+    Colegio.hasMany(Bus, { foreignKey: "id_colegio" });
+    Bus.belongsTo(Colegio, { foreignKey: "id_colegio" });
+
+    Usuario.hasMany(Bus, { foreignKey: "id_usuario_creo" });
+    Usuario.hasMany(Bus, { foreignKey: "id_usuario_modifico" });
+    Bus.belongsTo(Usuario, { as: "creador", foreignKey: "id_usuario_creo" });
+    Bus.belongsTo(Usuario, { as: "modificador", foreignKey: "id_usuario_modifico" });
 };
 
 export default setupAssociations;
