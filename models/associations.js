@@ -17,7 +17,6 @@ const setupAssociations = (models) => {
         CuotaEstudiante,
         PagoCuota,
         GastoExtraordinario,
-        DetalleGastoTutor,
         ActividadBus,
         Bus,
         EncargadoBus,
@@ -144,15 +143,7 @@ const setupAssociations = (models) => {
     Usuario.hasMany(GastoExtraordinario, { foreignKey: "id_usuario_creo" });
     Usuario.hasMany(GastoExtraordinario, { foreignKey: "id_usuario_modifico" });
 
-    // Relaciones para DetalleGastoTutor
-    GastoExtraordinario.hasMany(DetalleGastoTutor, { foreignKey: "id_gasto" });
-    DetalleGastoTutor.belongsTo(GastoExtraordinario, { foreignKey: "id_gasto" });
-    Tutor.hasMany(DetalleGastoTutor, { foreignKey: "id_tutor" });
-    DetalleGastoTutor.belongsTo(Tutor, { foreignKey: "id_tutor" });
-    Estudiante.hasMany(DetalleGastoTutor, { foreignKey: "id_estudiante" });
-    DetalleGastoTutor.belongsTo(Estudiante, { foreignKey: "id_estudiante" });
-    Usuario.hasMany(DetalleGastoTutor, { foreignKey: "id_usuario_creo" });
-    Usuario.hasMany(DetalleGastoTutor, { foreignKey: "id_usuario_modifico" });
+    // Relaciones para DetalleGastoTutor - deprecated
 
     // Relaciones para ActividadBus
     Colegio.hasMany(ActividadBus, { foreignKey: "id_colegio" });

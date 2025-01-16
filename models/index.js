@@ -16,7 +16,6 @@ import CuotaColegio from "./CuotaColegio.js";
 import CuotaEstudiante from "./CuotaEstudiante.js";
 import PagoCuota from "./PagoCuota.js";
 import GastoExtraordinario from "./GastoExtraordinario.js";
-import DetalleGastoTutor from "./DetalleGastoTutor.js";
 import ActividadBus from "./ActividadBus.js";
 import Bus from "./Bus.js";
 import EncargadoBus from "./EncargadoBus.js";
@@ -47,7 +46,6 @@ const models = {
     CuotaEstudiante,
     PagoCuota,
     GastoExtraordinario,
-    DetalleGastoTutor,
     ActividadBus,
     Bus,
     EncargadoBus,

@@ -1,6 +1,5 @@
 import Tutor from "../models/Tutor.js";
 import TutorEstudiante from "../models/TutorEstudiante.js";
-import DetalleGastoTutor from "../models/DetalleGastoTutor.js";
 import { decodeJWT } from "../utils/codificar.js";
 
 export const getAllTutores = async (req, res) => {
@@ -158,15 +157,6 @@ export const deleteTutor = async (req, res) => {
 
         if (!tutor) {
             return res.status(400).json({ status: 'ERROR', message: 'Tutor no encontrado' });
-        }
-
-        // Verificar si el tutor está asociado a DetalleGastoTutor
-        const detalleGasto = await DetalleGastoTutor.findOne({
-            where: { id_tutor: req.params.id }
-        });
-
-        if (detalleGasto) {
-            return res.status(400).json({ status: 'ERROR', message: 'Tutor está asociado a pagos de estudiante' });
         }
 
         // Eliminar relaciones en TutorEstudiante

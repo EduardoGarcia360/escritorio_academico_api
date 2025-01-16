@@ -99,13 +99,6 @@ import {
     deleteGastoExtraordinario 
 } from "../controllers/GastoExtraordinarioController.js";
 import { 
-    getAllDetallesGastoTutor, 
-    getDetalleGastoTutor, 
-    createDetalleGastoTutor, 
-    updateDetalleGastoTutor, 
-    deleteDetalleGastoTutor 
-} from "../controllers/DetalleGastoTutorController.js";
-import { 
     getAllActividadesBus, 
     getActividadBus, 
     createActividadBus, 
@@ -272,12 +265,7 @@ router.post('/gastosextraordinarios/', decryptPayload, authenticateToken, create
 router.put('/gastosextraordinarios/:id', decryptPayload, authenticateToken, updateGastoExtraordinario);
 router.delete('/gastosextraordinarios/:id', decryptPayload, authenticateToken, deleteGastoExtraordinario);
 
-// detalles de gastos de tutor
-router.get('/detallesgastotutor/', getAllDetallesGastoTutor);
-router.get('/detallesgastotutor/:id', getDetalleGastoTutor);
-router.post('/detallesgastotutor/', createDetalleGastoTutor);
-router.put('/detallesgastotutor/:id', updateDetalleGastoTutor);
-router.delete('/detallesgastotutor/:id', deleteDetalleGastoTutor);
+// detalles de gastos de tutor - deprecated
 
 // actividades de bus
 router.get('/actividadesbus/', getAllActividadesBus);
