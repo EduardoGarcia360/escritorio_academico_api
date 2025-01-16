@@ -119,13 +119,6 @@ import {
     updateEncargadoBus, 
     deleteEncargadoBus 
 } from "../controllers/EncargadoBusController.js";
-import { 
-    getAllCoordenadasBus, 
-    getCoordenadaBus, 
-    createCoordenadaBus, 
-    updateCoordenadaBus, 
-    deleteCoordenadaBus 
-} from "../controllers/CoordenadaBusController.js";
 import { executeStoredProcedure } from "../controllers/StoredProcedureController.js";
 import { 
     getUsuariosByColegio, 
@@ -283,12 +276,7 @@ router.delete('/encargadosbus/:id', deleteEncargadoBus);
 
 // actividades de estudiantes - deprecated
 
-// coordenadas de buses
-router.get('/coordenadasbus/', getAllCoordenadasBus);
-router.get('/coordenadasbus/:id', getCoordenadaBus);
-router.post('/coordenadasbus/', createCoordenadaBus);
-router.put('/coordenadasbus/:id', updateCoordenadaBus);
-router.delete('/coordenadasbus/:id', deleteCoordenadaBus);
+// coordenadas de buses - deprecated
 
 // relaciones usuario-colegio
 router.get('/usuarioscolegios/colegio/:id', getUsuariosByColegio);

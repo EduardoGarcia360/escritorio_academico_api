@@ -20,7 +20,6 @@ const setupAssociations = (models) => {
         ActividadBus,
         Bus,
         EncargadoBus,
-        CoordenadaBus,
         UsuarioColegio,
         Banco,
         CuentaBancariaColegio,
@@ -164,11 +163,7 @@ const setupAssociations = (models) => {
 
     // Relaciones para EstudianteActividad - deprecated
 
-    // Relaciones para CoordenadaBus
-    Bus.hasMany(CoordenadaBus, { foreignKey: "id_bus" });
-    CoordenadaBus.belongsTo(Bus, { foreignKey: "id_bus" });
-    Usuario.hasMany(CoordenadaBus, { foreignKey: "id_usuario_creo" });
-    Usuario.hasMany(CoordenadaBus, { foreignKey: "id_usuario_modifico" });
+    // Relaciones para CoordenadaBus - deprecated
 
     // Relaciones para UsuarioColegio
     Usuario.hasMany(UsuarioColegio, { foreignKey: "id_usuario" });
