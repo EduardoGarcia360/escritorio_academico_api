@@ -25,6 +25,9 @@ class GastoExtraordinario extends Model {
         descripcion: {
           type: DataTypes.STRING(255),
         },
+        es_actividad_bus: {
+          type: DataTypes.BOOLEAN,
+        },
         id_usuario_creo: {
           type: DataTypes.INTEGER,
           allowNull: false,
