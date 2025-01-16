@@ -19,7 +19,6 @@ const setupAssociations = (models) => {
         GastoExtraordinario,
         ActividadBus,
         Bus,
-        EncargadoBus,
         UsuarioColegio,
         Banco,
         CuentaBancariaColegio,
@@ -141,8 +140,6 @@ const setupAssociations = (models) => {
     Usuario.hasMany(GastoExtraordinario, { foreignKey: "id_usuario_creo" });
     Usuario.hasMany(GastoExtraordinario, { foreignKey: "id_usuario_modifico" });
 
-    // Relaciones para DetalleGastoTutor - deprecated
-
     // Relaciones para ActividadBus
     Colegio.hasMany(ActividadBus, { foreignKey: "id_colegio" });
     ActividadBus.belongsTo(Colegio, { foreignKey: "id_colegio" });
@@ -152,18 +149,6 @@ const setupAssociations = (models) => {
     // Relaciones para Bus
     Usuario.hasMany(Bus, { foreignKey: "id_usuario_creo" });
     Usuario.hasMany(Bus, { foreignKey: "id_usuario_modifico" });
-
-    // Relaciones para EncargadoBus
-    Bus.hasMany(EncargadoBus, { foreignKey: "id_bus" });
-    EncargadoBus.belongsTo(Bus, { foreignKey: "id_bus" });
-    PersonalDocente.hasMany(EncargadoBus, { foreignKey: "id_docente" });
-    EncargadoBus.belongsTo(PersonalDocente, { foreignKey: "id_docente" });
-    Usuario.hasMany(EncargadoBus, { foreignKey: "id_usuario_creo" });
-    Usuario.hasMany(EncargadoBus, { foreignKey: "id_usuario_modifico" });
-
-    // Relaciones para EstudianteActividad - deprecated
-
-    // Relaciones para CoordenadaBus - deprecated
 
     // Relaciones para UsuarioColegio
     Usuario.hasMany(UsuarioColegio, { foreignKey: "id_usuario" });

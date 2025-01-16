@@ -112,13 +112,6 @@ import {
     updateBus, 
     deleteBus 
 } from "../controllers/BusController.js";
-import { 
-    getAllEncargadosBus, 
-    getEncargadoBus, 
-    createEncargadoBus, 
-    updateEncargadoBus, 
-    deleteEncargadoBus 
-} from "../controllers/EncargadoBusController.js";
 import { executeStoredProcedure } from "../controllers/StoredProcedureController.js";
 import { 
     getUsuariosByColegio, 
@@ -251,8 +244,6 @@ router.post('/gastosextraordinarios/', decryptPayload, authenticateToken, create
 router.put('/gastosextraordinarios/:id', decryptPayload, authenticateToken, updateGastoExtraordinario);
 router.delete('/gastosextraordinarios/:id', decryptPayload, authenticateToken, deleteGastoExtraordinario);
 
-// detalles de gastos de tutor - deprecated
-
 // actividades de bus
 router.get('/actividadesbus/', getAllActividadesBus);
 router.get('/actividadesbus/:id', getActividadBus);
@@ -266,17 +257,6 @@ router.get('/buses/:id', getBus);
 router.post('/buses/', createBus);
 router.put('/buses/:id', updateBus);
 router.delete('/buses/:id', deleteBus);
-
-// encargados de bus
-router.get('/encargadosbus/', getAllEncargadosBus);
-router.get('/encargadosbus/:id', getEncargadoBus);
-router.post('/encargadosbus/', createEncargadoBus);
-router.put('/encargadosbus/:id', updateEncargadoBus);
-router.delete('/encargadosbus/:id', deleteEncargadoBus);
-
-// actividades de estudiantes - deprecated
-
-// coordenadas de buses - deprecated
 
 // relaciones usuario-colegio
 router.get('/usuarioscolegios/colegio/:id', getUsuariosByColegio);
