@@ -133,6 +133,13 @@ import {
     updateBus,
     deleteBus
 } from "../controllers/BusController.js";
+import {
+    getAllAsignacionesTransporteExtra,
+    getAsignacionTransporteExtra,
+    createAsignacionTransporteExtra,
+    updateAsignacionTransporteExtra,
+    deleteAsignacionTransporteExtra
+} from "../controllers/AsignacionTransporteExtraController.js";
 import { getAllSecciones } from "../controllers/SeccionController.js";
 import { login, validateSession } from "../controllers/AuthController.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js";
@@ -267,6 +274,13 @@ router.get('/buses/:id', getBus);
 router.post('/buses/', createBus);
 router.put('/buses/:id', updateBus);
 router.delete('/buses/:id', deleteBus);
+
+// Rutas para asignaciones de transporte extra
+router.get('/asignacionestransporteextra/', getAllAsignacionesTransporteExtra);
+router.get('/asignacionestransporteextra/:id', getAsignacionTransporteExtra);
+router.post('/asignacionestransporteextra/', createAsignacionTransporteExtra);
+router.put('/asignacionestransporteextra/:id', updateAsignacionTransporteExtra);
+router.delete('/asignacionestransporteextra/:id', deleteAsignacionTransporteExtra);
 
 // secciones
 router.get('/secciones', decryptPayload, authenticateToken, getAllSecciones);
