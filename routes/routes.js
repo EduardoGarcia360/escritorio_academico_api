@@ -105,13 +105,6 @@ import {
     updateActividadBus, 
     deleteActividadBus 
 } from "../controllers/ActividadBusController.js";
-import { 
-    getAllBuses, 
-    getBus, 
-    createBus, 
-    updateBus, 
-    deleteBus 
-} from "../controllers/BusController.js";
 import { executeStoredProcedure } from "../controllers/StoredProcedureController.js";
 import { 
     getUsuariosByColegio, 
@@ -250,13 +243,6 @@ router.get('/actividadesbus/:id', getActividadBus);
 router.post('/actividadesbus/', createActividadBus);
 router.put('/actividadesbus/:id', updateActividadBus);
 router.delete('/actividadesbus/:id', deleteActividadBus);
-
-// buses
-router.get('/buses/', getAllBuses);
-router.get('/buses/:id', getBus);
-router.post('/buses/', createBus);
-router.put('/buses/:id', updateBus);
-router.delete('/buses/:id', deleteBus);
 
 // relaciones usuario-colegio
 router.get('/usuarioscolegios/colegio/:id', getUsuariosByColegio);
