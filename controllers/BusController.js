@@ -1,8 +1,20 @@
 import Bus from "../models/Bus.js";
+import { decodeJWT } from "../utils/codificar.js";
 
 export const getAllBuses = async (req, res) => {
     try {
-        const buses = await Bus.findAll();
+        const token = req.cookies?.token;
+        const userData = decodeJWT(token);
+
+        if (!userData) {
+            return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
+        }
+
+        const buses = await Bus.findAll({
+            where: {
+                id_colegio: userData.id_colegio
+            }
+        });
         res.status(200).json(buses);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -29,6 +41,16 @@ export const getBus = async (req, res) => {
 
 export const createBus = async (req, res) => {
     try {
+        const token = req.cookies?.token;
+        const userData = decodeJWT(token);
+
+        if (!userData) {
+            return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
+        }
+
+        req.body.id_usuario_creo = userData.id
+        req.body.id_colegio = userData.id_colegio
+
         const nuevoBus = await Bus.create(req.body);
         res.status(200).json({ message: 'Bus creado correctamente!', bus: nuevoBus });
     } catch (error) {
@@ -38,6 +60,15 @@ export const createBus = async (req, res) => {
 
 export const updateBus = async (req, res) => {
     try {
+        const token = req.cookies?.token;
+        const userData = decodeJWT(token);
+
+        if (!userData) {
+            return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
+        }
+
+        req.body.id_usuario_modifico = userData.id
+        
         const [updated] = await Bus.update(req.body, {
             where: {
                 id_bus: req.params.id

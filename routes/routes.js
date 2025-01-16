@@ -276,11 +276,11 @@ router.post('/asignacionesgastoextra/', createAsignacionGastoExtra);
 router.delete('/asignacionesgastoextra/:id', deleteAsignacionGastoExtra);
 
 // Rutas para buses
-router.get('/buses/', getAllBuses);
-router.get('/buses/:id', getBus);
-router.post('/buses/', createBus);
-router.put('/buses/:id', updateBus);
-router.delete('/buses/:id', deleteBus);
+router.get('/buses/', decryptPayload, authenticateToken, getAllBuses);
+router.get('/buses/:id', decryptPayload, authenticateToken, getBus);
+router.post('/buses/', decryptPayload, authenticateToken, createBus);
+router.put('/buses/:id', decryptPayload, authenticateToken, updateBus);
+router.delete('/buses/:id', decryptPayload, authenticateToken, deleteBus);
 
 // Rutas para asignaciones de transporte extra
 router.get('/asignacionestransporteextra/', getAllAsignacionesTransporteExtra);
