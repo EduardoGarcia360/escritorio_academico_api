@@ -283,11 +283,10 @@ router.put('/buses/:id', decryptPayload, authenticateToken, updateBus);
 router.delete('/buses/:id', decryptPayload, authenticateToken, deleteBus);
 
 // Rutas para asignaciones de transporte extra
-router.get('/asignacionestransporteextra/', getAllAsignacionesTransporteExtra);
-router.get('/asignacionestransporteextra/:id', getAsignacionTransporteExtra);
-router.post('/asignacionestransporteextra/', createAsignacionTransporteExtra);
-router.put('/asignacionestransporteextra/:id', updateAsignacionTransporteExtra);
-router.delete('/asignacionestransporteextra/:id', deleteAsignacionTransporteExtra);
+router.get('/asignacionestransporteextra/:id', decryptPayload, authenticateToken, getAsignacionTransporteExtra);
+router.post('/asignacionestransporteextra/', decryptPayload, authenticateToken, createAsignacionTransporteExtra);
+router.put('/asignacionestransporteextra/:id', decryptPayload, authenticateToken, updateAsignacionTransporteExtra);
+router.delete('/asignacionestransporteextra/:id', decryptPayload, authenticateToken, deleteAsignacionTransporteExtra);
 
 // Rutas para coordenadas de buses
 router.get('/coordenadasbus/', getAllCoordenadasBus);
