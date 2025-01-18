@@ -141,6 +141,7 @@ import {
     deleteAsignacionTransporteExtra
 } from "../controllers/AsignacionTransporteExtraController.js";
 import {
+    getAllCoordenadasBusByTransporte,
     getAllCoordenadasBus,
     getCoordenadaBus,
     createCoordenadaBus,
@@ -289,11 +290,8 @@ router.put('/asignacionestransporteextra/:id', decryptPayload, authenticateToken
 router.delete('/asignacionestransporteextra/:id', decryptPayload, authenticateToken, deleteAsignacionTransporteExtra);
 
 // Rutas para coordenadas de buses
-router.get('/coordenadasbus/', getAllCoordenadasBus);
-router.get('/coordenadasbus/:id', getCoordenadaBus);
-router.post('/coordenadasbus/', createCoordenadaBus);
-router.put('/coordenadasbus/:id', updateCoordenadaBus);
-router.delete('/coordenadasbus/:id', deleteCoordenadaBus);
+router.get('/coordenadasbus/transporte/:id', decryptPayload, authenticateToken, getAllCoordenadasBusByTransporte);
+router.post('/coordenadasbus/', decryptPayload, authenticateToken, createCoordenadaBus);
 
 // secciones
 router.get('/secciones', decryptPayload, authenticateToken, getAllSecciones);

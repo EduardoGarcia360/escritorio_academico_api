@@ -9,6 +9,19 @@ export const getAllCoordenadasBus = async (req, res) => {
     }
 };
 
+export const getAllCoordenadasBusByTransporte = async (req, res) => {
+    try {
+        const coordenadas = await CoordenadaBus.findAll({
+            where: {
+                id_asignacion_transporte: req.params.id
+            }
+        });
+        res.status(200).json(coordenadas);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 export const getCoordenadaBus = async (req, res) => {
     try {
         const coordenada = await CoordenadaBus.findOne({
