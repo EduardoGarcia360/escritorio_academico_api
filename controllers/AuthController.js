@@ -43,7 +43,7 @@ export const login = async (req, res) => {
             role: usuario.rol,
             id_colegio: usuarioColegio.id_colegio
         };
-        const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: process.env.TIME_EXPIRE_TOKEN });
+        const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1d' });
 
         // cookie HTTPOnly
         res.cookie('token', token, {
