@@ -35,10 +35,6 @@ class Usuario extends Model {
           defaultValue: "A",
           comment: "A=Activo, I=Inactivo",
         },
-        fecha_creacion: {
-          type: DataTypes.DATEONLY,
-          defaultValue: DataTypes.NOW,
-        },
         createdAt: {
           type: DataTypes.DATE,
         },

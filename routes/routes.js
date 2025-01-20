@@ -149,6 +149,7 @@ import {
     deleteCoordenadaBus
 } from "../controllers/CoordenadaBusController.js";
 import { getAllSecciones } from "../controllers/SeccionController.js";
+import { getAllRolUsuario } from "../controllers/RolUsuarioController.js";
 import { login, validateSession } from "../controllers/AuthController.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js";
 import { decryptPayload } from "../middlewares/securityMiddleware.js";
@@ -158,6 +159,7 @@ const router = express.Router()
 router.get('/usuarios/:id', authenticateToken, getUsuario)
 router.post('/usuarios/', decryptPayload, authenticateToken, createUsuario)
 router.put('/usuarios/:id', decryptPayload, authenticateToken, updateUsuario)
+router.put('/usuarios/inactivar/:id', decryptPayload, authenticateToken, updateUsuario)
 
 // colegios
 router.get('/colegios/', authenticateToken, getColegio);
@@ -253,10 +255,7 @@ router.put('/gastosextraordinarios/:id', decryptPayload, authenticateToken, upda
 router.delete('/gastosextraordinarios/:id', decryptPayload, authenticateToken, deleteGastoExtraordinario);
 
 // relaciones usuario-colegio
-router.get('/usuarioscolegios/colegio/:id', getUsuariosByColegio);
-router.get('/usuarioscolegios/:id', getUsuarioColegio);
-router.post('/usuarioscolegios/', createUsuarioColegio);
-router.delete('/usuarioscolegios/:id', deleteUsuarioColegio);
+router.get('/usuarioscolegios/colegio/', decryptPayload, authenticateToken, getUsuariosByColegio);
 
 // bancos
 router.get('/bancos/', decryptPayload, authenticateToken, getAllBancos);
@@ -295,6 +294,9 @@ router.post('/coordenadasbus/', decryptPayload, authenticateToken, createCoorden
 
 // secciones
 router.get('/secciones', decryptPayload, authenticateToken, getAllSecciones);
+
+// roles por usuario
+router.get('/rolesusuario', decryptPayload, authenticateToken, getAllRolUsuario);
 
 // ejecutar stored procedure
 router.post('/execute-procedure', executeStoredProcedure);

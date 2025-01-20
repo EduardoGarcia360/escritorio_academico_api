@@ -2,21 +2,27 @@ import UsuarioColegio from "../models/UsuarioColegio.js";
 import Usuario from "../models/Usuario.js";
 import { getRoleDescription } from "../utils/rolUsuarioMapeo.js";
 import { getEstadoDescription } from "../utils/estadoMapeo.js";
+import { decodeJWT } from "../utils/codificar.js";
 
 export const getUsuariosByColegio = async (req, res) => {
     try {
-        const { id } = req.params;
+        const token = req.cookies?.token;
+        const userData = decodeJWT(token);
+
+        if (!userData) {
+            return res.status(400).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
+        }
 
         // Buscar las asociaciones de usuarios con el colegio especificado
         const usuarios = await UsuarioColegio.findAll({
             where: {
-                id_colegio: id
+                id_colegio: userData.id_colegio
             },
             attributes: ['id_usuario_colegio', 'id_colegio', 'createdAt'], // Campos de UsuarioColegio
             include: [
                 {
                     model: Usuario,
-                    attributes: ['id_usuario', 'nombre_completo', 'correo_electronico', 'rol', 'estado'] // Campos de Usuario
+                    attributes: ['id_usuario', 'nombre_usuario', 'nombre_completo', 'correo_electronico', 'rol', 'estado'] // Campos de Usuario
                 }
             ]
         });
@@ -28,8 +34,15 @@ export const getUsuariosByColegio = async (req, res) => {
         // Agregar descripción del rol a cada usuario
         const usuariosFixed = usuarios.map((usuario) => {
             const userData = usuario.toJSON();
-            userData.Usuario.desc_rol = getRoleDescription(userData.Usuario.rol);
-            userData.Usuario.desc_estado = getEstadoDescription(userData.Usuario.estado);
+            userData.correo_electronico = userData.Usuario.correo_electronico;
+            userData.estado = userData.Usuario.estado;
+            userData.id_usuario = userData.Usuario.id_usuario;
+            userData.nombre_completo = userData.Usuario.nombre_completo;
+            userData.rol = userData.Usuario.rol;
+            userData.nombre_usuario = userData.Usuario.nombre_usuario;
+            userData.desc_rol = getRoleDescription(userData.Usuario.rol);
+            userData.desc_estado = getEstadoDescription(userData.Usuario.estado);
+            delete userData.Usuario;
             return userData;
         });
 
