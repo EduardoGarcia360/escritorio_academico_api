@@ -1,26 +1,21 @@
 import express from "express";
-import { getAllUsuarios, getUsuario, createUsuario, updateUsuario, deleteUsuario } from "../controllers/UsuarioController.js";
-import { getAllColegios, getColegio, createColegio, updateColegio, deleteColegio } from "../controllers/ColegioController.js";
+import { getUsuario, createUsuario, updateUsuario } from "../controllers/UsuarioController.js";
+import { getColegio, createColegio, updateColegio, deleteColegio } from "../controllers/ColegioController.js";
 import { getAllCiclosEscolares, getCicloEscolar, createCicloEscolar, updateCicloEscolar, deleteCicloEscolar } from "../controllers/CicloEscolarController.js";
 import { getAllNivelesEducacion, getNivelEducacion, createNivelEducacion, updateNivelEducacion, deleteNivelEducacion } from "../controllers/NivelEducacionController.js";
 import { 
     getJornadaByNivelEducacion,
-    getAllJornadas, 
     getJornada, 
     createJornada, 
     updateJornada, 
     deleteJornada 
 } from "../controllers/JornadaController.js";
 import { 
-    getAllJornadasCicloEscolar, 
-    getJornadaCicloEscolar, 
     createJornadaCicloEscolar, 
-    updateJornadaCicloEscolar, 
     deleteJornadaCicloEscolar 
 } from "../controllers/JornadaCicloEscolarController.js";
 import { 
     getAllGradosByJornadaCiclo,
-    getAllGrados, 
     getGrado, 
     createGrado, 
     updateGrado, 
@@ -34,25 +29,17 @@ import {
     deletePersonalDocente 
 } from "../controllers/PersonalDocenteController.js";
 import { 
-    getAllEstudiantes, 
     getEstudiante, 
     createEstudiante, 
     updateEstudiante, 
-    deleteEstudiante 
 } from "../controllers/EstudianteController.js";
 import { 
-    getAllAsignacionesDocenteGrado, 
-    getAsignacionDocenteGrado, 
     createAsignacionDocenteGrado, 
-    updateAsignacionDocenteGrado, 
     deleteAsignacionDocenteGrado 
 } from "../controllers/AsignacionDocenteGradoController.js";
 import { 
     getAllAsignacionesEstudianteGradoByGrado,
-    getAllAsignacionesEstudianteGrado, 
-    getAsignacionEstudianteGrado, 
     createAsignacionEstudianteGrado, 
-    updateAsignacionEstudianteGrado, 
     deleteAsignacionEstudianteGrado 
 } from "../controllers/AsignacionEstudianteGradoController.js";
 import { 
@@ -63,13 +50,6 @@ import {
     deleteTutor 
 } from "../controllers/TutorController.js";
 import { 
-    getAllTutorEstudiantes, 
-    getTutorEstudiante, 
-    createTutorEstudiante, 
-    updateTutorEstudiante, 
-    deleteTutorEstudiante 
-} from "../controllers/TutorEstudianteController.js";
-import { 
     getAllCuotasColegio, 
     getCuotaColegio, 
     createCuotaColegio, 
@@ -79,17 +59,12 @@ import {
 import { 
     getAllCuotasEstudiante, 
     getCuotaEstudiante, 
-    createCuotaEstudiante, 
     updateCuotaEstudiante, 
-    deleteCuotaEstudiante 
 } from "../controllers/CuotaEstudianteController.js";
 import { 
     getPagoCuotaByCuotaEstudiante,
     getAllPagosCuota, 
-    getPagoCuota, 
     createPagoCuota, 
-    updatePagoCuota, 
-    deletePagoCuota 
 } from "../controllers/PagoCuotaController.js";
 import { 
     getAllGastosExtraordinarios, 
@@ -101,9 +76,6 @@ import {
 import { executeStoredProcedure } from "../controllers/StoredProcedureController.js";
 import { 
     getUsuariosByColegio, 
-    getUsuarioColegio, 
-    createUsuarioColegio, 
-    deleteUsuarioColegio 
 } from "../controllers/UsuarioColegioController.js";
 import {
     getAllBancos,
@@ -120,10 +92,7 @@ import {
     deleteCuentaBancariaColegio
 } from "../controllers/CuentaBancariaColegioController.js";
 import {
-    getAllAsignacionesGastoExtra,
-    getAsignacionGastoExtra,
     createAsignacionGastoExtra,
-    updateAsignacionGastoExtra,
     deleteAsignacionGastoExtra
 } from "../controllers/AsignacionGastoExtraController.js";
 import {
@@ -134,7 +103,6 @@ import {
     deleteBus
 } from "../controllers/BusController.js";
 import {
-    getAllAsignacionesTransporteExtra,
     getAsignacionTransporteExtra,
     createAsignacionTransporteExtra,
     updateAsignacionTransporteExtra,
@@ -142,11 +110,7 @@ import {
 } from "../controllers/AsignacionTransporteExtraController.js";
 import {
     getAllCoordenadasBusByTransporte,
-    getAllCoordenadasBus,
-    getCoordenadaBus,
     createCoordenadaBus,
-    updateCoordenadaBus,
-    deleteCoordenadaBus
 } from "../controllers/CoordenadaBusController.js";
 import { getAllSecciones } from "../controllers/SeccionController.js";
 import { getAllRolUsuario } from "../controllers/RolUsuarioController.js";
@@ -272,8 +236,8 @@ router.put('/cuentasbancarias/:id', decryptPayload, authenticateToken, updateCue
 router.delete('/cuentasbancarias/:id', decryptPayload, authenticateToken, deleteCuentaBancariaColegio);
 
 // Rutas para asignaciones de gastos extras
-router.post('/asignacionesgastoextra/', createAsignacionGastoExtra);
-router.delete('/asignacionesgastoextra/:id', deleteAsignacionGastoExtra);
+router.post('/asignacionesgastoextra/', decryptPayload, authenticateToken, createAsignacionGastoExtra);
+router.delete('/asignacionesgastoextra/:id', decryptPayload, authenticateToken, deleteAsignacionGastoExtra);
 
 // Rutas para buses
 router.get('/buses/', decryptPayload, authenticateToken, getAllBuses);
