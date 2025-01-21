@@ -3,6 +3,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `escritorio_academico`.`listadoMaest
 begin
 	-- Listar todos los maestros asignados a un grado específico
     SELECT ADG.id_asignacion,
+    		PD.id_docente,
            PD.codigo_empleado,
            PD.nombre_completo,
            PD.identificacion,
