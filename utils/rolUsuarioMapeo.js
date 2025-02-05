@@ -4,6 +4,7 @@ const roleDescriptions = {
     D: "Docente",
     E: "Estudiante",
     O: "Otro",
+    P: "Padre de Familia",
 };
 
 // Función para obtener la descripción
