@@ -66,3 +66,18 @@ export const validateSession = async (req, res) => {
         res.status(400).json({ status: 'ERROR', message: error.message })
     }
 }
+
+export const logout = async (req, res) => {
+    try {
+        res.cookie("token", "", {
+            httpOnly: true,
+            secure: process.env.SECURE_COOKIE === "TRUE",
+            sameSite: "lax",
+            expires: new Date(0) // Expira la cookie inmediatamente
+        });
+    
+        res.status(200).json({ message: "Sesión cerrada correctamente" });
+    } catch (error) {
+        res.status(400).json({ status: 'ERROR', message: error.message })
+    }
+}

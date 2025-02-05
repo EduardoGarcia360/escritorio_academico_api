@@ -114,7 +114,7 @@ import {
 } from "../controllers/CoordenadaBusController.js";
 import { getAllSecciones } from "../controllers/SeccionController.js";
 import { getAllRolUsuario } from "../controllers/RolUsuarioController.js";
-import { login, validateSession } from "../controllers/AuthController.js";
+import { login, validateSession, logout } from "../controllers/AuthController.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js";
 import { decryptPayload } from "../middlewares/securityMiddleware.js";
 const router = express.Router()
@@ -267,6 +267,7 @@ router.post('/execute-procedure', executeStoredProcedure);
 
 // autenticación
 router.post('/login', decryptPayload, login)
+router.post('/logout', decryptPayload, logout)
 router.get('/auth/validatesession', decryptPayload, authenticateToken, validateSession)
 
 export default router
