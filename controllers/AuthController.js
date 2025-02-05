@@ -53,7 +53,7 @@ export const login = async (req, res) => {
             maxAge: 60 * 60 * 1000, // Duración de 1 hora (ajustar según necesidad)
         });
 
-        return res.json({ status: 'OK', message: 'Inicio de Sesión Correcto' });
+        return res.json({ status: 'OK', message: 'Inicio de Sesión Correcto', role: usuario.rol });
     } catch (error) {
         return res.status(500).json({ status: 'ERROR', message: "Error interno del servidor", error: error.message });
     }
