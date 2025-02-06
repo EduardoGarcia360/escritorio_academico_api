@@ -29,6 +29,7 @@ import {
     deletePersonalDocente 
 } from "../controllers/PersonalDocenteController.js";
 import { 
+    getEstudiantesByUsuarioTutor,
     getEstudiante, 
     createEstudiante, 
     updateEstudiante, 
@@ -172,6 +173,7 @@ router.delete('/personaldocente/:id', decryptPayload, authenticateToken, deleteP
 
 // estudiantes
 router.get('/estudiantes/:id', decryptPayload, authenticateToken, getEstudiante);
+router.get('/estudiantes/usuariotutor/:id', authenticateToken, getEstudiantesByUsuarioTutor);
 router.post('/estudiantes/', decryptPayload, authenticateToken, createEstudiante);
 router.put('/estudiantes/:id', decryptPayload, authenticateToken, updateEstudiante);
 router.put('/estudiantes/inactivar/:id', decryptPayload, authenticateToken, updateEstudiante);

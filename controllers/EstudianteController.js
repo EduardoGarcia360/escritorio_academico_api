@@ -1,6 +1,8 @@
 import Estudiante from "../models/Estudiante.js";
 import CuotaColegio from "../models/CuotaColegio.js";
 import { decodeJWT } from "../utils/codificar.js";
+import UsuarioTutor from "../models/UsuarioTutor.js";
+import TutorEstudiante from "../models/TutorEstudiante.js";
 
 export const getAllEstudiantes = async (req, res) => {
     try {
@@ -30,6 +32,43 @@ export const getEstudiante = async (req, res) => {
             }
         });
         res.status(200).json(estudiante);
+    } catch (error) {
+        res.status(400).json({ status: 'ERROR', message: error.message });
+    }
+};
+
+export const getEstudiantesByUsuarioTutor = async (req, res) => {
+    try {
+        const token = req.cookies?.token;
+        const userData = decodeJWT(token);
+
+        if (!userData) {
+            return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
+        }
+
+        // Buscar el UsuarioTutor para obtener el id_tutor
+        const usuarioTutor = await UsuarioTutor.findOne({
+            where: { id_usuario: userData.id },
+            attributes: ['id_tutor']
+        });
+
+        if (!usuarioTutor) {
+            return res.status(404).json({ status: 'ERROR', message: "Usuario-Tutor no encontrado" });
+        }
+
+        // Obtener los estudiantes asociados al tutor a través de TutorEstudiante
+        const estudiantes = await Estudiante.findAll({
+            include: [
+                {
+                    model: TutorEstudiante,
+                    where: { id_tutor: usuarioTutor.id_tutor },
+                    attributes: [] // No incluir los datos de TutorEstudiante en la respuesta
+                }
+            ],
+            attributes: ['id_estudiante', 'nombre_completo'] // Solo los datos necesarios del estudiante
+        });
+
+        res.status(200).json(estudiantes);
     } catch (error) {
         res.status(400).json({ status: 'ERROR', message: error.message });
     }
