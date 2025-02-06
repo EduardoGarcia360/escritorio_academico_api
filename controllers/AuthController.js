@@ -43,14 +43,19 @@ export const login = async (req, res) => {
             role: usuario.rol,
             id_colegio: usuarioColegio.id_colegio
         };
-        const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1d' });
+        const token = jwt.sign(user, process.env.JWT_SECRET, 
+            { 
+                expiresIn: process.env.TIME_EXPIRE_TOKEN_JWT
+            });
 
         // cookie HTTPOnly
+        const timeExpireCookie = parseInt(process.env.TIME_EXPIRE_TOKEN);
+
         res.cookie('token', token, {
             httpOnly: true, // No accesible desde JavaScript
             secure: process.env.SECURE_COOKIE === 'TRUE', // Solo en HTTPS en producción
-            sameSite: 'lax', // Protege contra ataques CSRF (ajustar según necesidad)
-            maxAge: 60 * 60 * 1000, // Duración de 1 hora (ajustar según necesidad)
+            sameSite: 'lax', // Protege contra ataques CSRF
+            maxAge: (timeExpireCookie * 60 * 60 * 1000), // Duración de 24 horas
         });
 
         return res.json({ status: 'OK', message: 'Inicio de Sesión Correcto', role: usuario.rol });
