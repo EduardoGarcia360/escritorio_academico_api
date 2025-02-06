@@ -24,6 +24,7 @@ const setupAssociations = (models) => {
         Bus,
         AsignacionTransporteExtra,
         CoordenadaBus,
+        UsuarioTutor,
     } = models;
 
     // Relaciones para Colegio
@@ -211,6 +212,18 @@ const setupAssociations = (models) => {
     Usuario.hasMany(CoordenadaBus, { foreignKey: "id_usuario_modifico" });
     CoordenadaBus.belongsTo(Usuario, { as: "creador", foreignKey: "id_usuario_creo" });
     CoordenadaBus.belongsTo(Usuario, { as: "modificador", foreignKey: "id_usuario_modifico" });
+
+    // Relaciones para UsuarioTutor
+    Usuario.hasMany(UsuarioTutor, { foreignKey: "id_usuario" });
+    UsuarioTutor.belongsTo(Usuario, { foreignKey: "id_usuario" });
+
+    Tutor.hasMany(UsuarioTutor, { foreignKey: "id_tutor" });
+    UsuarioTutor.belongsTo(Tutor, { foreignKey: "id_tutor" });
+
+    Usuario.hasMany(UsuarioTutor, { foreignKey: "id_usuario_creo" });
+    Usuario.hasMany(UsuarioTutor, { foreignKey: "id_usuario_modifico" });
+    UsuarioTutor.belongsTo(Usuario, { as: "creador", foreignKey: "id_usuario_creo" });
+    UsuarioTutor.belongsTo(Usuario, { as: "modificador", foreignKey: "id_usuario_modifico" });
 };
 
 export default setupAssociations;
