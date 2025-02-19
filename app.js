@@ -17,18 +17,20 @@ import {
 } from "./config.js";
 
 dotenv.config({ path: './development.env' });
-const app = express()
-const dominio = `${PROTOCOL}://${HOST}`
-const local = `localhost`
+const app = express();
+const produccion = `${PROTOCOL}://${HOST}`;
+const desarrollo = `http://localhost:${PORT}`;
 
 app.use(cors({
-    origin: [dominio, local], // Origenes permitidos
+    origin: [produccion, desarrollo], // Origenes permitidos
     credentials: true, // Permite el envío de cookies y credenciales
-}))
-app.use(express.json())
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+})); // Habilita el middleware para manejar CORS
+app.use(express.json()); // Habilita el middleware para manejar JSON
 app.use(cookieParser()); // Habilita el middleware para manejar cookies
-app.use(encryptResponse);
-app.use('/escritorio', escritorioRoutes)
+app.use(encryptResponse); // Habilita el middleware para encriptar la respuesta
+app.use('/escritorio', escritorioRoutes); // Habilita las rutas de escritorio
 
 try {
     await db.authenticate()
@@ -39,5 +41,5 @@ try {
 }
 
 app.listen(8000, () => {
-    console.log(`server activo en ${dominio}`)
+    console.log(`server activo en ${produccion}`)
 })

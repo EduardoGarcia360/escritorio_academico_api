@@ -58,9 +58,10 @@ export const login = async (req, res) => {
 
         res.cookie('token', token, {
             httpOnly: true, // No accesible desde JavaScript
-            secure: false, // Solo en HTTPS en producción
-            sameSite: 'lax', // Protege contra ataques CSRF
-            maxAge: duracionCookie, // Duración de 24 horas
+            secure: process.env.AMBIENTE === "PROD", // Solo en HTTPS en producción
+            sameSite: process.env.AMBIENTE === "PROD" ? "None" : "Lax", // Protege contra ataques CSRF
+            domain: process.env.AMBIENTE === "PROD" ? ".railway.app" : "localhost", // Dominio de la cookie
+            maxAge: duracionCookie, // Duración del token en milisegundos
         });
 
         console.log('TOKEN LOGIN', token);
@@ -83,8 +84,9 @@ export const logout = async (req, res) => {
     try {
         res.cookie("token", "", {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: process.env.AMBIENTE === "PROD", // Solo en HTTPS en producción
+            sameSite: process.env.AMBIENTE === "PROD" ? "None" : "Lax", // Protege contra ataques CSRF
+            domain: process.env.AMBIENTE === "PROD" ? ".railway.app" : "localhost", // Dominio de la cookie
             expires: new Date(0) // Expira la cookie inmediatamente
         });
     
