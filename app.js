@@ -22,7 +22,7 @@ const produccion = `${PROTOCOL}://${HOST}`;
 const desarrollo = `http://localhost:${PORT}`;
 
 app.use(cors({
-    origin: [produccion, desarrollo], // Origenes permitidos
+    origin: [desarrollo], // Origenes permitidos
     credentials: true, // Permite el envío de cookies y credenciales
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
