@@ -19,7 +19,7 @@ import {
 dotenv.config({ path: './development.env' });
 const app = express()
 const dominio = `${PROTOCOL}://${HOST}`
-const local = `http://localhost:${PORT}`
+const local = `localhost`
 
 app.use(cors({
     origin: [dominio, local], // Origenes permitidos
