@@ -53,12 +53,14 @@ export const login = async (req, res) => {
 
         // cookie HTTPOnly
         const timeExpireCookie = parseInt(process.env.TIME_EXPIRE_TOKEN);
+        const duracionCookie = (timeExpireCookie * 60 * 60 * 1000);
+        console.log('duracionCookie', duracionCookie, 'tipo de dato', typeof duracionCookie);
 
         res.cookie('token', token, {
             httpOnly: true, // No accesible desde JavaScript
             secure: false, // Solo en HTTPS en producción
             sameSite: 'lax', // Protege contra ataques CSRF
-            maxAge: (timeExpireCookie * 60 * 60 * 1000), // Duración de 24 horas
+            maxAge: duracionCookie, // Duración de 24 horas
         });
 
         console.log('TOKEN LOGIN', token);
