@@ -1,9 +1,9 @@
-export const PROTOCOL = 'https';
-export const HOST = 'escritorioacademicoapi-production.up.railway.app';
-export const PORT = 8000;
+export const PROTOCOL = 'http';
+export const HOST = 'localhost';
+export const PORT = 3000;
 
-export const DB_HOST = 'shortline.proxy.rlwy.net';
-export const DB_PORT = 33655;
-export const DB_NAME = 'railway';
+export const DB_HOST = 'localhost';
+export const DB_PORT = 3306;
+export const DB_NAME = 'escritorio_academico';
 export const DB_USER = 'root';
-export const DB_PASSWORD = 'VzNinFRTQfjHVMDbPoaGCKNeiAgASRqN';
+export const DB_PASSWORD = '';
