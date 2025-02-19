@@ -45,7 +45,7 @@ export const login = async (req, res) => {
         };
 
         console.log('variablesENV', process.env.JWT_SECRET, process.env.TIME_EXPIRE_TOKEN_JWT, process.env.TIME_EXPIRE_TOKEN);
-        
+
         const token = jwt.sign(user, process.env.JWT_SECRET, 
             { 
                 expiresIn: process.env.TIME_EXPIRE_TOKEN_JWT
@@ -56,7 +56,7 @@ export const login = async (req, res) => {
 
         res.cookie('token', token, {
             httpOnly: true, // No accesible desde JavaScript
-            secure: true, // Solo en HTTPS en producción
+            secure: process.env.SECURE_COOKIE === 'TRUE', // Solo en HTTPS en producción
             sameSite: 'lax', // Protege contra ataques CSRF
             maxAge: (timeExpireCookie * 60 * 60 * 1000), // Duración de 24 horas
         });
@@ -81,7 +81,7 @@ export const logout = async (req, res) => {
     try {
         res.cookie("token", "", {
             httpOnly: true,
-            secure: true,
+            secure: process.env.SECURE_COOKIE === 'TRUE',
             sameSite: "lax",
             expires: new Date(0) // Expira la cookie inmediatamente
         });
