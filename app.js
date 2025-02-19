@@ -5,12 +5,13 @@ import cookieParser from 'cookie-parser';
 import { db } from "./models/index.js";
 import escritorioRoutes from "./routes/routes.js";
 import encryptResponse from "./middlewares/responseEncryptMiddleware.js";
+import { PORT } from "./config.js";
 
 dotenv.config({ path: './development.env' });
 const app = express()
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: `http://localhost:${PORT}`,
     credentials: true, // Permite el envío de cookies y credenciales
 }))
 app.use(express.json())
@@ -26,5 +27,5 @@ try {
 }
 
 app.listen(8000, () => {
-    console.log('server activo en http://localhost:8000/')
+    console.log(`server activo en http://localhost:${PORT}/`)
 })
