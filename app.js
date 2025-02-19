@@ -18,9 +18,10 @@ import {
 
 dotenv.config({ path: './development.env' });
 const app = express()
+const dominio = `${PROTOCOL}://${HOST}`
 
 app.use(cors({
-    origin: `${PROTOCOL}://${HOST}:${PORT}`,
+    origin: dominio,
     credentials: true, // Permite el envío de cookies y credenciales
 }))
 app.use(express.json())
@@ -37,5 +38,5 @@ try {
 }
 
 app.listen(8000, () => {
-    console.log(`server activo en ${PROTOCOL}://${HOST}:${PORT}/`)
+    console.log(`server activo en ${dominio}`)
 })
