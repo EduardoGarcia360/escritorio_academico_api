@@ -6,6 +6,7 @@ import { db } from "./models/index.js";
 import escritorioRoutes from "./routes/routes.js";
 import encryptResponse from "./middlewares/responseEncryptMiddleware.js";
 import { 
+    HOST,
     PORT,
     DB_HOST,
     DB_PORT,
@@ -18,7 +19,7 @@ dotenv.config({ path: './development.env' });
 const app = express()
 
 app.use(cors({
-    origin: `http://localhost:${PORT}`,
+    origin: `https://${HOST}:${PORT}`,
     credentials: true, // Permite el envío de cookies y credenciales
 }))
 app.use(express.json())
@@ -35,5 +36,5 @@ try {
 }
 
 app.listen(8000, () => {
-    console.log(`server activo en http://localhost:${PORT}/`)
+    console.log(`server activo en https://${HOST}:${PORT}/`)
 })
