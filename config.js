@@ -1,3 +1,4 @@
+export const PROTOCOL = 'https';
 export const HOST = 'escritorioacademicoapi-production.up.railway.app';
 export const PORT = 8000;
 
