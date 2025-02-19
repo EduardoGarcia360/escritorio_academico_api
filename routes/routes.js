@@ -272,4 +272,9 @@ router.post('/login', decryptPayload, login)
 router.post('/logout', decryptPayload, logout)
 router.get('/auth/validatesession', decryptPayload, authenticateToken, validateSession)
 
+// bienvenida
+router.get('/hello', (req, res) => {
+    res.send('Bienvenido a la API de Gestión Escolar')
+})
+
 export default router
