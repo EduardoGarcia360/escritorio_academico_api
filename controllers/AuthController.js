@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import Usuario from "../models/Usuario.js";
 import UsuarioColegio from "../models/UsuarioColegio.js";
+import { HOST } from "../config.js";
 
 export const login = async (req, res) => {
     const { nombre_usuario, contrasena } = req.body;
@@ -60,7 +61,7 @@ export const login = async (req, res) => {
             httpOnly: true, // No accesible desde JavaScript
             secure: process.env.AMBIENTE === "PROD", // Solo en HTTPS en producción
             sameSite: process.env.AMBIENTE === "PROD" ? "None" : "Lax", // Protege contra ataques CSRF
-            domain: process.env.AMBIENTE === "PROD" ? ".railway.app" : "localhost", // Dominio de la cookie
+            domain: process.env.AMBIENTE === "PROD" ? HOST : undefined, // Dominio de la cookie
             maxAge: duracionCookie, // Duración del token en milisegundos
         });
 
@@ -86,7 +87,7 @@ export const logout = async (req, res) => {
             httpOnly: true,
             secure: process.env.AMBIENTE === "PROD", // Solo en HTTPS en producción
             sameSite: process.env.AMBIENTE === "PROD" ? "None" : "Lax", // Protege contra ataques CSRF
-            domain: process.env.AMBIENTE === "PROD" ? ".railway.app" : "localhost", // Dominio de la cookie
+            domain: process.env.AMBIENTE === "PROD" ? HOST : undefined, // Dominio de la cookie
             expires: new Date(0) // Expira la cookie inmediatamente
         });
     
