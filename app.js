@@ -19,10 +19,11 @@ import {
 dotenv.config({ path: './development.env' });
 const app = express();
 const produccion = `${PROTOCOL}://${HOST}`;
-const desarrollo = `http://localhost:${PORT}`;
+const desarrollo = `${PROTOCOL}://localhost:${PORT}`;
+const dominiosPermitidos = [produccion, desarrollo];
 
 app.use(cors({
-    origin: [desarrollo], // Origenes permitidos
+    origin: dominiosPermitidos, // Origenes permitidos
     credentials: true, // Permite el envío de cookies y credenciales
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
