@@ -6,9 +6,10 @@ import { db } from "./models/index.js";
 import escritorioRoutes from "./routes/routes.js";
 import encryptResponse from "./middlewares/responseEncryptMiddleware.js";
 import { 
+    SUB_HOST,
+    HOST_VERCEL,
     PROTOCOL,
     HOST,
-    PORT,
     DB_HOST,
     DB_PORT,
     DB_NAME,
@@ -19,8 +20,9 @@ import {
 dotenv.config({ path: './development.env' });
 const app = express();
 const produccion = `${PROTOCOL}://${HOST}`;
-const desarrollo = `${PROTOCOL}://localhost:${PORT}`;
-const dominiosPermitidos = [produccion, desarrollo];
+const principal = `${PROTOCOL}://${HOST_VERCEL}`;
+const secundario = `${PROTOCOL}://${SUB_HOST}`;
+const dominiosPermitidos = [produccion, principal, secundario];
 
 app.use(cors({
     origin: dominiosPermitidos, // Origenes permitidos
@@ -35,7 +37,7 @@ app.use('/escritorio', escritorioRoutes); // Habilita las rutas de escritorio
 
 try {
     await db.authenticate()
-    console.log('conexión a la base')
+    console.log(`conexión a la base - ${new Date().toLocaleString()}`);
 } catch (error) {
     console.error(`error de conexión en bd: ${error}`)
     console.error(`host: ${DB_HOST}, port: ${DB_PORT}, name: ${DB_NAME}, user: ${DB_USER}, password: ${DB_PASSWORD}`)
