@@ -1,28 +1,24 @@
 import express from "express";
 import cors from 'cors'
 import dotenv from 'dotenv';
+const ambiente = 'development';
+dotenv.config({ path: `./${ambiente}.env` });
 import cookieParser from 'cookie-parser';
 import { db } from "./models/index.js";
 import escritorioRoutes from "./routes/routes.js";
 import encryptResponse from "./middlewares/responseEncryptMiddleware.js";
-import { 
-    SUB_HOST,
-    HOST_VERCEL,
-    PROTOCOL,
-    HOST,
-    DB_HOST,
-    DB_PORT,
-    DB_NAME,
-    DB_USER,
-    DB_PASSWORD,
-} from "./config.js";
 
-dotenv.config({ path: './development.env' });
 const app = express();
-const produccion = `${PROTOCOL}://${HOST}`;
-const principal = `${PROTOCOL}://${HOST_VERCEL}`;
-const secundario = `${PROTOCOL}://${SUB_HOST}`;
-const dominiosPermitidos = [produccion, principal, secundario];
+let dominiosPermitidos = [];
+if (ambiente === 'development') {
+    const desarrollo = `${process.env.PROTOCOL}://${process.env.HOST}:${process.env.PORT}`;
+    dominiosPermitidos = [desarrollo];
+} else {
+    const produccion = `${process.env.PROTOCOL}://${process.env.HOST}`;
+    const principal = `${process.env.PROTOCOL}://${process.env.HOST_VERCEL}`;
+    const secundario = `${process.env.PROTOCOL}://${process.env.SUB_HOST}`;
+    dominiosPermitidos = [produccion, principal, secundario];
+}
 
 app.use(cors({
     origin: dominiosPermitidos, // Origenes permitidos
@@ -40,9 +36,13 @@ try {
     console.log(`conexión a la base - ${new Date().toLocaleString()}`);
 } catch (error) {
     console.error(`error de conexión en bd: ${error}`)
-    console.error(`host: ${DB_HOST}, port: ${DB_PORT}, name: ${DB_NAME}, user: ${DB_USER}, password: ${DB_PASSWORD}`)
+    console.error(`host: ${process.env.DB_HOST}, 
+        port: ${process.env.DB_PORT}, 
+        name: ${process.env.DB_NAME}, 
+        user: ${process.env.DB_USER}, 
+        password: ${process.env.DB_PASSWORD}`)
 }
 
-app.listen(8000, () => {
-    console.log(`server activo en ${produccion}`)
+app.listen(process.env.PORT, () => {
+    console.log(`server activo en:`, dominiosPermitidos);
 })
