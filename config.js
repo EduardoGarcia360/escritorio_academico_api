@@ -1,5 +1,7 @@
 export const PROTOCOL = 'http';
 export const HOST = 'localhost';
+export const HOST_VERCEL = '';
+export const SUB_HOST = '';
 export const PORT = 3000;
 
 export const DB_HOST = 'localhost';

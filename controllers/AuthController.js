@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import Usuario from "../models/Usuario.js";
 import UsuarioColegio from "../models/UsuarioColegio.js";
+import { HOST } from "../config.js";
 
 export const login = async (req, res) => {
     const { nombre_usuario, contrasena } = req.body;
@@ -43,6 +44,9 @@ export const login = async (req, res) => {
             role: usuario.rol,
             id_colegio: usuarioColegio.id_colegio
         };
+
+        console.log('variablesENV', process.env.JWT_SECRET, process.env.TIME_EXPIRE_TOKEN_JWT, process.env.TIME_EXPIRE_TOKEN);
+
         const token = jwt.sign(user, process.env.JWT_SECRET, 
             { 
                 expiresIn: process.env.TIME_EXPIRE_TOKEN_JWT
@@ -50,13 +54,18 @@ export const login = async (req, res) => {
 
         // cookie HTTPOnly
         const timeExpireCookie = parseInt(process.env.TIME_EXPIRE_TOKEN);
+        const duracionCookie = (timeExpireCookie * 60 * 60 * 1000);
+        console.log('duracionCookie', duracionCookie, 'tipo de dato', typeof duracionCookie);
 
         res.cookie('token', token, {
             httpOnly: true, // No accesible desde JavaScript
-            secure: process.env.SECURE_COOKIE === 'TRUE', // Solo en HTTPS en producción
-            sameSite: 'lax', // Protege contra ataques CSRF
-            maxAge: (timeExpireCookie * 60 * 60 * 1000), // Duración de 24 horas
+            secure: process.env.AMBIENTE === "PROD", // Solo en HTTPS en producción
+            sameSite: process.env.AMBIENTE === "PROD" ? "None" : "Strict", // Protege contra ataques CSRF
+            domain: process.env.AMBIENTE === "PROD" ? HOST : undefined, // Dominio de la cookie
+            maxAge: duracionCookie, // Duración del token en milisegundos
         });
+
+        console.log('TOKEN LOGIN', token);
 
         return res.json({ status: 'OK', message: 'Inicio de Sesión Correcto', role: usuario.rol });
     } catch (error) {
@@ -76,8 +85,9 @@ export const logout = async (req, res) => {
     try {
         res.cookie("token", "", {
             httpOnly: true,
-            secure: process.env.SECURE_COOKIE === "TRUE",
-            sameSite: "lax",
+            secure: process.env.AMBIENTE === "PROD", // Solo en HTTPS en producción
+            sameSite: process.env.AMBIENTE === "PROD" ? "None" : "Strict", // Protege contra ataques CSRF
+            domain: process.env.AMBIENTE === "PROD" ? HOST : undefined, // Dominio de la cookie
             expires: new Date(0) // Expira la cookie inmediatamente
         });
     
