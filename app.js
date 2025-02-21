@@ -14,9 +14,9 @@ if (ambiente === 'development') {
     const desarrollo = `${process.env.PROTOCOL}://${process.env.HOST}:${process.env.PORT}`;
     dominiosPermitidos = [desarrollo];
 } else {
-    const produccion = `${process.env.PROTOCOL}://${process.env.HOST}`;
-    const principal = `${process.env.PROTOCOL}://${process.env.HOST_VERCEL}`;
-    const secundario = `${process.env.PROTOCOL}://${process.env.SUB_HOST}`;
+    const produccion = `${process.env.PROTOCOL}://${process.env.HOST}`
+    const principal = `${process.env.PROTOCOL}://${process.env.HOST_VERCEL}`
+    const secundario = `${process.env.PROTOCOL}://${process.env.SUB_HOST}`
     dominiosPermitidos = [produccion, principal, secundario];
 }
 
@@ -43,6 +43,6 @@ try {
         password: ${process.env.DB_PASSWORD}`)
 }
 
-app.listen(process.env.PORT, () => {
+app.listen(Number(process.env.PORT), () => {
     console.log(`server activo en:`, dominiosPermitidos);
 })
