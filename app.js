@@ -17,15 +17,32 @@ if (ambiente === 'development') {
     const produccion = `${process.env.PROTOCOL}://${process.env.HOST}`
     const principal = `${process.env.PROTOCOL}://${process.env.HOST_VERCEL}`
     const secundario = `${process.env.PROTOCOL}://${process.env.SUB_HOST}`
+    console.log('dominiosPermitidos', produccion, principal, secundario);
     dominiosPermitidos = [produccion, principal, secundario];
 }
 
 app.use(cors({
-    origin: dominiosPermitidos, // Origenes permitidos
+    origin: function (origin, callback) {
+        if (!origin || dominiosPermitidos.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    }, // Origenes permitidos
     credentials: true, // Permite el envío de cookies y credenciales
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
 })); // Habilita el middleware para manejar CORS
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (dominiosPermitidos.includes(origin)) {
+        res.setHeader("Access-Control-Allow-Origin", origin);
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+        res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    }
+    next();
+});
 app.use(express.json()); // Habilita el middleware para manejar JSON
 app.use(cookieParser()); // Habilita el middleware para manejar cookies
 app.use(encryptResponse); // Habilita el middleware para encriptar la respuesta
@@ -43,6 +60,6 @@ try {
         password: ${process.env.DB_PASSWORD}`)
 }
 
-app.listen(Number(process.env.PORT), () => {
+app.listen(8000, () => {
     console.log(`server activo en:`, dominiosPermitidos);
 })
