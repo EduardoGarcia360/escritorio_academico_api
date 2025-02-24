@@ -1,4 +1,4 @@
-import { ambiente } from "../utils/ambiente";
+import { ambiente } from "../utils/ambiente.js";
 import { Sequelize } from "sequelize";
 import dotenv from 'dotenv';
 dotenv.config({ path: `./${ambiente}.env` });
