@@ -1,7 +1,7 @@
+import { ambiente } from "./utils/ambiente.js";
 import express from "express";
 import cors from 'cors'
 import dotenv from 'dotenv';
-const ambiente = 'production';
 dotenv.config({ path: `./${ambiente}.env` });
 import cookieParser from 'cookie-parser';
 import { db } from "./models/index.js";
