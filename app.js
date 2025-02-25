@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import { db } from "./models/index.js";
 import escritorioRoutes from "./routes/routes.js";
 import encryptResponse from "./middlewares/responseEncryptMiddleware.js";
+import { isOriginAllowed } from "./utils/dominio.js";
 
 const app = express();
 let dominiosPermitidos = [];
@@ -17,13 +18,14 @@ if (ambiente === 'development') {
     const produccion = `${process.env.PROTOCOL}://${process.env.HOST}`
     const principal = `${process.env.PROTOCOL}://${process.env.HOST_VERCEL}`
     const secundario = `${process.env.PROTOCOL}://${process.env.SUB_HOST}`
+    const aleatorio = /^https:\/\/escritorio-academico-front-[a-z0-9]+-eduardo360s-projects\.vercel\.app$/
     console.log('dominiosPermitidos', produccion, principal, secundario);
-    dominiosPermitidos = [produccion, principal, secundario];
+    dominiosPermitidos = [produccion, principal, secundario, aleatorio];
 }
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin || dominiosPermitidos.includes(origin)) {
+        if (!origin || isOriginAllowed(origin, dominiosPermitidos)) {
             callback(null, true);
         } else {
             callback(new Error("Not allowed by CORS"));
@@ -35,7 +37,7 @@ app.use(cors({
 })); // Habilita el middleware para manejar CORS
 app.use((req, res, next) => {
     const origin = req.headers.origin;
-    if (dominiosPermitidos.includes(origin)) {
+    if (isOriginAllowed(origin, dominiosPermitidos)) {
         res.setHeader("Access-Control-Allow-Origin", origin);
         res.setHeader("Access-Control-Allow-Credentials", "true");
         res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
