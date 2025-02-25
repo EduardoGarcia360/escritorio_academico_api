@@ -84,14 +84,16 @@ const io = new SocketIOServer(server, {
 io.on("connection", (socket) => {
     console.log("Cliente conectado a Socket.io");
 
-    // Enviar mensaje de bienvenida al cliente
-    socket.emit("message", "Bienvenido a Socket.io");
-
-    // Escuchar mensajes del cliente
-    socket.on("message", (msg) => {
-        console.log("Mensaje recibido:", msg);
-        // Opcional: reenviar el mensaje a otros clientes
-        socket.broadcast.emit("message", msg);
+    // Escucha un evento para unirse a una sala
+    socket.on("joinRoom", (roomId) => {
+        socket.join(roomId);
+        console.log(`Socket ${socket.id} se unió a la sala ${roomId}`);
+    });
+    
+    // Envío a una sala específica
+    socket.on("enviarMensajeARoom", ({ roomId, mensaje }) => {
+        io.to(roomId).emit("message", mensaje);
+        console.log(`Mensaje enviado a la sala ${roomId}:`, mensaje);
     });
 
     // Manejar desconexión del cliente
