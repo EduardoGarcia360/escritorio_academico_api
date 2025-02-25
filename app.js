@@ -11,7 +11,7 @@ import encryptResponse from "./middlewares/responseEncryptMiddleware.js";
 const app = express();
 let dominiosPermitidos = [];
 if (ambiente === 'development') {
-    const desarrollo = `${process.env.PROTOCOL}://${process.env.HOST}:${process.env.PORT}`;
+    const desarrollo = `${process.env.PROTOCOL}://${process.env.HOST}:${process.env.LOCAL_PORT}`;
     dominiosPermitidos = [desarrollo];
 } else {
     const produccion = `${process.env.PROTOCOL}://${process.env.HOST}`
