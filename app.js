@@ -8,8 +8,8 @@ import { db } from "./models/index.js";
 import escritorioRoutes from "./routes/routes.js";
 import encryptResponse from "./middlewares/responseEncryptMiddleware.js";
 import { isOriginAllowed } from "./utils/dominio.js";
-import http from "http"; // Se requiere para crear el servidor HTTP
-import { WebSocketServer } from "ws"; // Se utiliza para manejar WebSocket
+import http from "http";
+import { Server as SocketIOServer } from "socket.io";
 
 const app = express();
 let dominiosPermitidos = [];
@@ -66,23 +66,38 @@ try {
 // Crear el servidor HTTP a partir de Express
 const server = http.createServer(app);
 
-// Configurar el servidor WebSocket sobre el mismo servidor HTTP
-const wss = new WebSocketServer({ server });
+// Crear el servidor de Socket.io sobre el servidor HTTP
+const io = new SocketIOServer(server, {
+    cors: {
+        origin: function (origin, callback) {
+            if (!origin || isOriginAllowed(origin, dominiosPermitidos)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+        credentials: true,
+    },
+});
 
-wss.on('connection', (ws) => {
-    console.log('Cliente WebSocket conectado');
+// Configurar los eventos de Socket.io
+io.on("connection", (socket) => {
+    console.log("Cliente conectado a Socket.io");
 
-    ws.on('message', (message) => {
-        console.log('Mensaje recibido:', message);
-        // Aquí puedes agregar lógica para reenviar el mensaje a otros clientes si es necesario.
+    // Enviar mensaje de bienvenida al cliente
+    socket.emit("message", "Bienvenido a Socket.io");
+
+    // Escuchar mensajes del cliente
+    socket.on("message", (msg) => {
+        console.log("Mensaje recibido:", msg);
+        // Opcional: reenviar el mensaje a otros clientes
+        socket.broadcast.emit("message", msg);
     });
 
-    ws.on('close', () => {
-        console.log('Conexión WebSocket cerrada');
+    // Manejar desconexión del cliente
+    socket.on("disconnect", () => {
+        console.log("Cliente desconectado de Socket.io");
     });
-
-    // Envía un mensaje inicial al cliente que se conecta
-    ws.send('Bienvenido al WebSocket');
 });
 
 // Usa el puerto asignado por Railway (o 8000 en desarrollo)
