@@ -1,1 +1,1 @@
-export const ambiente = 'development';
+export const ambiente = 'production';
