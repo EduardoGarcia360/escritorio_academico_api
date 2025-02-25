@@ -8,6 +8,8 @@ import { db } from "./models/index.js";
 import escritorioRoutes from "./routes/routes.js";
 import encryptResponse from "./middlewares/responseEncryptMiddleware.js";
 import { isOriginAllowed } from "./utils/dominio.js";
+import http from "http"; // Se requiere para crear el servidor HTTP
+import { WebSocketServer } from "ws"; // Se utiliza para manejar WebSocket
 
 const app = express();
 let dominiosPermitidos = [];
@@ -17,10 +19,9 @@ if (ambiente === 'development') {
 } else {
     const produccion = `${process.env.PROTOCOL}://${process.env.HOST}`
     const principal = `${process.env.PROTOCOL}://${process.env.HOST_VERCEL}`
-    const secundario = `${process.env.PROTOCOL}://${process.env.SUB_HOST}`
     const aleatorio = /^https:\/\/escritorio-academico-front-[a-z0-9]+-eduardo360s-projects\.vercel\.app$/
-    console.log('dominiosPermitidos', produccion, principal, secundario);
-    dominiosPermitidos = [produccion, principal, secundario, aleatorio];
+    console.log('dominiosPermitidos', produccion, principal);
+    dominiosPermitidos = [produccion, principal, aleatorio];
 }
 
 app.use(cors({
@@ -62,6 +63,31 @@ try {
         password: ${process.env.DB_PASSWORD}`)
 }
 
-app.listen(8000, () => {
-    console.log(`server activo en:`, dominiosPermitidos);
-})
+// Crear el servidor HTTP a partir de Express
+const server = http.createServer(app);
+
+// Configurar el servidor WebSocket sobre el mismo servidor HTTP
+const wss = new WebSocketServer({ server });
+
+wss.on('connection', (ws) => {
+    console.log('Cliente WebSocket conectado');
+
+    ws.on('message', (message) => {
+        console.log('Mensaje recibido:', message);
+        // Aquí puedes agregar lógica para reenviar el mensaje a otros clientes si es necesario.
+    });
+
+    ws.on('close', () => {
+        console.log('Conexión WebSocket cerrada');
+    });
+
+    // Envía un mensaje inicial al cliente que se conecta
+    ws.send('Bienvenido al WebSocket');
+});
+
+// Usa el puerto asignado por Railway (o 8000 en desarrollo)
+const PORT = 8000;
+
+server.listen(PORT, () => {
+    console.log(`Servidor activo en el puerto: ${PORT}`);
+});
