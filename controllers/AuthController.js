@@ -44,7 +44,7 @@ export const login = async (req, res) => {
             id_colegio: usuarioColegio.id_colegio
         };
 
-        console.log('variablesENV', process.env.JWT_SECRET, process.env.TIME_EXPIRE_TOKEN_JWT, process.env.TIME_EXPIRE_TOKEN);
+        // console.log('variablesENV', process.env.JWT_SECRET, process.env.TIME_EXPIRE_TOKEN_JWT, process.env.TIME_EXPIRE_TOKEN);
 
         const token = jwt.sign(user, process.env.JWT_SECRET, 
             { 
@@ -54,7 +54,7 @@ export const login = async (req, res) => {
         // cookie HTTPOnly
         const timeExpireCookie = parseInt(process.env.TIME_EXPIRE_TOKEN);
         const duracionCookie = (timeExpireCookie * 60 * 60 * 1000);
-        console.log('duracionCookie', duracionCookie, 'tipo de dato', typeof duracionCookie);
+        // console.log('duracionCookie', duracionCookie, 'tipo de dato', typeof duracionCookie);
 
         res.cookie('token', token, {
             httpOnly: true, // No accesible desde JavaScript
@@ -64,7 +64,7 @@ export const login = async (req, res) => {
             maxAge: duracionCookie, // Duración del token en milisegundos
         });
 
-        console.log('TOKEN LOGIN', token);
+        // console.log('TOKEN LOGIN', token);
 
         return res.json({ status: 'OK', message: 'Inicio de Sesión Correcto', role: usuario.rol });
     } catch (error) {

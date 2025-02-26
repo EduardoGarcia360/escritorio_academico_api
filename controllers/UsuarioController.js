@@ -93,7 +93,7 @@ export const createUsuario = async (req, res) => {
         })
         res.status(200).json({ status: 'OK', message: 'Usuario creado correctamente!' });
     } catch (error) {
-        console.log('crear', error)
+        // console.log('crear', error)
         res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
