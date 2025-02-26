@@ -20,7 +20,7 @@ if (ambiente === 'development') {
     const produccion = `${process.env.PROTOCOL}://${process.env.HOST}`
     const principal = `${process.env.PROTOCOL}://${process.env.HOST_VERCEL}`
     const aleatorio = /^https:\/\/escritorio-academico-front-[a-z0-9]+-eduardo360s-projects\.vercel\.app$/
-    console.log('dominiosPermitidos', produccion, principal);
+    // console.log('dominiosPermitidos', produccion, principal);
     dominiosPermitidos = [produccion, principal, aleatorio];
 }
 
@@ -68,6 +68,7 @@ const server = http.createServer(app);
 
 // Crear el servidor de Socket.io sobre el servidor HTTP
 const io = new SocketIOServer(server, {
+    path: "/socket.io/",
     cors: {
         origin: function (origin, callback) {
             if (!origin || isOriginAllowed(origin, dominiosPermitidos)) {
