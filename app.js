@@ -70,14 +70,9 @@ const server = http.createServer(app);
 const io = new SocketIOServer(server, {
     path: "/socket.io/",
     cors: {
-        origin: function (origin, callback) {
-            if (!origin || isOriginAllowed(origin, dominiosPermitidos)) {
-                callback(null, true);
-            } else {
-                callback(new Error("Not allowed by CORS"));
-            }
-        },
-        credentials: true,
+        origin: "*",
+        methods: ["GET", "POST"],
+        credentials: true
     },
 });
 
@@ -85,7 +80,9 @@ const io = new SocketIOServer(server, {
 io.on("connection", (socket) => {
     console.log("Cliente conectado a Socket.io");
 
-    // Escucha un evento para unirse a una sala
+    // Emitir mensaje de bienvenida
+    socket.emit("message", "Conectado a Socket.io correctamente");
+
     socket.on("joinRoom", (roomId) => {
         socket.join(roomId);
         console.log(`Socket ${socket.id} se unió a la sala ${roomId}`);
@@ -97,7 +94,10 @@ io.on("connection", (socket) => {
         console.log(`Mensaje enviado a la sala ${roomId}:`, mensaje);
     });
 
-    // Manejar desconexión del cliente
+    socket.on("connect_error", (err) => {
+        console.error("Error de conexión con el cliente:", err);
+    });
+
     socket.on("disconnect", () => {
         console.log("Cliente desconectado de Socket.io");
     });
