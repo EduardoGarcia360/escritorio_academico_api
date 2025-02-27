@@ -48,8 +48,9 @@ export const createBus = async (req, res) => {
             return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
         }
 
-        req.body.id_usuario_creo = userData.id
-        req.body.id_colegio = userData.id_colegio
+        const seguridad = { id_usuario_creo: userData.id, id_colegio: userData.id_colegio }
+        req.body = { ...req.body, ...seguridad }
+        console.log('req.body BUS', JSON.stringify(req.body));
 
         const nuevoBus = await Bus.create(req.body);
         res.status(200).json({ message: 'Bus creado correctamente!', bus: nuevoBus });
