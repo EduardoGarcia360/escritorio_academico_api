@@ -3,6 +3,7 @@ import CuotaColegio from "../models/CuotaColegio.js";
 import { decodeJWT } from "../utils/codificar.js";
 import UsuarioTutor from "../models/UsuarioTutor.js";
 import TutorEstudiante from "../models/TutorEstudiante.js";
+import CicloEscolar from "../models/CicloEscolar.js";
 
 export const getAllEstudiantes = async (req, res) => {
     try {
@@ -53,7 +54,7 @@ export const getEstudiantesByUsuarioTutor = async (req, res) => {
         });
 
         if (!usuarioTutor) {
-            return res.status(404).json({ status: 'ERROR', message: "Usuario-Tutor no encontrado" });
+            return res.status(400).json({ status: 'ERROR', message: "Usuario-Tutor no encontrado" });
         }
 
         // Obtener los estudiantes asociados al tutor a través de TutorEstudiante
@@ -81,6 +82,15 @@ export const createEstudiante = async (req, res) => {
 
         if (!userData) {
             return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
+        }
+
+        // Obtener el ciclo escolar activo
+        const cicloActivo = await CicloEscolar.findOne({
+            where: { estado: 'A' }
+        });
+
+        if (!cicloActivo) {
+            return res.status(400).json({ status: 'ERROR', message: 'No hay un ciclo escolar activo' });
         }
 
         // Validar si existe un registro en CuotaColegio
