@@ -44,6 +44,7 @@ export const createPersonalDocente = async (req, res) => {
             return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
         }
 
+        req.body.correo_electronico = !req.body.correo_electronico ? null : req.body.correo_electronico
         req.body.id_usuario_creo = userData.id
         req.body.id_colegio = userData.id_colegio
 
@@ -63,6 +64,7 @@ export const updatePersonalDocente = async (req, res) => {
             return res.status(403).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
         }
 
+        req.body.correo_electronico = !req.body.correo_electronico ? null : req.body.correo_electronico
         req.body.id_usuario_modifico = userData.id
         req.body.id_colegio = userData.id_colegio
 

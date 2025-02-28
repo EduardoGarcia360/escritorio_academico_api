@@ -28,6 +28,7 @@ class PersonalDocente extends Model {
         correo_electronico: {
           type: DataTypes.STRING(100),
           unique: true,
+          defaultValue: null,
         },
         direccion: {
           type: DataTypes.STRING(255),
@@ -44,6 +45,7 @@ class PersonalDocente extends Model {
         },
         fecha_egreso: {
           type: DataTypes.DATEONLY,
+          defaultValue: null,
         },
         especialidad: {
           type: DataTypes.STRING(50),
