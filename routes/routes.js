@@ -113,6 +113,13 @@ import {
     getAllCoordenadasBusByTransporte,
     createCoordenadaBus,
 } from "../controllers/CoordenadaBusController.js";
+import {
+    getAllRegistrosHorarioBus,
+    getRegistroHorarioBus,
+    createRegistroHorarioBus,
+    updateRegistroHorarioBus,
+    deleteRegistroHorarioBus
+} from "../controllers/RegistroHorarioBusController.js";
 import { getAllSecciones } from "../controllers/SeccionController.js";
 import { getAllRolUsuario } from "../controllers/RolUsuarioController.js";
 import { login, validateSession, logout } from "../controllers/AuthController.js";
@@ -257,6 +264,13 @@ router.delete('/asignacionestransporteextra/:id', decryptPayload, authenticateTo
 // Rutas para coordenadas de buses
 router.get('/coordenadasbus/transporte/:id', decryptPayload, authenticateToken, getAllCoordenadasBusByTransporte);
 router.post('/coordenadasbus/', decryptPayload, authenticateToken, createCoordenadaBus);
+
+// Rutas para RegistroHorarioBus
+router.get('/registroshorariobus/', decryptPayload, authenticateToken, getAllRegistrosHorarioBus);
+router.get('/registroshorariobus/:id', decryptPayload, authenticateToken, getRegistroHorarioBus);
+router.post('/registroshorariobus/', decryptPayload, authenticateToken, createRegistroHorarioBus);
+router.put('/registroshorariobus/:id', decryptPayload, authenticateToken, updateRegistroHorarioBus);
+router.delete('/registroshorariobus/:id', decryptPayload, authenticateToken, deleteRegistroHorarioBus);
 
 // secciones
 router.get('/secciones', decryptPayload, authenticateToken, getAllSecciones);

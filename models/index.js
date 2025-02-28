@@ -24,6 +24,7 @@ import Bus from "./Bus.js";
 import AsignacionTransporteExtra from "./AsignacionTransporteExtra.js";
 import CoordenadaBus from "./CoordenadaBus.js";
 import UsuarioTutor from "./UsuarioTutor.js";
+import RegistroHorarioBus from "./RegistroHorarioBus.js";
 import setupAssociations from "./associations.js";
 
 // Inicializar modelos
@@ -53,6 +54,7 @@ const models = {
     Bus,
     AsignacionTransporteExtra,
     CoordenadaBus,
+    RegistroHorarioBus,
 };
 
 Object.values(models).forEach((model) => {
