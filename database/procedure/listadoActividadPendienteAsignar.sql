@@ -1,4 +1,4 @@
-CREATE PROCEDURE escritorio_academico.listadoActividadPendienteAsignar(IN p_id_colegio INT,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `escritorio_academico`.`listadoActividadPendienteAsignar`(IN p_id_colegio INT,
     IN p_id_grado INT)
 begin
 	-- Listar las actividades que no están asignadas a un grado específico

@@ -1,4 +1,4 @@
-CREATE PROCEDURE listadoEstudiantesPendienteAsignar(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `escritorio_academico`.`listadoEstudiantesPendienteAsignar`(
 IN p_id_colegio INT)
 BEGIN
 	-- Listar los estudiantes que no están asignados a ningún grado

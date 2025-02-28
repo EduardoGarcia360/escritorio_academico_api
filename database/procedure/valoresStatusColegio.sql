@@ -1,4 +1,4 @@
-CREATE PROCEDURE escritorio_academico.valoresStatusColegio(IN p_id_colegio INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `escritorio_academico`.`valoresStatusColegio`(IN p_id_colegio INT)
 begin
 	DECLARE v_nombre_ciclo VARCHAR(100);
     DECLARE v_anio_ciclo INT;

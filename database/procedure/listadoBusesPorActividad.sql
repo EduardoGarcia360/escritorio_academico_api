@@ -1,4 +1,4 @@
-CREATE PROCEDURE escritorio_academico.listadoBusesPorActividad(IN p_id_colegio INT,
+CREATE DEFINER=`root`@`localhost` PROCEDURE `escritorio_academico`.`listadoBusesPorActividad`(IN p_id_colegio INT,
     IN p_id_asignacion INT)
 begin
 	-- Listar los datos requeridos de los buses asignados a una actividad específica

@@ -1,4 +1,4 @@
-CREATE PROCEDURE escritorio_academico.listadoJornadaColegio(IN p_id_colegio INT, IN p_id_ciclo INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `escritorio_academico`.`listadoJornadaColegio`(IN p_id_colegio INT, IN p_id_ciclo INT)
 begin
 	-- Listar las jornadas asociadas a un colegio con la descripción concatenada
     SELECT J.id_jornada,
