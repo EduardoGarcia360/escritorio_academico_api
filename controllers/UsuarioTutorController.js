@@ -18,7 +18,7 @@ export const getUsuarioTutor = async (req, res) => {
         });
 
         if (!usuarioTutor) {
-            return res.status(404).json({ message: 'Usuario-Tutor no encontrado' });
+            return res.status(400).json({ message: 'Usuario-Tutor no encontrado' });
         }
 
         res.status(200).json(usuarioTutor);
@@ -49,7 +49,7 @@ export const updateUsuarioTutor = async (req, res) => {
             return res.status(200).json({ message: 'Usuario-Tutor actualizado correctamente!', usuarioTutor: usuarioTutorActualizado });
         }
 
-        return res.status(404).json({ message: 'Usuario-Tutor no encontrado' });
+        return res.status(400).json({ message: 'Usuario-Tutor no encontrado' });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -62,7 +62,7 @@ export const deleteUsuarioTutor = async (req, res) => {
         });
 
         if (!usuarioTutor) {
-            return res.status(404).json({ message: 'Usuario-Tutor no encontrado' });
+            return res.status(400).json({ message: 'Usuario-Tutor no encontrado' });
         }
 
         await UsuarioTutor.destroy({

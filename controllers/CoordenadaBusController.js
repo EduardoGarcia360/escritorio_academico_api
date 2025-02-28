@@ -31,7 +31,7 @@ export const getCoordenadaBus = async (req, res) => {
         });
 
         if (!coordenada) {
-            return res.status(404).json({ message: 'Coordenada no encontrada' });
+            return res.status(400).json({ message: 'Coordenada no encontrada' });
         }
 
         res.status(200).json(coordenada);
@@ -64,7 +64,7 @@ export const updateCoordenadaBus = async (req, res) => {
             return res.status(200).json({ message: 'Coordenada actualizada correctamente!', coordenada: coordenadaActualizada });
         }
 
-        return res.status(404).json({ message: 'Coordenada no encontrada' });
+        return res.status(400).json({ message: 'Coordenada no encontrada' });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -77,7 +77,7 @@ export const deleteCoordenadaBus = async (req, res) => {
         });
 
         if (!coordenada) {
-            return res.status(404).json({ message: 'Coordenada no encontrada' });
+            return res.status(400).json({ message: 'Coordenada no encontrada' });
         }
 
         await CoordenadaBus.destroy({

@@ -47,7 +47,7 @@ export const getCuentaBancariaColegio = async (req, res) => {
         });
 
         if (!cuenta) {
-            return res.status(404).json({ message: 'Cuenta bancaria no encontrada' });
+            return res.status(400).json({ message: 'Cuenta bancaria no encontrada' });
         }
 
         res.status(200).json(cuenta);
@@ -98,7 +98,7 @@ export const updateCuentaBancariaColegio = async (req, res) => {
             return res.status(200).json({ message: 'Cuenta bancaria actualizada correctamente!', cuenta: cuentaActualizada });
         }
 
-        return res.status(404).json({ message: 'Cuenta bancaria no encontrada' });
+        return res.status(400).json({ message: 'Cuenta bancaria no encontrada' });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -111,7 +111,7 @@ export const deleteCuentaBancariaColegio = async (req, res) => {
         });
 
         if (!cuenta) {
-            return res.status(404).json({ message: 'Cuenta bancaria no encontrada' });
+            return res.status(400).json({ message: 'Cuenta bancaria no encontrada' });
         }
 
         await CuentaBancariaColegio.destroy({

@@ -30,7 +30,7 @@ export const getBanco = async (req, res) => {
         });
 
         if (!banco) {
-            return res.status(404).json({ message: 'Banco no encontrado' });
+            return res.status(400).json({ message: 'Banco no encontrado' });
         }
 
         res.status(200).json(banco);
@@ -81,7 +81,7 @@ export const updateBanco = async (req, res) => {
             return res.status(200).json({ message: 'Banco actualizado correctamente!' });
         }
 
-        return res.status(404).json({ message: 'Banco no encontrado' });
+        return res.status(400).json({ message: 'Banco no encontrado' });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -94,7 +94,7 @@ export const deleteBanco = async (req, res) => {
         });
 
         if (!banco) {
-            return res.status(404).json({ message: 'Banco no encontrado' });
+            return res.status(400).json({ message: 'Banco no encontrado' });
         }
 
         await Banco.destroy({

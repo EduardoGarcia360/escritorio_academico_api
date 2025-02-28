@@ -19,7 +19,7 @@ export const getAsignacionTransporteExtra = async (req, res) => {
         });
 
         if (!asignacion) {
-            return res.status(404).json({ message: 'Asignación de transporte extra no encontrada' });
+            return res.status(400).json({ message: 'Asignación de transporte extra no encontrada' });
         }
 
         res.status(200).json(asignacion);
@@ -70,7 +70,7 @@ export const updateAsignacionTransporteExtra = async (req, res) => {
             return res.status(200).json({ message: 'Asignación de transporte extra actualizada correctamente!', asignacion: asignacionActualizada });
         }
 
-        return res.status(404).json({ message: 'Asignación de transporte extra no encontrada' });
+        return res.status(400).json({ message: 'Asignación de transporte extra no encontrada' });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -83,7 +83,7 @@ export const deleteAsignacionTransporteExtra = async (req, res) => {
         });
 
         if (!asignacion) {
-            return res.status(404).json({ message: 'Asignación de transporte extra no encontrada' });
+            return res.status(400).json({ message: 'Asignación de transporte extra no encontrada' });
         }
 
         await AsignacionTransporteExtra.destroy({

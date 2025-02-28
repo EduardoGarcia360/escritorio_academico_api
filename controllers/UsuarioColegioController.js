@@ -28,7 +28,7 @@ export const getUsuariosByColegio = async (req, res) => {
         });
 
         if (usuarios.length === 0) {
-            return res.status(404).json({ status: 'ERROR', message: 'No se encontraron usuarios asociados a este colegio.' });
+            return res.status(400).json({ status: 'ERROR', message: 'No se encontraron usuarios asociados a este colegio.' });
         }
 
         // Agregar descripción del rol a cada usuario
