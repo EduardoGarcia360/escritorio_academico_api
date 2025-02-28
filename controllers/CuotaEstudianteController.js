@@ -1,6 +1,7 @@
 import CuotaEstudiante from "../models/CuotaEstudiante.js";
 import CicloEscolar from "../models/CicloEscolar.js";
 import { Op } from "sequelize";
+import { extraerCaracteres } from "../utils/utils.js";
 
 export const getAllCuotasEstudiante = async (req, res) => {
     try {
@@ -19,7 +20,7 @@ export const getAllCuotasEstudiante = async (req, res) => {
 // console.log('CICLO ACTIVO', cicloActivo)
 console.log('CICLO ACTIVO2', cicloActivo.fecha_inicio)
         // Extraer el año de la fecha de inicio del ciclo escolar
-        const anioInicial = new Date(cicloActivo.fecha_inicio).getFullYear() + 1;
+        const anioInicial = extraerCaracteres(cicloActivo.fecha_inicio, 4);
 console.log('ANIO INICIAL', anioInicial)
         // Filtrar las cuotas por estudiante y periodo dentro del año del ciclo activo
         const cuotas = await CuotaEstudiante.findAll({
