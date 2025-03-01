@@ -25,6 +25,41 @@ class CoordenadaBus extends Model {
           type: DataTypes.DATE,
           allowNull: false,
         },
+        accuracy: {
+          type: DataTypes.DECIMAL(10, 6),
+          allowNull: false,
+          comment: "Precisión del GPS en metros (Ej: 16.134)",
+        },
+        altitude: {
+          type: DataTypes.DECIMAL(10, 6),
+          allowNull: false,
+          comment: "Altitud en metros sobre el nivel del mar (Ej: 1503.699951)",
+        },
+        altitude_accuracy: {
+          type: DataTypes.DECIMAL(10, 6),
+          allowNull: false,
+          comment: "Precisión de la altitud (Ej: 1.069285)",
+        },
+        simulated: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+          comment: "Indica si la ubicación es simulada (Ej: false)",
+        },
+        speed: {
+          type: DataTypes.DECIMAL(10, 7),
+          allowNull: false,
+          comment: "Velocidad en metros por segundo (Ej: 0.1275473)",
+        },
+        bearing: {
+          type: DataTypes.DECIMAL(10, 5),
+          allowNull: false,
+          comment: "Dirección en grados (Ej: 172.43936)",
+        },
+        time: {
+          type: DataTypes.BIGINT,
+          allowNull: false,
+          comment: "Marca de tiempo en milisegundos (Ej: 1740789114379)",
+        },
         id_usuario_creo: {
           type: DataTypes.INTEGER,
           allowNull: true,
