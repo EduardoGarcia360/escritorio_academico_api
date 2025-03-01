@@ -21,10 +21,6 @@ class CoordenadaBus extends Model {
           type: DataTypes.DECIMAL(10, 6),
           allowNull: false,
         },
-        fecha_registro: {
-          type: DataTypes.DATE,
-          allowNull: false,
-        },
         accuracy: {
           type: DataTypes.DECIMAL(10, 6),
           allowNull: false,
