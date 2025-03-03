@@ -33,6 +33,12 @@ class AsignacionTransporteExtra extends Model {
         observaciones: {
           type: DataTypes.TEXT,
         },
+        estado: {
+          type: DataTypes.ENUM("A", "F"),
+          defaultValue: "A",
+          allowNull: false,
+          comment: "A=Activo, F=Finalizado",
+        },
         id_usuario_creo: {
           type: DataTypes.INTEGER,
           allowNull: false,

@@ -18,20 +18,25 @@ class RegistroHorarioBus extends Model {
           allowNull: false,
           comment: "S=Salida, L=Llegada",
         },
-        fecha_hora: {
-          type: DataTypes.DATE,
-          allowNull: false,
-        },
         latitud: {
           type: DataTypes.DECIMAL(10, 6),
-          allowNull: false,
         },
         longitud: {
           type: DataTypes.DECIMAL(10, 6),
-          allowNull: false,
         },
         observaciones: {
           type: DataTypes.STRING(250),
+        },
+        estado: {
+          type: DataTypes.ENUM("A", "F"),
+          defaultValue: "A",
+          allowNull: false,
+          comment: "A=Activo, F=Finalizado",
+        },
+        fecha_hora: {
+          type: DataTypes.DATE,
+          allowNull: false,
+          defaultValue: DataTypes.NOW,
         },
         id_usuario_creo: {
           type: DataTypes.INTEGER,
