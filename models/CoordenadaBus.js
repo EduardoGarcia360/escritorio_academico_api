@@ -49,6 +49,11 @@ class CoordenadaBus extends Model {
           type: DataTypes.BIGINT,
           comment: "Marca de tiempo en milisegundos (Ej: 1740789114379)",
         },
+        fecha_registro: {
+          type: DataTypes.DATE,
+          allowNull: false,
+          defaultValue: DataTypes.NOW,
+        },
         id_usuario_creo: {
           type: DataTypes.INTEGER,
           allowNull: true,
