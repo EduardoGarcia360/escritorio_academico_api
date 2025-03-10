@@ -62,6 +62,12 @@ class CoordenadaBus extends Model {
           type: DataTypes.INTEGER,
           allowNull: true,
         },
+        tipo_ubicacion: {
+          type: DataTypes.ENUM("I", "V"),
+          defaultValue: "I",
+          allowNull: false,
+          comment: "I=Ida, V=Vuelta",
+        },
       },
       {
         sequelize,
