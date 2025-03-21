@@ -26,9 +26,9 @@ class Usuario extends Model {
           unique: true,
         },
         rol: {
-          type: DataTypes.ENUM("A", "D", "E", "O"),
+          type: DataTypes.ENUM("A", "D", "E", "O", "P"),
           allowNull: false,
-          comment: "A=Administrador, D=Docente, E=Estudiante, O=Otro",
+          comment: "A=Administrador, D=Docente, E=Estudiante, O=Otro, P=Padre de Familia",
         },
         estado: {
           type: DataTypes.ENUM("A", "I"),
