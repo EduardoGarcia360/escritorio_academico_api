@@ -5,6 +5,7 @@ import Usuario from "../models/Usuario.js";
 import { decodeJWT } from "../utils/codificar.js";
 import bcrypt from "bcrypt";
 import { Op } from "sequelize";
+import UsuarioColegio from "../models/UsuarioColegio.js";
 
 export const getAllTutores = async (req, res) => {
     try {
@@ -131,6 +132,12 @@ export const createTutor = async (req, res) => {
                 id_usuario: usuario.id_usuario,
                 id_tutor: tutor.id_tutor,
                 id_usuario_creo: userData.id
+            });
+
+            // Asocia el usuario del tutor al colegio
+            await UsuarioColegio.create({
+                id_usuario: usuario.id_usuario,
+                id_colegio: userData.id_colegio,
             });
 
             res.status(200).json({ status: 'OK', message: 'Tutor y relación creados correctamente!' });
