@@ -1,7 +1,14 @@
 import express from "express";
 import { getUsuario, createUsuario, updateUsuario } from "../controllers/UsuarioController.js";
 import { getColegio, createColegio, updateColegio, deleteColegio } from "../controllers/ColegioController.js";
-import { getAllCiclosEscolares, getCicloEscolar, createCicloEscolar, updateCicloEscolar, deleteCicloEscolar } from "../controllers/CicloEscolarController.js";
+import { 
+    getCicloEscolarVigente,
+    getAllCiclosEscolares, 
+    getCicloEscolar, 
+    createCicloEscolar, 
+    updateCicloEscolar, 
+    deleteCicloEscolar 
+} from "../controllers/CicloEscolarController.js";
 import { getAllNivelesEducacion, getNivelEducacion, createNivelEducacion, updateNivelEducacion, deleteNivelEducacion } from "../controllers/NivelEducacionController.js";
 import { 
     getJornadaByNivelEducacion,
@@ -137,6 +144,7 @@ router.put('/colegios/', decryptPayload, authenticateToken, updateColegio);
 router.delete('/colegios/:id', decryptPayload, authenticateToken, deleteColegio);
 
 // ciclos escolares
+router.get('/ciclosescolares/vigente', decryptPayload, authenticateToken, getCicloEscolarVigente);
 router.get('/ciclosescolares/', decryptPayload, authenticateToken, getAllCiclosEscolares);
 router.get('/ciclosescolares/:id', decryptPayload, authenticateToken, getCicloEscolar);
 router.post('/ciclosescolares/', decryptPayload, authenticateToken, createCicloEscolar);

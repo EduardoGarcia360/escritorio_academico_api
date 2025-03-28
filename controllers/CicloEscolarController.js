@@ -50,6 +50,19 @@ export const getCicloEscolar = async (req, res) => {
     }
 };
 
+export const getCicloEscolarVigente = async (req, res) => {
+    try {
+        const cicloEscolar = await CicloEscolar.findOne({
+            where: {
+                estado: 'A'
+            }
+        });
+        res.status(200).json(cicloEscolar);
+    } catch (error) {
+        res.status(400).json({ status: 'ERROR', message: error.message });
+    }
+};
+
 export const createCicloEscolar = async (req, res) => {
     try {
         const token = req.cookies?.token;
