@@ -290,7 +290,7 @@ router.post('/logout', decryptPayload, logout)
 router.get('/auth/validatesession', decryptPayload, authenticateToken, validateSession)
 
 // cargar imagenes
-router.post('/upload', upload.single('file'), uploadImage);
+router.post('/upload', upload.single('image'), uploadImage);
 
 // bienvenida
 router.get('/hello', (req, res) => {

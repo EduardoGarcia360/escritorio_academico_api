@@ -14,27 +14,13 @@ if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir);
 }
 
-// 🔤 Función para sanitizar nombre del archivo
-const sanitizeFilename = (name) => {
-  return name
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9-_]/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-};
-
 // 🧠 Configuración de Multer
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, uploadsDir);
   },
   filename: function (req, file, cb) {
-    const customName = req.body.filename;
-    const extension = path.extname(file.originalname);
-    const safeName = sanitizeFilename(customName || Date.now().toString());
-    cb(null, `${safeName}${extension}`);
+    cb(null, `${file.originalname}`);
   }
 });
 
@@ -56,6 +42,7 @@ export const uploadImage = (req, res) => {
   }
 
   const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+  console.log('imagen url', imageUrl);
 
   // Aquí puedes guardar el nombre en la base de datos si lo deseas
 
