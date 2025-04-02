@@ -50,7 +50,7 @@ export const createBus = async (req, res) => {
 
         const seguridad = { id_usuario_creo: userData.id, id_colegio: userData.id_colegio }
         req.body = { ...req.body, ...seguridad }
-        console.log('req.body BUS', JSON.stringify(req.body));
+        // console.log('req.body BUS', JSON.stringify(req.body));
 
         const nuevoBus = await Bus.create(req.body);
         res.status(200).json({ message: 'Bus creado correctamente!', bus: nuevoBus });

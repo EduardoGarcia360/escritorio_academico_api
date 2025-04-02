@@ -18,10 +18,10 @@ export const getAllCuotasEstudiante = async (req, res) => {
             });
         }
 // console.log('CICLO ACTIVO', cicloActivo)
-console.log('CICLO ACTIVO2', cicloActivo.fecha_inicio)
+// console.log('CICLO ACTIVO2', cicloActivo.fecha_inicio)
         // Extraer el año de la fecha de inicio del ciclo escolar
         const anioInicial = extraerCaracteres(cicloActivo.fecha_inicio, 4);
-console.log('ANIO INICIAL', anioInicial)
+// console.log('ANIO INICIAL', anioInicial)
         // Filtrar las cuotas por estudiante y periodo dentro del año del ciclo activo
         const cuotas = await CuotaEstudiante.findAll({
             where: {

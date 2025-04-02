@@ -236,7 +236,7 @@ export const updateTutor = async (req, res) => {
         
         res.status(200).json({ status: 'OK', message: 'Tutor actualizado correctamente!' });
     } catch (error) {
-        console.log('ERROR', error)
+        // console.log('ERROR', error)
         res.status(400).json({ status: 'ERROR', message: error.message });
     }
 };
