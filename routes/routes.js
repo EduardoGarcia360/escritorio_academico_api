@@ -129,6 +129,7 @@ import { getAllRolUsuario } from "../controllers/RolUsuarioController.js";
 import { login, validateSession, logout } from "../controllers/AuthController.js";
 import { authenticateToken } from "../middlewares/authMiddleware.js";
 import { decryptPayload } from "../middlewares/securityMiddleware.js";
+import { upload, uploadImage } from "../controllers/uploadController.js";
 const router = express.Router()
 
 // usuarios
@@ -287,6 +288,9 @@ router.post('/execute-procedure', executeStoredProcedure);
 router.post('/login', decryptPayload, login)
 router.post('/logout', decryptPayload, logout)
 router.get('/auth/validatesession', decryptPayload, authenticateToken, validateSession)
+
+// cargar imagenes
+router.post('/upload', upload.single('file'), uploadImage);
 
 // bienvenida
 router.get('/hello', (req, res) => {

@@ -49,7 +49,9 @@ app.use((req, res, next) => {
 app.use(express.json()); // Habilita el middleware para manejar JSON
 app.use(cookieParser()); // Habilita el middleware para manejar cookies
 app.use(encryptResponse); // Habilita el middleware para encriptar la respuesta
+app.use(express.urlencoded({ extended: true })); // Habilita el middleware para manejar datos URL-encoded
 app.use('/escritorio', escritorioRoutes); // Habilita las rutas de escritorio
+app.use('/uploads', express.static('uploads')); // Habilita el middleware para servir archivos estáticos desde la carpeta uploads
 
 try {
     await db.authenticate()
