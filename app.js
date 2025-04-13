@@ -20,8 +20,9 @@ if (ambiente === 'development') {
     const produccion = `${process.env.PROTOCOL}://${process.env.HOST}`
     const principal = `${process.env.PROTOCOL}://${process.env.HOST_VERCEL}`
     const aleatorio = /^https:\/\/escritorio-academico-front-[a-z0-9]+-eduardo360s-projects\.vercel\.app$/
+    const staticVercel = `${process.env.PROTOCOL}://${process.env.HOST_STATIC}`
     // console.log('dominiosPermitidos', produccion, principal);
-    dominiosPermitidos = [produccion, principal, aleatorio];
+    dominiosPermitidos = [produccion, principal, staticVercel, aleatorio];
 }
 
 app.use(cors({
