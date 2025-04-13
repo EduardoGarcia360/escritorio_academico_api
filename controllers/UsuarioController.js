@@ -52,6 +52,33 @@ export const getUsuario = async (req, res) => {
     }
 };
 
+export const getMiUsuario = async (req, res) => {
+    try {
+        // Obtener y decodificar el token
+        const token = req.cookies?.token;
+        const userData = decodeJWT(token);
+
+        if (!userData) {
+            return res.status(400).json({ status: 'ERROR', message: "Token inválido o no proporcionado" });
+        }
+
+        // Obtener los datos del usuario
+        const usuario = await Usuario.findOne({
+            where: {
+                id_usuario: userData.id
+            }
+        });
+
+        if (!usuario) {
+            return res.status(400).json({ status: 'ERROR', message: "Usuario no encontrado" });
+        }
+
+        res.status(200).json(usuario);
+    } catch (error) {
+        res.status(400).json({ status: 'ERROR', message: error.message });
+    }
+};
+
 export const createUsuario = async (req, res) => {
     try {
         const token = req.cookies?.token;

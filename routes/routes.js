@@ -1,5 +1,10 @@
 import express from "express";
-import { getUsuario, createUsuario, updateUsuario } from "../controllers/UsuarioController.js";
+import { 
+    getMiUsuario,
+    getUsuario, 
+    createUsuario, 
+    updateUsuario 
+} from "../controllers/UsuarioController.js";
 import { getColegio, createColegio, updateColegio, deleteColegio } from "../controllers/ColegioController.js";
 import { 
     getCicloEscolarVigente,
@@ -133,6 +138,7 @@ import { upload, uploadImage } from "../controllers/uploadController.js";
 const router = express.Router()
 
 // usuarios
+router.get('/usuarios/miusuario', decryptPayload, authenticateToken, getMiUsuario)
 router.get('/usuarios/:id', authenticateToken, getUsuario)
 router.post('/usuarios/', decryptPayload, authenticateToken, createUsuario)
 router.put('/usuarios/:id', decryptPayload, authenticateToken, updateUsuario)
