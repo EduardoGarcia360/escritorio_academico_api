@@ -19,7 +19,8 @@ begin
            B.marca,
            B.color,
            RH.tipo_registro,
-           RH.createdAt AS hora_finalizado
+           RH.createdAt AS hora_finalizado,
+           ATE.estado
     FROM AsignacionTransporteExtra ATE
     INNER JOIN Bus B ON ATE.id_bus = B.id_bus
     LEFT JOIN RegistroHorarioBus RH ON ATE.id_asignacion_transporte = RH.id_asignacion_transporte AND RH.estado = 'F'

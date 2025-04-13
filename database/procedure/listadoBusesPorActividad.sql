@@ -14,7 +14,12 @@ begin
            B.capacidad,
            B.marca,
            PD.nombre_completo,
-           PD.telefono
+           PD.telefono,
+           (
+           		select count(1)
+				from CoordenadaBus c 
+				where c.id_asignacion_transporte = ATE.id_asignacion_transporte
+           ) cantidad_ubicaciones
     FROM AsignacionTransporteExtra ATE
     INNER JOIN Bus B ON ATE.id_bus = B.id_bus
     INNER JOIN PersonalDocente PD ON ATE.id_docente = PD.id_docente
